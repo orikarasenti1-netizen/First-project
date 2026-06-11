@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>עו"ד יצחק קרסנטי | ייעוץ משפטי אישי בראש העין</title>
-  <meta name="description" content="עו&quot;ד יצחק קרסנטי — משרד עורכי דין בראש העין. מתמחה בצוואות, ירושות, ייפוי כוח מתמשך, מקרקעין, פלילי והסכמי ממון.">
-  <meta name="keywords" content="עורך דין ראש העין, עורך דין צוואות, ירושות, ייפוי כוח מתמשך, פלילי, הסכמי ממון, מקרקעין">
+  <meta name="description" content="עו&quot;ד יצחק קרסנטי — משרד עורכי דין בראש העין. שירות לכל הארץ. מתמחה בצוואות, ירושות, ייפוי כוח מתמשך, מקרקעין, פלילי והסכמי ממון.">
+  <meta name="keywords" content="עורך דין ראש העין, עורך דין צוואות, ירושות, ייפוי כוח מתמשך, פלילי, הסכמי ממון, מקרקעין, עורך דין כל הארץ">
   <meta name="author" content="עו&quot;ד יצחק קרסנטי">
   <link rel="canonical" href="https://krasenti-law.co.il/">
   <meta property="og:title" content="עו&quot;ד יצחק קרסנטי | ייעוץ משפטי בראש העין">
@@ -76,9 +76,9 @@
     /* ── HERO ── */
     #hero{min-height:100vh;background:var(--navy);display:grid;grid-template-columns:1fr 42%;position:relative;overflow:hidden}
 
-    .hero-photo-col{position:relative;overflow:hidden}
-    .hero-photo-col img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;filter:grayscale(20%)}
-    .hero-photo-col::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,var(--navy) 0%,transparent 40%)}
+    .hero-photo-col{position:relative;overflow:hidden;background:#ECE8DF}
+    .hero-photo-col img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;filter:contrast(1.05) brightness(1.02)}
+    .hero-photo-col::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,transparent 55%,var(--navy) 100%)}
 
     .hero-text-col{display:flex;flex-direction:column;justify-content:center;padding:120px clamp(32px,5vw,80px) 80px;position:relative;z-index:2}
 
@@ -118,20 +118,18 @@
     .practice-intro .cta-link:hover{color:var(--gold)}
 
     .practice-list{display:grid;grid-template-columns:1fr 1fr;gap:0}
-    .practice-item{padding:32px 0;border-bottom:1px solid var(--rule);display:flex;align-items:baseline;gap:20px;transition:all var(--ease)}
+    .practice-item{padding:32px 0;border-bottom:1px solid var(--rule);transition:all var(--ease)}
     .practice-item:nth-child(odd){padding-left:0;padding-right:40px}
     .practice-item:nth-child(even){padding-right:0;padding-left:40px;border-right:1px solid var(--rule)}
     .practice-item:last-child,.practice-item:nth-last-child(2){border-bottom:none}
     .practice-item:hover .pi-title{color:var(--gold)}
-    .pi-num{font-family:var(--f-serif);font-size:13px;color:var(--light);flex-shrink:0;margin-top:4px}
-    .pi-body{}
     .pi-title{font-family:var(--f-serif);font-size:20px;font-weight:700;color:var(--navy);margin-bottom:8px;transition:color var(--ease)}
     .pi-desc{font-size:14px;color:var(--mid);line-height:1.7;font-weight:300}
 
     /* ── ABOUT ── */
     #about{padding:clamp(80px,10vw,130px) 0;background:var(--warm)}
     .about-layout{display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:center}
-    .about-photo{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top center;filter:grayscale(10%)}
+    .about-photo{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top center;filter:contrast(1.05) brightness(1.02)}
     .about-text .section-eyebrow{margin-bottom:16px}
     .about-h{font-family:var(--f-serif);font-size:clamp(26px,3vw,38px);font-weight:700;color:var(--navy);line-height:1.2;margin-bottom:32px}
     .about-body{font-size:16px;color:var(--mid);line-height:1.9;font-weight:300;margin-bottom:28px}
@@ -204,9 +202,9 @@
     /* ── RESPONSIVE ── */
     @media(max-width:1024px){
       #hero{grid-template-columns:1fr;min-height:auto}
-      .hero-photo-col{height:50vw;max-height:420px}
-      .hero-photo-col::after{background:linear-gradient(to bottom,transparent 50%,var(--navy))}
-      .hero-text-col{padding:48px clamp(24px,5vw,64px) 72px}
+      .hero-photo-col{height:72vw;max-height:520px;order:-1}
+      .hero-photo-col::after{background:linear-gradient(to top,var(--navy) 0%,transparent 45%)}
+      .hero-text-col{padding:40px clamp(20px,5vw,56px) 64px}
       .practice-layout{grid-template-columns:1fr;gap:48px}
       .about-layout{grid-template-columns:1fr;gap:48px}
       .about-layout .about-photo-col{max-width:380px}
@@ -336,42 +334,36 @@
 
       <div class="practice-list" role="list">
         <div class="practice-item fi" role="listitem">
-          <span class="pi-num" aria-hidden="true">—</span>
           <div class="pi-body">
             <div class="pi-title">צוואות</div>
             <p class="pi-desc">עריכת צוואה שתבטיח שרצונותיך יכובדו במלואם. ייעוץ אישי ומקיף.</p>
           </div>
         </div>
         <div class="practice-item fi" role="listitem">
-          <span class="pi-num" aria-hidden="true">—</span>
           <div class="pi-body">
             <div class="pi-title">ירושות</div>
             <p class="pi-desc">ניהול הליכי ירושה בצורה חלקה, יעילה ומסודרת מול הרשויות.</p>
           </div>
         </div>
         <div class="practice-item fi" role="listitem">
-          <span class="pi-num" aria-hidden="true">—</span>
           <div class="pi-body">
             <div class="pi-title">ייפוי כוח מתמשך</div>
             <p class="pi-desc">הגנה על עתידך ועל יקיריך. קביעת מי יטפל בענייניך כשלא תוכל בעצמך.</p>
           </div>
         </div>
         <div class="practice-item fi" role="listitem">
-          <span class="pi-num" aria-hidden="true">—</span>
           <div class="pi-body">
             <div class="pi-title">מקרקעין</div>
             <p class="pi-desc">ליווי בעסקאות נדל"ן מרכישה ועד רישום. הגנה מקצועית על האינטרסים שלך.</p>
           </div>
         </div>
         <div class="practice-item fi" role="listitem">
-          <span class="pi-num" aria-hidden="true">—</span>
           <div class="pi-body">
             <div class="pi-title">פלילי</div>
             <p class="pi-desc">ייצוג בהליכים פליליים מתוך הבנה מעמיקה של המערכת — מחקירה ועד פסיקה.</p>
           </div>
         </div>
         <div class="practice-item fi" role="listitem">
-          <span class="pi-num" aria-hidden="true">—</span>
           <div class="pi-body">
             <div class="pi-title">הסכמי ממון</div>
             <p class="pi-desc">עריכת הסכמי ממון לפני ואחרי נישואים, להגדרה ברורה של זכויות כל הצדדים.</p>
@@ -395,7 +387,7 @@
           עו"ד יצחק קרסנטי מטפל אישית בכל תיק — מהפגישה הראשונה ועד הסגירה. לא תועבר בין אנשים, לא תקבל תשובות מוכנות מראש. תקבל ייעוץ שמבוסס על הסיפור שלך.
         </p>
         <p class="about-body">
-          המשרד פועל בראש העין ומשרת לקוחות בכל אזור השרון. הגישה: ישירה, שקופה ומחויבת לתוצאה.
+          המשרד פועל בראש העין ומשרת לקוחות בכל רחבי הארץ. הגישה: ישירה, שקופה ומחויבת לתוצאה.
         </p>
         <div class="about-rule" aria-hidden="true"></div>
         <blockquote class="about-pull">
@@ -550,7 +542,7 @@
           </a>
           <div>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            ראש העין, אזור השרון
+            ראש העין | שירות לכל הארץ
           </div>
         </div>
       </div>
