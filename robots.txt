@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://krasenti-law.co.il/sitemap.xml
