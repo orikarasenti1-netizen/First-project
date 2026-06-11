@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>עו"ד יצחק קרסנטי | ייעוץ משפטי אישי בראש העין</title>
-  <meta name="description" content="עו&quot;ד יצחק קרסנטי — משרד עורכי דין בראש העין. שירות לכל הארץ. מתמחה בצוואות, ירושות, ייפוי כוח מתמשך, מקרקעין, פלילי והסכמי ממון.">
-  <meta name="keywords" content="עורך דין ראש העין, עורך דין צוואות, ירושות, ייפוי כוח מתמשך, פלילי, הסכמי ממון, מקרקעין, עורך דין כל הארץ">
+  <title>עו"ד יצחק קרסנטי | ייעוץ משפטי בכל הארץ</title>
+  <meta name="description" content="עו&quot;ד יצחק קרסנטי — ייעוץ משפטי אישי ומקצועי בכל הארץ. צוואות, ירושות, ייפוי כוח מתמשך, מקרקעין, פלילי והסכמי ממון.">
+  <meta name="keywords" content="עורך דין, צוואות, ירושות, ייפוי כוח מתמשך, פלילי, הסכמי ממון, מקרקעין, ראש העין, שירות לכל הארץ">
   <meta name="author" content="עו&quot;ד יצחק קרסנטי">
   <link rel="canonical" href="https://krasenti-law.co.il/">
-  <meta property="og:title" content="עו&quot;ד יצחק קרסנטי | ייעוץ משפטי בראש העין">
-  <meta property="og:description" content="ליווי משפטי אישי ומקצועי בצוואות, ירושות, מקרקעין ופלילי.">
+  <meta property="og:title" content="עו&quot;ד יצחק קרסנטי | ייעוץ משפטי בכל הארץ">
+  <meta property="og:description" content="ליווי משפטי אישי ומקצועי — שירות לכל הארץ.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="he_IL">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,212 +18,294 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Attorney","name":"עו\"ד יצחק קרסנטי","telephone":"+972-50-507-5051","email":"itzikkarase@gmail.com","url":"https://krasenti-law.co.il","address":{"@type":"PostalAddress","addressLocality":"ראש העין","addressCountry":"IL"},"areaServed":{"@type":"Country","name":"Israel"},"knowsAbout":["צוואות","ירושות","ייפוי כוח מתמשך","מקרקעין","פלילי","הסכמי ממון"]}
   </script>
-
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
     :root{
-      --ink:   #0E1620;
-      --navy:  #1A2744;
-      --gold:  #B8973A;
-      --warm:  #F5F3EE;
+      --ink:   #0D1117;
+      --navy:  #0F1C36;
+      --gold:  #C49A3C;
+      --warm:  #F2EFE9;
+      --paper: #FAFAF8;
       --white: #FFFFFF;
-      --mid:   #5A5A6A;
-      --light: #9A9AAA;
-      --rule:  #D8D4C8;
+      --mid:   #666676;
+      --muted: #9A9AAA;
+      --rule:  #DDD9CD;
       --f-serif:'Frank Ruhl Libre',serif;
       --f-sans:'Heebo',sans-serif;
-      --ease:0.25s ease;
+      --ease:cubic-bezier(.25,.46,.45,.94);
     }
 
     html{scroll-behavior:smooth}
-    body{font-family:var(--f-sans);color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased;line-height:1.6}
-    img{display:block;max-width:100%;height:auto}
+    body{font-family:var(--f-sans);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;line-height:1.6}
+    img{display:block;max-width:100%}
     a{color:inherit;text-decoration:none}
-
-    .wrap{max-width:1160px;margin:0 auto;padding:0 clamp(24px,5vw,64px)}
-
-    /* focus */
     :focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}}
 
-    /* reduced motion */
-    @media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+    .wrap{max-width:1200px;margin:0 auto;padding:0 clamp(20px,5vw,64px)}
 
-    /* fade */
-    .fi{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+    .fi{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
     .fi.in{opacity:1;transform:none}
 
     /* ── NAV ── */
-    .nav{position:fixed;inset-block-start:0;inset-inline:0;z-index:100;padding:22px 0;transition:all var(--ease)}
-    .nav.on{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 0}
+    .nav{
+      position:fixed;inset-block-start:0;inset-inline:0;z-index:100;
+      padding:22px 0;
+      transition:padding .3s var(--ease),background .3s var(--ease),border-color .3s var(--ease);
+      border-bottom:1px solid transparent;
+    }
+    .nav.on{background:rgba(15,28,54,.96);backdrop-filter:blur(12px);padding:13px 0;border-bottom-color:rgba(196,154,60,.2)}
     .nav-row{display:flex;align-items:center;justify-content:space-between}
-    .nav-brand{font-family:var(--f-serif);font-weight:700;font-size:18px;color:var(--white);transition:color var(--ease);line-height:1.15}
-    .nav-brand small{display:block;font-family:var(--f-sans);font-size:11px;font-weight:400;letter-spacing:2px;color:var(--gold);text-transform:uppercase}
-    .nav.on .nav-brand{color:var(--navy)}
-    .nav-links{display:flex;align-items:center;gap:36px;list-style:none}
-    .nav-links a{font-size:14px;color:rgba(255,255,255,.75);transition:color var(--ease);letter-spacing:.3px}
-    .nav.on .nav-links a{color:var(--mid)}
-    .nav-links a:hover,.nav.on .nav-links a:hover{color:var(--gold)}
-    .nav-cta{padding:10px 24px;border:1.5px solid var(--gold);color:var(--gold)!important;font-weight:500;border-radius:2px;font-size:14px!important;transition:all var(--ease)!important}
-    .nav-cta:hover{background:var(--gold);color:var(--white)!important}
+    .nav-brand{font-family:var(--f-serif);font-size:17px;font-weight:700;color:var(--white);line-height:1.2}
+    .nav-brand small{display:block;font-family:var(--f-sans);font-size:10px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;font-weight:400}
+    .nav-right{display:flex;align-items:center;gap:32px}
+    .nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+    .nav-links a{font-size:13px;color:rgba(255,255,255,.55);letter-spacing:.3px;transition:color .2s}
+    .nav-links a:hover{color:var(--white)}
+    .nav-cta{padding:9px 22px;border:1px solid var(--gold);color:var(--gold)!important;font-size:13px;border-radius:1px;transition:all .2s;font-weight:500}
+    .nav-cta:hover{background:var(--gold);color:var(--navy)!important}
     .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:101}
-    .burger span{display:block;width:22px;height:1.5px;background:var(--white);transition:all var(--ease)}
-    .nav.on .burger span{background:var(--navy)}
+    .burger span{display:block;width:22px;height:1.5px;background:var(--white);transition:all .25s}
     .burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
     .burger.open span:nth-child(2){opacity:0}
     .burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
 
     /* ── HERO ── */
-    #hero{min-height:100vh;background:var(--navy);display:grid;grid-template-columns:1fr 42%;position:relative;overflow:hidden}
+    #hero{
+      min-height:100vh;
+      background:var(--navy);
+      display:grid;
+      grid-template-columns:1fr 38%;
+      overflow:hidden;
+      position:relative;
+    }
+    .hero-text{
+      display:flex;flex-direction:column;justify-content:flex-end;
+      padding:120px clamp(20px,5vw,64px) clamp(56px,7vw,88px);
+      position:relative;z-index:2;
+    }
+    .hero-eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:clamp(24px,4vw,40px);font-weight:500}
+    .hero-h1{
+      font-family:var(--f-serif);
+      font-size:clamp(60px,10vw,144px);
+      font-weight:900;
+      color:var(--white);
+      line-height:0.9;
+      letter-spacing:-0.025em;
+      margin-bottom:clamp(28px,4vw,48px);
+    }
+    .hero-h1 .g{color:var(--gold)}
+    .hero-sub{
+      font-size:clamp(15px,1.5vw,17px);color:rgba(255,255,255,.45);font-weight:300;line-height:1.75;
+      max-width:380px;margin-bottom:clamp(36px,5vw,56px);
+      border-right:2px solid rgba(196,154,60,.35);padding-right:18px;
+    }
+    .hero-contacts{display:flex;flex-direction:column}
+    .hero-ci{
+      display:flex;align-items:center;gap:16px;padding:16px 0;
+      border-bottom:1px solid rgba(255,255,255,.06);transition:border-color .2s;
+    }
+    .hero-ci:first-child{border-top:1px solid rgba(255,255,255,.06)}
+    .hero-ci:hover{border-bottom-color:rgba(196,154,60,.25)}
+    .hci-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .hci-wa{background:rgba(37,211,102,.1)}
+    .hci-ph{background:rgba(255,255,255,.06)}
+    .hci-label{font-size:10px;color:rgba(255,255,255,.3);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:2px}
+    .hci-val{font-size:15px;color:var(--white);font-weight:500}
 
-    .hero-photo-col{position:relative;overflow:hidden;background:#ECE8DF}
-    .hero-photo-col img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;filter:contrast(1.05) brightness(1.02)}
-    .hero-photo-col::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,transparent 55%,var(--navy) 100%)}
+    .hero-photo{position:relative;overflow:hidden;background:#ECE8DF}
+    .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;filter:contrast(1.05)}
+    /* Gold vertical rule at the join between photo and text */
+    .hero-photo::before{
+      content:'';position:absolute;top:12%;bottom:0;right:0;
+      width:2px;
+      background:linear-gradient(to bottom,transparent,var(--gold) 25%,var(--gold) 80%,transparent);
+      z-index:2;
+    }
 
-    .hero-text-col{display:flex;flex-direction:column;justify-content:center;padding:120px clamp(32px,5vw,80px) 80px;position:relative;z-index:2}
-
-    .hero-eyebrow{font-size:11px;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);margin-bottom:32px;font-weight:500}
-
-    .hero-h1{font-family:var(--f-serif);font-size:clamp(40px,5.5vw,72px);font-weight:900;color:var(--white);line-height:1.05;margin-bottom:28px}
-    .hero-h1 span{color:var(--gold)}
-
-    .hero-line{width:48px;height:1.5px;background:var(--gold);margin-bottom:28px}
-
-    .hero-p{font-size:clamp(16px,1.8vw,19px);color:rgba(255,255,255,.6);font-weight:300;line-height:1.75;max-width:420px;margin-bottom:52px}
-
-    .hero-actions{display:flex;flex-direction:column;gap:14px}
-    .hero-action{display:flex;align-items:center;gap:16px;padding:18px 24px;border:1px solid rgba(255,255,255,.12);transition:all var(--ease);cursor:pointer;border-radius:2px}
-    .hero-action:hover{border-color:var(--gold);background:rgba(184,151,58,.06)}
-    .hero-action-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-    .ha-wa .hero-action-icon{background:rgba(37,211,102,.15)}
-    .ha-ph .hero-action-icon{background:rgba(255,255,255,.08)}
-    .ha-em .hero-action-icon{background:rgba(184,151,58,.15)}
-    .hero-action-label{font-size:13px;color:rgba(255,255,255,.45);letter-spacing:.5px;display:block;margin-bottom:2px}
-    .hero-action-val{font-size:16px;color:var(--white);font-weight:500}
-
-    /* ── STRIP ── */
-    .strip{background:var(--gold);padding:20px 0}
-    .strip-inner{display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap}
-    .strip-item{font-family:var(--f-serif);font-size:15px;color:var(--navy);font-weight:700;letter-spacing:.3px}
-    .strip-sep{width:1px;height:20px;background:rgba(14,22,32,.2)}
+    /* ── TICKER ── */
+    .ticker{background:var(--gold);overflow:hidden}
+    .ticker-track{
+      display:flex;align-items:center;white-space:nowrap;
+      animation:ticker 30s linear infinite;padding:17px 0;
+      direction:ltr;
+    }
+    .ticker-track:hover{animation-play-state:paused}
+    .ticker-item{font-family:var(--f-serif);font-size:14px;color:var(--navy);font-weight:700;padding:0 36px;flex-shrink:0;letter-spacing:.2px}
+    .ticker-dot{width:4px;height:4px;background:rgba(15,28,54,.25);border-radius:50%;flex-shrink:0}
+    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
     /* ── PRACTICE ── */
-    #practice{padding:clamp(80px,10vw,130px) 0;background:var(--white)}
-    .section-eyebrow{font-size:11px;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:20px;font-weight:500}
-    .section-h{font-family:var(--f-serif);font-size:clamp(28px,3.5vw,44px);font-weight:700;color:var(--navy);line-height:1.15;margin-bottom:0}
+    #practice{padding:clamp(72px,10vw,120px) 0;background:var(--paper)}
+    .practice-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:52px}
+    .section-eyebrow{font-size:11px;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:16px;font-weight:500}
+    .section-h{font-family:var(--f-serif);font-size:clamp(26px,3.2vw,44px);font-weight:700;color:var(--navy);line-height:1.1}
+    .practice-intro-p{font-size:16px;color:var(--mid);line-height:1.85;font-weight:300}
 
-    .practice-layout{display:grid;grid-template-columns:280px 1fr;gap:80px;align-items:start;margin-top:64px}
-    .practice-intro p{font-size:17px;color:var(--mid);line-height:1.8;font-weight:300;margin-top:20px}
-    .practice-intro .cta-link{display:inline-flex;align-items:center;gap:8px;margin-top:32px;font-size:15px;font-weight:500;color:var(--navy);border-bottom:1px solid var(--gold);padding-bottom:4px;transition:color var(--ease)}
-    .practice-intro .cta-link:hover{color:var(--gold)}
+    .practice-list{border-top:1px solid var(--rule)}
+    details.prow{border-bottom:1px solid var(--rule)}
+    details.prow summary{
+      list-style:none;cursor:pointer;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:26px 0;transition:color .2s;
+    }
+    details.prow summary::-webkit-details-marker{display:none}
+    details.prow summary:hover .prow-title{color:var(--gold)}
+    .prow-title{font-family:var(--f-serif);font-size:clamp(18px,2vw,26px);font-weight:700;color:var(--navy);transition:color .2s}
+    details.prow[open] .prow-title{color:var(--gold)}
+    .prow-plus{
+      width:30px;height:30px;border:1px solid var(--rule);border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      font-size:20px;font-weight:300;color:var(--muted);line-height:1;
+      flex-shrink:0;transition:all .25s;
+    }
+    details.prow[open] .prow-plus{border-color:var(--gold);color:var(--gold);transform:rotate(45deg)}
+    .prow-body{padding:0 0 28px;max-width:620px}
+    .prow-body p{font-size:16px;color:var(--mid);line-height:1.9;font-weight:300}
 
-    .practice-list{display:grid;grid-template-columns:1fr 1fr;gap:0}
-    .practice-item{padding:32px 0;border-bottom:1px solid var(--rule);transition:all var(--ease)}
-    .practice-item:nth-child(odd){padding-left:0;padding-right:40px}
-    .practice-item:nth-child(even){padding-right:0;padding-left:40px;border-right:1px solid var(--rule)}
-    .practice-item:last-child,.practice-item:nth-last-child(2){border-bottom:none}
-    .practice-item:hover .pi-title{color:var(--gold)}
-    .pi-title{font-family:var(--f-serif);font-size:20px;font-weight:700;color:var(--navy);margin-bottom:8px;transition:color var(--ease)}
-    .pi-desc{font-size:14px;color:var(--mid);line-height:1.7;font-weight:300}
+    /* ── BLACK STATEMENT ── */
+    .blk{background:#000;padding:clamp(80px,12vw,140px) 0;overflow:hidden}
+    .blk-kicker{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.25);display:block;margin-bottom:clamp(20px,3vw,36px)}
+    .blk-line{
+      font-family:var(--f-serif);
+      font-size:clamp(34px,6vw,86px);
+      font-weight:900;color:var(--white);
+      line-height:1.0;letter-spacing:-0.02em;
+    }
+    .blk-line .g{color:var(--gold)}
+    .blk-caption{
+      font-size:15px;color:rgba(255,255,255,.3);font-weight:300;line-height:1.75;
+      max-width:460px;margin-top:clamp(24px,4vw,44px);
+      border-right:1px solid rgba(196,154,60,.25);padding-right:18px;
+    }
 
     /* ── ABOUT ── */
-    #about{padding:clamp(80px,10vw,130px) 0;background:var(--warm)}
-    .about-layout{display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:center}
-    .about-photo{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top center;filter:contrast(1.05) brightness(1.02)}
-    .about-text .section-eyebrow{margin-bottom:16px}
-    .about-h{font-family:var(--f-serif);font-size:clamp(26px,3vw,38px);font-weight:700;color:var(--navy);line-height:1.2;margin-bottom:32px}
-    .about-body{font-size:16px;color:var(--mid);line-height:1.9;font-weight:300;margin-bottom:28px}
-    .about-rule{width:100%;height:1px;background:var(--rule);margin:36px 0}
-    .about-pull{font-family:var(--f-serif);font-size:clamp(18px,2.2vw,24px);color:var(--navy);font-weight:300;font-style:italic;line-height:1.55;border-right:2px solid var(--gold);padding-right:24px}
-
-    /* ── VALUES ── */
-    #values{padding:clamp(80px,10vw,130px) 0;background:var(--navy)}
-    .values-h{font-family:var(--f-serif);font-size:clamp(28px,3.5vw,44px);font-weight:700;color:var(--white);line-height:1.15;margin-bottom:64px;max-width:560px}
-    .values-h em{color:var(--gold);font-style:normal}
-    .values-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(255,255,255,.07)}
-    .value-cell{background:var(--navy);padding:48px 40px;transition:background var(--ease)}
-    .value-cell:hover{background:#1f3158}
-    .value-title{font-family:var(--f-serif);font-size:22px;color:var(--white);font-weight:700;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.1)}
-    .value-desc{font-size:15px;color:rgba(255,255,255,.5);line-height:1.8;font-weight:300}
+    #about{padding:clamp(72px,10vw,120px) 0;background:var(--warm)}
+    .about-quote{
+      font-family:var(--f-serif);
+      font-size:clamp(24px,3.8vw,52px);
+      font-style:italic;font-weight:300;
+      color:var(--navy);line-height:1.3;
+      text-align:center;
+      max-width:920px;margin:0 auto clamp(48px,7vw,80px);
+      padding-bottom:clamp(48px,7vw,80px);
+      border-bottom:1px solid var(--rule);
+    }
+    .about-quote strong{font-weight:700;font-style:normal}
+    .about-grid{display:grid;grid-template-columns:1fr 320px;gap:72px;align-items:center}
+    .about-text .section-eyebrow{margin-bottom:12px}
+    .about-h{font-family:var(--f-serif);font-size:clamp(22px,2.5vw,32px);font-weight:700;color:var(--navy);line-height:1.2;margin-bottom:24px}
+    .about-p{font-size:16px;color:var(--mid);line-height:1.9;font-weight:300;margin-bottom:18px}
+    .about-img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top center;display:block;filter:contrast(1.05)}
 
     /* ── CONTACT ── */
-    #contact{padding:clamp(80px,10vw,130px) 0;background:var(--white)}
-    .contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
-    .contact-text .section-h{margin-bottom:24px}
-    .contact-text p{font-size:17px;color:var(--mid);line-height:1.8;font-weight:300;margin-bottom:48px}
-    .contact-links{display:flex;flex-direction:column;gap:0}
-    .contact-link{display:flex;align-items:center;gap:20px;padding:24px 0;border-top:1px solid var(--rule);transition:all var(--ease)}
-    .contact-link:last-child{border-bottom:1px solid var(--rule)}
-    .contact-link:hover .cl-arrow{transform:translateX(-4px);color:var(--gold)}
-    .cl-icon{width:40px;height:40px;border:1px solid var(--rule);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all var(--ease)}
-    .contact-link:hover .cl-icon{border-color:var(--gold)}
-    .cl-icon svg{width:18px;height:18px;stroke:var(--mid);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:stroke var(--ease)}
-    .contact-link:hover .cl-icon svg{stroke:var(--gold)}
-    .cl-body{flex:1}
-    .cl-label{font-size:12px;color:var(--light);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:4px}
-    .cl-val{font-size:17px;color:var(--navy);font-weight:500}
-    .cl-arrow{font-size:20px;color:var(--light);transition:all var(--ease)}
+    #contact{padding:clamp(72px,10vw,120px) 0;background:var(--navy)}
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+    .contact-eyebrow{font-size:11px;letter-spacing:3.5px;text-transform:uppercase;color:rgba(196,154,60,.7);display:block;margin-bottom:16px;font-weight:500}
+    .contact-h{font-family:var(--f-serif);font-size:clamp(28px,3.8vw,52px);font-weight:700;color:var(--white);line-height:1.1;margin-bottom:28px}
+    .contact-sub{font-size:15px;color:rgba(255,255,255,.35);line-height:1.8;font-weight:300;margin-bottom:44px}
+    .contact-phone{
+      display:flex;align-items:center;gap:16px;
+      font-family:var(--f-serif);font-size:clamp(32px,4.5vw,58px);
+      font-weight:700;color:var(--white);letter-spacing:-0.01em;
+      padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.08);
+      margin-bottom:20px;transition:color .2s;
+    }
+    .contact-phone:hover{color:var(--gold)}
+    .contact-phone svg{width:clamp(24px,2.5vw,34px);height:clamp(24px,2.5vw,34px);stroke:rgba(196,154,60,.5);fill:none;stroke-width:1.5;stroke-linecap:round;flex-shrink:0}
+    .clr{display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.05);transition:all .2s}
+    .clr:hover .clr-val{color:var(--gold)}
+    .clr-icon{width:34px;height:34px;border:1px solid rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:border-color .2s}
+    .clr:hover .clr-icon{border-color:rgba(196,154,60,.5)}
+    .clr-icon svg{width:15px;height:15px}
+    .clr-label{font-size:10px;color:rgba(255,255,255,.25);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:2px}
+    .clr-val{font-size:14px;color:rgba(255,255,255,.65);font-weight:500;transition:color .2s}
 
     /* form */
-    .form-panel{background:var(--warm);padding:48px;border-radius:2px}
-    .form-panel h3{font-family:var(--f-serif);font-size:26px;color:var(--navy);margin-bottom:6px;font-weight:700}
-    .form-panel .form-sub{font-size:14px;color:var(--light);margin-bottom:36px}
-    .fg{margin-bottom:22px}
-    .fg label{display:block;font-size:12px;font-weight:500;color:var(--navy);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
-    .fg input,.fg textarea{width:100%;padding:13px 0;border:none;border-bottom:1.5px solid var(--rule);background:transparent;font-family:var(--f-sans);font-size:15px;color:var(--ink);outline:none;direction:rtl;transition:border-color var(--ease);border-radius:0}
-    .fg input:focus,.fg textarea:focus{border-bottom-color:var(--navy)}
-    .fg textarea{resize:none;min-height:110px}
-    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-    .btn-submit{width:100%;padding:16px;background:var(--navy);color:var(--white);border:none;font-family:var(--f-sans);font-size:15px;font-weight:500;letter-spacing:.5px;cursor:pointer;border-radius:2px;transition:background var(--ease);margin-top:8px}
-    .btn-submit:hover{background:#243258}
-    .form-privacy{font-size:12px;color:var(--light);text-align:center;margin-top:12px}
+    .form-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:40px;border-radius:2px}
+    .form-box h3{font-family:var(--f-serif);font-size:22px;color:var(--white);font-weight:700;margin-bottom:4px}
+    .form-sub{font-size:13px;color:rgba(255,255,255,.25);margin-bottom:30px}
+    .fg{margin-bottom:20px}
+    .fg label{display:block;font-size:10px;font-weight:500;color:rgba(255,255,255,.35);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:9px}
+    .fg input,.fg textarea{
+      width:100%;padding:11px 0;
+      border:none;border-bottom:1px solid rgba(255,255,255,.1);
+      background:transparent;font-family:var(--f-sans);font-size:15px;color:var(--white);
+      outline:none;direction:rtl;transition:border-color .2s;border-radius:0;
+    }
+    .fg input::placeholder,.fg textarea::placeholder{color:rgba(255,255,255,.18)}
+    .fg input:focus,.fg textarea:focus{border-bottom-color:var(--gold)}
+    .fg textarea{resize:none;min-height:96px}
+    .fg2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .btn-send{
+      width:100%;padding:14px;background:var(--gold);color:var(--navy);
+      border:none;font-family:var(--f-sans);font-size:15px;font-weight:700;letter-spacing:.4px;
+      cursor:pointer;border-radius:1px;transition:background .2s;margin-top:8px;
+    }
+    .btn-send:hover{background:#d4a940}
+    .form-note{font-size:11px;color:rgba(255,255,255,.18);text-align:center;margin-top:11px}
 
     /* ── FOOTER ── */
-    footer{background:var(--ink);padding:56px 0 28px}
-    .footer-inner{display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;margin-bottom:48px}
-    .footer-brand{font-family:var(--f-serif);font-size:20px;color:var(--white);font-weight:700;margin-bottom:4px}
-    .footer-brand-sub{font-size:11px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:16px}
-    .footer-tag{font-size:14px;color:rgba(255,255,255,.3);line-height:1.75}
-    .footer-col-h{font-size:11px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;font-weight:500}
-    .footer-nav{list-style:none;display:flex;flex-direction:column;gap:10px}
-    .footer-nav a{font-size:14px;color:rgba(255,255,255,.4);transition:color var(--ease)}
-    .footer-nav a:hover{color:var(--white)}
-    .footer-info{display:flex;flex-direction:column;gap:10px}
-    .footer-info a,.footer-info div{font-size:14px;color:rgba(255,255,255,.4);transition:color var(--ease);display:flex;align-items:center;gap:8px}
-    .footer-info a:hover{color:rgba(255,255,255,.75)}
-    .footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-    .footer-copy,.footer-legal{font-size:12px;color:rgba(255,255,255,.2)}
+    footer{background:var(--ink);padding:48px 0 24px}
+    .foot-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+    .foot-brand{font-family:var(--f-serif);font-size:18px;color:var(--white);font-weight:700;margin-bottom:4px}
+    .foot-tag{font-size:10px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+    .foot-line{font-size:13px;color:rgba(255,255,255,.22);line-height:1.7}
+    .foot-col-h{font-size:10px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:18px;font-weight:500}
+    .foot-nav{list-style:none;display:flex;flex-direction:column;gap:10px}
+    .foot-nav a{font-size:13px;color:rgba(255,255,255,.3);transition:color .2s}
+    .foot-nav a:hover{color:rgba(255,255,255,.7)}
+    .foot-info{display:flex;flex-direction:column;gap:10px}
+    .foot-info a,.foot-info div{font-size:13px;color:rgba(255,255,255,.3);display:flex;align-items:center;gap:8px;transition:color .2s}
+    .foot-info a:hover{color:rgba(255,255,255,.65)}
+    .foot-info svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+    .foot-bottom{border-top:1px solid rgba(255,255,255,.05);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+    .foot-copy,.foot-legal{font-size:11px;color:rgba(255,255,255,.16)}
 
-    /* ── WA FLOAT ── */
-    .wa-fab{position:fixed;bottom:28px;left:28px;z-index:99;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform var(--ease),box-shadow var(--ease)}
+    /* ── WA FAB ── */
+    .wa-fab{
+      position:fixed;bottom:28px;left:28px;z-index:99;
+      width:56px;height:56px;background:#25D366;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 4px 20px rgba(37,211,102,.4);
+      transition:transform .2s,box-shadow .2s;
+    }
     .wa-fab:hover{transform:scale(1.08);box-shadow:0 8px 28px rgba(37,211,102,.5)}
     .wa-fab svg{width:26px;height:26px;fill:white}
 
     /* ── RESPONSIVE ── */
     @media(max-width:1024px){
       #hero{grid-template-columns:1fr;min-height:auto}
-      .hero-photo-col{height:72vw;max-height:520px;order:-1}
-      .hero-photo-col::after{background:linear-gradient(to top,var(--navy) 0%,transparent 45%)}
-      .hero-text-col{padding:40px clamp(20px,5vw,56px) 64px}
-      .practice-layout{grid-template-columns:1fr;gap:48px}
-      .about-layout{grid-template-columns:1fr;gap:48px}
-      .about-layout .about-photo-col{max-width:380px}
-      .contact-layout{grid-template-columns:1fr;gap:56px}
-      .values-grid{grid-template-columns:1fr}
-      .footer-inner{grid-template-columns:1fr 1fr}
+      .hero-photo{height:72vw;max-height:520px;order:-1}
+      .hero-photo::before{display:none}
+      .hero-text{padding:40px clamp(20px,5vw,48px) 64px;justify-content:flex-start}
+      .practice-head{grid-template-columns:1fr;gap:20px}
+      .about-grid{grid-template-columns:1fr;gap:48px}
+      .about-grid .about-img-wrap{order:-1;max-width:320px}
+      .contact-grid{grid-template-columns:1fr;gap:56px}
+      .foot-grid{grid-template-columns:1fr 1fr}
     }
     @media(max-width:768px){
-      .nav-links{display:none;position:fixed;inset:0;background:var(--navy);flex-direction:column;justify-content:center;align-items:center;gap:32px;z-index:100}
+      .nav-links{
+        display:none;position:fixed;inset:0;
+        background:rgba(15,28,54,.97);
+        flex-direction:column;justify-content:center;align-items:center;
+        gap:28px;z-index:100;
+      }
       .nav-links.open{display:flex}
       .nav-links a{font-size:20px;color:var(--white)!important}
       .burger{display:flex}
-      .practice-list{grid-template-columns:1fr}
-      .practice-item:nth-child(even){border-right:none;padding-left:0}
-      .practice-item:nth-last-child(2){border-bottom:1px solid var(--rule)}
-      .practice-item:last-child{border-bottom:none}
-      .form-row{grid-template-columns:1fr}
-      .footer-inner{grid-template-columns:1fr}
-      .footer-bottom{flex-direction:column;text-align:center}
+      .about-quote{font-size:clamp(19px,5vw,28px)}
+      .fg2{grid-template-columns:1fr}
+      .foot-grid{grid-template-columns:1fr}
+      .foot-bottom{flex-direction:column;text-align:center}
+    }
+    @media(max-width:480px){
+      .hero-h1{font-size:clamp(52px,14vw,80px)}
+      .blk-line{font-size:clamp(28px,8.5vw,52px)}
+      .contact-phone{font-size:clamp(28px,8vw,44px)}
+      .form-box{padding:28px 18px}
     }
   </style>
 </head>
@@ -237,198 +319,163 @@
         עו"ד יצחק קרסנטי
         <small>משרד עורכי דין</small>
       </a>
-      <ul class="nav-links" id="nav-links" role="list">
-        <li><a href="#practice">תחומי עיסוק</a></li>
-        <li><a href="#about">אודות</a></li>
-        <li><a href="#contact" class="nav-cta">ייעוץ ראשוני</a></li>
-      </ul>
-      <button class="burger" id="burger" aria-label="תפריט" aria-expanded="false" aria-controls="nav-links">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="nav-right">
+        <ul class="nav-links" id="nav-links" role="list">
+          <li><a href="#practice">תחומי עיסוק</a></li>
+          <li><a href="#about">אודות</a></li>
+          <li><a href="#contact" class="nav-cta">ייעוץ ראשוני</a></li>
+        </ul>
+        <button class="burger" id="burger" aria-label="תפריט" aria-expanded="false" aria-controls="nav-links">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </div>
 </nav>
 
 <!-- HERO -->
-<section id="hero" aria-label="כותרת">
-  <div class="hero-text-col">
-    <p class="hero-eyebrow">משרד עורכי דין · ראש העין</p>
+<section id="hero" aria-label="כותרת ראשית">
+  <div class="hero-text">
+    <p class="hero-eyebrow">עורך דין · ראש העין · שירות לכל הארץ</p>
     <h1 class="hero-h1">
       כשהחוק<br>
       נוגע<br>
-      <span>בחייך</span>
+      <span class="g">בחייך</span>
     </h1>
-    <div class="hero-line" aria-hidden="true"></div>
-    <p class="hero-p">ליווי משפטי אישי ממישהו שמכיר את המערכת מבפנים. כל תיק מטופל ישירות, בלי תחנות ביניים.</p>
-
-    <div class="hero-actions" role="list" aria-label="דרכי יצירת קשר">
+    <p class="hero-sub">ליווי משפטי אישי ממישהו שמכיר את המערכת מבפנים. כל תיק מטופל ישירות, ללא תחנות ביניים.</p>
+    <nav class="hero-contacts" aria-label="דרכי יצירת קשר">
       <a href="https://wa.me/972505075051?text=%D7%94%D7%99%D7%99%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%93%D7%A8%D7%9A%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%A9%D7%9C%D7%9A%20%D7%95%D7%90%D7%A0%D7%99%20%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%99%D7%99%D7%A2%D7%95%D7%A5%20%D7%9E%D7%A9%D7%A4%D7%98%D7%99."
-         class="hero-action ha-wa" target="_blank" rel="noopener" role="listitem" aria-label="שלח WhatsApp">
-        <div class="hero-action-icon">
+         class="hero-ci" target="_blank" rel="noopener" aria-label="שלח הודעת WhatsApp">
+        <div class="hci-icon hci-wa">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         </div>
         <div>
-          <span class="hero-action-label">WhatsApp</span>
-          <span class="hero-action-val">שלח הודעה עכשיו</span>
+          <span class="hci-label">WhatsApp</span>
+          <span class="hci-val">שלח הודעה עכשיו</span>
         </div>
       </a>
-
-      <a href="tel:0505075051" class="hero-action ha-ph" role="listitem" aria-label="התקשר">
-        <div class="hero-action-icon">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .93h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.83a16 16 0 006.29 6.29l1.26-1.26a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+      <a href="tel:0505075051" class="hero-ci" aria-label="050-507-5051">
+        <div class="hci-icon hci-ph">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .93h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.83a16 16 0 006.29 6.29l1.26-1.26a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
         </div>
         <div>
-          <span class="hero-action-label">טלפון</span>
-          <span class="hero-action-val">050-507-5051</span>
+          <span class="hci-label">טלפון</span>
+          <span class="hci-val">050-507-5051</span>
         </div>
       </a>
-
-      <a href="mailto:itzikkarase@gmail.com?subject=%D7%A4%D7%A0%D7%99%D7%99%D7%94%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8&body=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%A2%D7%95%22%D7%93%20%D7%99%D7%A6%D7%97%D7%A7%20%D7%A7%D7%A8%D7%A1%D7%A0%D7%98%D7%99%2C%0A%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%93%D7%A8%D7%9A%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%99%D7%99%D7%A2%D7%95%D7%A5."
-         class="hero-action ha-em" role="listitem" aria-label="שלח מייל">
-        <div class="hero-action-icon">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="rgba(184,151,58,.9)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </div>
-        <div>
-          <span class="hero-action-label">מייל</span>
-          <span class="hero-action-val">itzikkarase@gmail.com</span>
-        </div>
-      </a>
-    </div>
+    </nav>
   </div>
-
-  <div class="hero-photo-col" aria-hidden="true">
-    <img src="./assets/lawyer.jpg.jpeg" alt="עו&quot;ד יצחק קרסנטי" loading="eager">
+  <div class="hero-photo" aria-hidden="true">
+    <img src="./assets/lawyer.jpg.jpeg" alt='עו"ד יצחק קרסנטי' loading="eager">
   </div>
 </section>
 
-<!-- STRIP -->
-<div class="strip" aria-label="תחומי התמחות בקצרה">
-  <div class="wrap">
-    <div class="strip-inner">
-      <span class="strip-item">צוואות וירושות</span>
-      <div class="strip-sep" aria-hidden="true"></div>
-      <span class="strip-item">ייפוי כוח מתמשך</span>
-      <div class="strip-sep" aria-hidden="true"></div>
-      <span class="strip-item">מקרקעין</span>
-      <div class="strip-sep" aria-hidden="true"></div>
-      <span class="strip-item">פלילי</span>
-      <div class="strip-sep" aria-hidden="true"></div>
-      <span class="strip-item">הסכמי ממון</span>
-    </div>
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true" role="presentation">
+  <div class="ticker-track">
+    <span class="ticker-item">צוואות</span><span class="ticker-dot"></span>
+    <span class="ticker-item">ירושות</span><span class="ticker-dot"></span>
+    <span class="ticker-item">ייפוי כוח מתמשך</span><span class="ticker-dot"></span>
+    <span class="ticker-item">מקרקעין</span><span class="ticker-dot"></span>
+    <span class="ticker-item">פלילי</span><span class="ticker-dot"></span>
+    <span class="ticker-item">הסכמי ממון</span><span class="ticker-dot"></span>
+    <span class="ticker-item">צוואות</span><span class="ticker-dot"></span>
+    <span class="ticker-item">ירושות</span><span class="ticker-dot"></span>
+    <span class="ticker-item">ייפוי כוח מתמשך</span><span class="ticker-dot"></span>
+    <span class="ticker-item">מקרקעין</span><span class="ticker-dot"></span>
+    <span class="ticker-item">פלילי</span><span class="ticker-dot"></span>
+    <span class="ticker-item">הסכמי ממון</span><span class="ticker-dot"></span>
   </div>
 </div>
 
 <!-- PRACTICE -->
 <section id="practice" aria-labelledby="practice-h">
   <div class="wrap">
-    <span class="section-eyebrow">תחומי עיסוק</span>
-    <h2 class="section-h" id="practice-h">מומחיות משפטית<br>רחבה ואישית</h2>
-
-    <div class="practice-layout">
-      <div class="practice-intro fi">
-        <p>בכל תחום שבו החוק פוגש את חייך — תקבל ייעוץ מישיר, ברור ומקצועי. ללא עיגולי פינות, ללא פשרות.</p>
-        <a href="#contact" class="cta-link" aria-label="צור קשר לייעוץ">
-          לייעוץ ראשוני ←
-        </a>
+    <div class="practice-head fi">
+      <div>
+        <span class="section-eyebrow">תחומי עיסוק</span>
+        <h2 class="section-h" id="practice-h">מומחיות משפטית<br>בכל מה שחשוב</h2>
       </div>
-
-      <div class="practice-list" role="list">
-        <div class="practice-item fi" role="listitem">
-          <div class="pi-body">
-            <div class="pi-title">צוואות</div>
-            <p class="pi-desc">עריכת צוואה שתבטיח שרצונותיך יכובדו במלואם. ייעוץ אישי ומקיף.</p>
-          </div>
-        </div>
-        <div class="practice-item fi" role="listitem">
-          <div class="pi-body">
-            <div class="pi-title">ירושות</div>
-            <p class="pi-desc">ניהול הליכי ירושה בצורה חלקה, יעילה ומסודרת מול הרשויות.</p>
-          </div>
-        </div>
-        <div class="practice-item fi" role="listitem">
-          <div class="pi-body">
-            <div class="pi-title">ייפוי כוח מתמשך</div>
-            <p class="pi-desc">הגנה על עתידך ועל יקיריך. קביעת מי יטפל בענייניך כשלא תוכל בעצמך.</p>
-          </div>
-        </div>
-        <div class="practice-item fi" role="listitem">
-          <div class="pi-body">
-            <div class="pi-title">מקרקעין</div>
-            <p class="pi-desc">ליווי בעסקאות נדל"ן מרכישה ועד רישום. הגנה מקצועית על האינטרסים שלך.</p>
-          </div>
-        </div>
-        <div class="practice-item fi" role="listitem">
-          <div class="pi-body">
-            <div class="pi-title">פלילי</div>
-            <p class="pi-desc">ייצוג בהליכים פליליים מתוך הבנה מעמיקה של המערכת — מחקירה ועד פסיקה.</p>
-          </div>
-        </div>
-        <div class="practice-item fi" role="listitem">
-          <div class="pi-body">
-            <div class="pi-title">הסכמי ממון</div>
-            <p class="pi-desc">עריכת הסכמי ממון לפני ואחרי נישואים, להגדרה ברורה של זכויות כל הצדדים.</p>
-          </div>
-        </div>
-      </div>
+      <p class="practice-intro-p">בכל תחום שבו החוק פוגש את חייך — תקבל ייעוץ ישיר, ברור ומקצועי. ללא עיגולי פינות.</p>
+    </div>
+    <div class="practice-list fi" role="list">
+      <details class="prow">
+        <summary aria-expanded="false">
+          <span class="prow-title">צוואות</span>
+          <span class="prow-plus" aria-hidden="true">+</span>
+        </summary>
+        <div class="prow-body"><p>עריכת צוואה שתבטיח שרצונותיך יכובדו במלואם. ייעוץ אישי ומקיף, תוך מחשבה על כל תרחיש אפשרי.</p></div>
+      </details>
+      <details class="prow">
+        <summary>
+          <span class="prow-title">ירושות</span>
+          <span class="prow-plus" aria-hidden="true">+</span>
+        </summary>
+        <div class="prow-body"><p>ניהול הליכי ירושה בצורה חלקה, יעילה ומסודרת מול הרשויות — תוך שמירה על האינטרסים של כל הצדדים.</p></div>
+      </details>
+      <details class="prow">
+        <summary>
+          <span class="prow-title">ייפוי כוח מתמשך</span>
+          <span class="prow-plus" aria-hidden="true">+</span>
+        </summary>
+        <div class="prow-body"><p>הגנה על עתידך ועל יקיריך. קביעת מי יטפל בענייניך הרפואיים, הכלכליים והאישיים — כשלא תוכל לעשות זאת בעצמך.</p></div>
+      </details>
+      <details class="prow">
+        <summary>
+          <span class="prow-title">מקרקעין</span>
+          <span class="prow-plus" aria-hidden="true">+</span>
+        </summary>
+        <div class="prow-body"><p>ליווי מלא בעסקאות נדל"ן מהמשא ומתן ועד הרישום. הגנה מקצועית על האינטרסים שלך בכל שלב בעסקה.</p></div>
+      </details>
+      <details class="prow">
+        <summary>
+          <span class="prow-title">פלילי</span>
+          <span class="prow-plus" aria-hidden="true">+</span>
+        </summary>
+        <div class="prow-body"><p>ייצוג בהליכים פליליים מתוך הבנה מעמיקה של המערכת — מחקירה ועד פסיקה. ידע שנרכש מהצד השני של השולחן.</p></div>
+      </details>
+      <details class="prow">
+        <summary>
+          <span class="prow-title">הסכמי ממון</span>
+          <span class="prow-plus" aria-hidden="true">+</span>
+        </summary>
+        <div class="prow-body"><p>עריכת הסכמי ממון לפני ואחרי נישואים, להגדרה ברורה של זכויות כל הצדדים ולמניעת מחלוקות עתידיות.</p></div>
+      </details>
     </div>
   </div>
 </section>
+
+<!-- BLACK STATEMENT -->
+<div class="blk" aria-label="התמחות בדיני פלילי">
+  <div class="wrap">
+    <div class="fi">
+      <span class="blk-kicker">פלילי · הכרת המערכת</span>
+      <p class="blk-line">
+        הבנה שרק מישהו<br>
+        שחי את המערכת<br>
+        מבפנים <span class="g">יכול לתת</span>
+      </p>
+      <p class="blk-caption">ייצוג בהליכים פליליים מחייב יותר מידע משפטי — הוא דורש הכרת המנגנונים, הנהלים והאנשים שמרכיבים את מערכת אכיפת החוק.</p>
+    </div>
+  </div>
+</div>
 
 <!-- ABOUT -->
 <section id="about" aria-labelledby="about-h">
   <div class="wrap">
-    <div class="about-layout">
-      <div class="fi">
+    <blockquote class="about-quote fi">
+      "כל לקוח מביא איתו סיפור שונה.<br>
+      <strong>תפקידי הוא להבין אותו לעומק — ולמצוא את הפתרון הנכון, לא רק את המהיר."</strong>
+    </blockquote>
+    <div class="about-grid">
+      <div class="about-text fi">
         <span class="section-eyebrow">אודות</span>
-        <h2 class="about-h" id="about-h">
-          גישה אישית.<br>הבנה שנרכשת<br>רק בשטח.
-        </h2>
-        <p class="about-body">
-          עו"ד יצחק קרסנטי מטפל אישית בכל תיק — מהפגישה הראשונה ועד הסגירה. לא תועבר בין אנשים, לא תקבל תשובות מוכנות מראש. תקבל ייעוץ שמבוסס על הסיפור שלך.
-        </p>
-        <p class="about-body">
-          המשרד פועל בראש העין ומשרת לקוחות בכל רחבי הארץ. הגישה: ישירה, שקופה ומחויבת לתוצאה.
-        </p>
-        <div class="about-rule" aria-hidden="true"></div>
-        <blockquote class="about-pull">
-          "כל לקוח מביא איתו סיפור שונה. תפקידי הוא להבין אותו לעומק — ולמצוא את הפתרון הנכון, לא רק את המהיר."
-        </blockquote>
+        <h2 class="about-h" id="about-h">גישה אישית.<br>הבנה שנרכשת<br>רק בשטח.</h2>
+        <p class="about-p">עו"ד יצחק קרסנטי מטפל אישית בכל תיק — מהפגישה הראשונה ועד הסגירה. לא תועבר בין אנשים, לא תקבל תשובות מוכנות מראש.</p>
+        <p class="about-p">המשרד פועל בראש העין ומשרת לקוחות בכל רחבי הארץ. הגישה: ישירה, שקופה ומחויבת לתוצאה.</p>
       </div>
-
-      <div class="about-photo-col fi">
-        <img src="./assets/lawyer.jpg.jpeg"
-             alt="עו&quot;ד יצחק קרסנטי"
-             class="about-photo"
-             loading="lazy">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- VALUES -->
-<section id="values" aria-labelledby="values-h">
-  <div class="wrap">
-    <h2 class="values-h" id="values-h">
-      ארבעה דברים שיש לך<br>
-      <em>זכות לדרוש</em><br>
-      מעורך הדין שלך
-    </h2>
-    <div class="values-grid" role="list">
-      <div class="value-cell fi" role="listitem">
-        <div class="value-title">ייצוג ישיר</div>
-        <p class="value-desc">עו"ד קרסנטי מטפל בתיק שלך בעצמו. לא מזכירה, לא עורך דין זוטר — אתה.</p>
-      </div>
-      <div class="value-cell fi" role="listitem">
-        <div class="value-title">הכרת המערכת</div>
-        <p class="value-desc">הבנה מעמיקה של מוסדות המדינה, מנגנוני האכיפה והדרך שבה הם פועלים באמת.</p>
-      </div>
-      <div class="value-cell fi" role="listitem">
-        <div class="value-title">שקיפות מלאה</div>
-        <p class="value-desc">שכר טרחה ברור מראש, תהליך מוסבר בכל שלב, ואין הפתעות בדרך.</p>
-      </div>
-      <div class="value-cell fi" role="listitem">
-        <div class="value-title">זמינות אמיתית</div>
-        <p class="value-desc">שאלות משפטיות לא תמיד מחכות. מענה מהיר ורציני כי הזמן שלך חשוב.</p>
+      <div class="about-img-wrap fi">
+        <img src="./assets/lawyer.jpg.jpeg" alt='עו"ד יצחק קרסנטי' class="about-img" loading="lazy">
       </div>
     </div>
   </div>
@@ -437,56 +484,42 @@
 <!-- CONTACT -->
 <section id="contact" aria-labelledby="contact-h">
   <div class="wrap">
-    <div class="contact-layout">
-      <div class="contact-text fi">
-        <span class="section-eyebrow">צור קשר</span>
-        <h2 class="section-h" id="contact-h">מוכן לדבר?<br>אנחנו כאן.</h2>
-        <p>ייעוץ ראשוני ב-WhatsApp, שיחת טלפון, או מלא את הטופס ונחזור אליך בהקדם.</p>
-
-        <div class="contact-links" role="list" aria-label="דרכי יצירת קשר">
-          <a href="https://wa.me/972505075051?text=%D7%94%D7%99%D7%99%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%93%D7%A8%D7%9A%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%A9%D7%9C%D7%9A%20%D7%95%D7%90%D7%A0%D7%99%20%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%99%D7%99%D7%A2%D7%95%D7%A5%20%D7%9E%D7%A9%D7%A4%D7%98%D7%99."
-             class="contact-link" target="_blank" rel="noopener" role="listitem" aria-label="WhatsApp">
-            <div class="cl-icon">
-              <svg viewBox="0 0 24 24" fill="#25D366" stroke="none" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            </div>
-            <div class="cl-body">
-              <span class="cl-label">WhatsApp</span>
-              <span class="cl-val">שלח הודעה</span>
-            </div>
-            <span class="cl-arrow" aria-hidden="true">←</span>
-          </a>
-
-          <a href="tel:0505075051" class="contact-link" role="listitem" aria-label="050-507-5051">
-            <div class="cl-icon">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .93h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.83a16 16 0 006.29 6.29l1.26-1.26a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-            </div>
-            <div class="cl-body">
-              <span class="cl-label">טלפון</span>
-              <span class="cl-val">050-507-5051</span>
-            </div>
-            <span class="cl-arrow" aria-hidden="true">←</span>
-          </a>
-
-          <a href="mailto:itzikkarase@gmail.com?subject=%D7%A4%D7%A0%D7%99%D7%99%D7%94%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8&body=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%A2%D7%95%22%D7%93%20%D7%99%D7%A6%D7%97%D7%A7%20%D7%A7%D7%A8%D7%A1%D7%A0%D7%98%D7%99%2C%0A%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%93%D7%A8%D7%9A%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%99%D7%99%D7%A2%D7%95%D7%A5."
-             class="contact-link" role="listitem" aria-label="מייל">
-            <div class="cl-icon">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </div>
-            <div class="cl-body">
-              <span class="cl-label">מייל</span>
-              <span class="cl-val">itzikkarase@gmail.com</span>
-            </div>
-            <span class="cl-arrow" aria-hidden="true">←</span>
-          </a>
-        </div>
+    <div class="contact-grid">
+      <div class="fi">
+        <span class="contact-eyebrow">צור קשר</span>
+        <h2 class="contact-h" id="contact-h">מוכן לדבר?<br>אנחנו כאן.</h2>
+        <p class="contact-sub">ייעוץ ראשוני ב-WhatsApp, שיחת טלפון, או מלא את הטופס ונחזור אליך.</p>
+        <a href="tel:0505075051" class="contact-phone" aria-label="050-507-5051">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .93h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.83a16 16 0 006.29 6.29l1.26-1.26a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          050-507-5051
+        </a>
+        <a href="https://wa.me/972505075051?text=%D7%94%D7%99%D7%99%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%93%D7%A8%D7%9A%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%A9%D7%9C%D7%9A%20%D7%95%D7%90%D7%A0%D7%99%20%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%99%D7%99%D7%A2%D7%95%D7%A5%20%D7%9E%D7%A9%D7%A4%D7%98%D7%99."
+           class="clr" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <div class="clr-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="#25D366" stroke="none" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </div>
+          <div>
+            <span class="clr-label">WhatsApp</span>
+            <span class="clr-val">שלח הודעה</span>
+          </div>
+        </a>
+        <a href="mailto:itzikkarase@gmail.com?subject=%D7%A4%D7%A0%D7%99%D7%99%D7%94%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8"
+           class="clr" aria-label="מייל">
+          <div class="clr-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <span class="clr-label">מייל</span>
+            <span class="clr-val">itzikkarase@gmail.com</span>
+          </div>
+        </a>
       </div>
-
-      <div class="form-panel fi">
+      <div class="form-box fi">
         <h3>השאר פרטים</h3>
         <p class="form-sub">ונחזור אליך לייעוץ ראשוני בהקדם</p>
         <form action="https://formspree.io/f/mykanzwr" method="POST" id="contact-form" novalidate aria-label="טופס יצירת קשר">
           <input type="hidden" name="_subject" value="פנייה חדשה מהאתר – עו״ד קרסנטי">
-          <div class="form-row">
+          <div class="fg2">
             <div class="fg">
               <label for="fname">שם מלא *</label>
               <input type="text" id="fname" name="name" required autocomplete="name" placeholder="ישראל ישראלי" aria-required="true">
@@ -504,8 +537,8 @@
             <label for="fmsg">תיאור הפנייה *</label>
             <textarea id="fmsg" name="message" required aria-required="true" placeholder="ספר לנו במה נוכל לעזור..."></textarea>
           </div>
-          <button type="submit" class="btn-submit">שלח פנייה</button>
-          <p class="form-privacy">הפרטים שלך ישמרו בסודיות מלאה</p>
+          <button type="submit" class="btn-send">שלח פנייה</button>
+          <p class="form-note">הפרטים שלך ישמרו בסודיות מלאה</p>
         </form>
       </div>
     </div>
@@ -515,41 +548,41 @@
 <!-- FOOTER -->
 <footer role="contentinfo">
   <div class="wrap">
-    <div class="footer-inner">
+    <div class="foot-grid">
       <div>
-        <div class="footer-brand">עו"ד יצחק קרסנטי</div>
-        <div class="footer-brand-sub">משרד עורכי דין</div>
-        <p class="footer-tag">כשהחוק נוגע בחייך —<br>מגיע לך מישהו שמבין.</p>
+        <div class="foot-brand">עו"ד יצחק קרסנטי</div>
+        <div class="foot-tag">משרד עורכי דין</div>
+        <p class="foot-line">כשהחוק נוגע בחייך —<br>מגיע לך מישהו שמבין.</p>
       </div>
       <div>
-        <div class="footer-col-h">ניווט</div>
-        <ul class="footer-nav" role="list">
+        <div class="foot-col-h">ניווט</div>
+        <ul class="foot-nav" role="list">
           <li><a href="#practice">תחומי עיסוק</a></li>
           <li><a href="#about">אודות</a></li>
           <li><a href="#contact">צור קשר</a></li>
         </ul>
       </div>
       <div>
-        <div class="footer-col-h">יצירת קשר</div>
-        <div class="footer-info">
+        <div class="foot-col-h">יצירת קשר</div>
+        <div class="foot-info">
           <a href="tel:0505075051" aria-label="טלפון">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .93h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.83a16 16 0 006.29 6.29l1.26-1.26a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .93h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.83a16 16 0 006.29 6.29l1.26-1.26a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
             050-507-5051
           </a>
           <a href="mailto:itzikkarase@gmail.com" aria-label="מייל">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             itzikkarase@gmail.com
           </a>
           <div>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
             ראש העין | שירות לכל הארץ
           </div>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p class="footer-copy">© 2025 עו"ד יצחק קרסנטי. כל הזכויות שמורות.</p>
-      <p class="footer-legal">האתר אינו מהווה ייעוץ משפטי</p>
+    <div class="foot-bottom">
+      <p class="foot-copy">© 2025 עו"ד יצחק קרסנטי. כל הזכויות שמורות.</p>
+      <p class="foot-legal">האתר אינו מהווה ייעוץ משפטי</p>
     </div>
   </div>
 </footer>
@@ -577,26 +610,26 @@
     burger.setAttribute('aria-expanded','false');
   }));
 
-  const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('in')), {threshold:.1});
+  const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('in')), {threshold:.08});
   document.querySelectorAll('.fi').forEach(el => io.observe(el));
 
   const form = document.getElementById('contact-form');
   form.addEventListener('submit', async e => {
     e.preventDefault();
-    const btn = form.querySelector('.btn-submit'), orig = btn.textContent;
+    const btn = form.querySelector('.btn-send'), orig = btn.textContent;
     btn.textContent = 'שולח...'; btn.disabled = true;
     try {
       const r = await fetch(form.action, {method:'POST', body:new FormData(form), headers:{Accept:'application/json'}});
       if (r.ok) {
         btn.textContent = '✓ נשלח בהצלחה';
-        btn.style.background = '#1a7a4a';
+        btn.style.background = '#1a7a4a'; btn.style.color = '#fff';
         form.reset();
-        setTimeout(() => { btn.textContent = orig; btn.style.background = ''; btn.disabled = false; }, 4000);
+        setTimeout(() => { btn.textContent = orig; btn.style.background = ''; btn.style.color = ''; btn.disabled = false; }, 4000);
       } else throw 0;
     } catch {
       btn.textContent = 'שגיאה — נסה שוב';
-      btn.style.background = '#b83232';
-      setTimeout(() => { btn.textContent = orig; btn.style.background = ''; btn.disabled = false; }, 3000);
+      btn.style.background = '#b83232'; btn.style.color = '#fff';
+      setTimeout(() => { btn.textContent = orig; btn.style.background = ''; btn.style.color = ''; btn.disabled = false; }, 3000);
     }
   });
 </script>
