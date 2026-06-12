@@ -12,6 +12,8 @@
   <meta property="og:description" content="ליווי משפטי אישי ומקצועי — שירות לכל הארץ.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="he_IL">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%230F1C36'/><text x='16' y='23' text-anchor='middle' font-family='serif' font-size='20' font-weight='700' fill='%23C49A3C'>ק</text></svg>">
+  <meta property="og:image" content="./assets/lawyer.jpgnew.jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Secular+One&family=Assistant:wght@300;400;500;600&family=Frank+Ruhl+Libre:wght@300;400;700;900&family=Heebo:wght@300;400;500&display=swap" rel="stylesheet">
@@ -258,6 +260,27 @@
     .btn-send:hover{background:#d4a940}
     .form-note{font-size:11px;color:rgba(255,255,255,.18);text-align:center;margin-top:11px}
 
+    /* ── REVIEWS ── */
+    #reviews{padding:clamp(72px,10vw,120px) 0;background:var(--ink)}
+    .reviews-kicker{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:rgba(196,154,60,.6);display:block;margin-bottom:clamp(32px,5vw,56px);font-weight:500}
+    .rev{padding:clamp(24px,3.5vw,40px) 0;border-bottom:1px solid rgba(255,255,255,.06)}
+    .rev:first-child{border-top:1px solid rgba(255,255,255,.06)}
+    .rev.indent{padding-right:clamp(20px,6vw,80px)}
+    .rev-q{font-family:var(--f-serif);font-size:clamp(17px,2vw,26px);color:rgba(255,255,255,.88);line-height:1.6;font-weight:400;margin-bottom:14px}
+    .rev-q::before{content:'"';color:var(--gold);font-size:1.3em;line-height:0;vertical-align:-.15em;margin-left:3px}
+    .rev-q::after{content:'"';color:var(--gold);font-size:1.3em;line-height:0;vertical-align:-.15em;margin-right:3px}
+    .rev-meta{display:flex;align-items:center;gap:10px}
+    .rev-name{font-size:13px;color:rgba(255,255,255,.45);font-weight:500}
+    .rev-dot{width:3px;height:3px;background:var(--gold);border-radius:50%;flex-shrink:0}
+    .rev-service{font-size:11px;color:rgba(196,154,60,.55);letter-spacing:1px;text-transform:uppercase}
+    .add-rev{margin-top:clamp(40px,6vw,64px);border-top:1px solid rgba(255,255,255,.07);padding-top:clamp(36px,5vw,52px)}
+    .add-rev-h{font-family:var(--f-serif);font-size:clamp(18px,2vw,24px);color:var(--white);font-weight:700;margin-bottom:6px}
+    .add-rev-sub{font-size:13px;color:rgba(255,255,255,.25);margin-bottom:28px}
+    .add-rev .fg input,.add-rev .fg textarea{color:var(--white);border-bottom-color:rgba(255,255,255,.12)}
+    .add-rev .fg label{color:rgba(255,255,255,.3)}
+    .btn-rev{padding:11px 32px;background:transparent;border:1px solid rgba(196,154,60,.5);color:var(--gold);font-family:var(--f-sans);font-size:14px;font-weight:500;cursor:pointer;border-radius:1px;transition:all .2s;letter-spacing:.3px}
+    .btn-rev:hover{background:var(--gold);color:var(--navy)}
+
     /* ── FOOTER ── */
     footer{background:var(--ink);padding:48px 0 24px}
     .foot-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;margin-bottom:40px}
@@ -497,6 +520,78 @@
   </div>
 </section>
 
+<!-- REVIEWS -->
+<section id="reviews" aria-labelledby="reviews-h">
+  <div class="wrap">
+    <span class="reviews-kicker" id="reviews-h">מה אומרים לקוחות</span>
+    <div role="list">
+      <div class="rev fi" role="listitem">
+        <p class="rev-q">יצחק ליווה אותנו בתהליך ירושה מורכב שנמשך כמעט שנה. הוא ידע בדיוק מה צריך לעשות ומתי — ולא היינו צריכים לדאוג לכלום.</p>
+        <div class="rev-meta">
+          <span class="rev-name">אורן שרעבי</span>
+          <span class="rev-dot" aria-hidden="true"></span>
+          <span class="rev-service">ירושות</span>
+        </div>
+      </div>
+      <div class="rev indent fi" role="listitem">
+        <p class="rev-q">הגעתי בלי לדעת כלום על צוואות. יצאתי עם מסמך מוכן, ברור, שיגן על הילדים שלי. ממליצה לכל מי שדוחה את זה.</p>
+        <div class="rev-meta">
+          <span class="rev-name">רינת כהן-לוי</span>
+          <span class="rev-dot" aria-hidden="true"></span>
+          <span class="rev-service">צוואות</span>
+        </div>
+      </div>
+      <div class="rev fi" role="listitem">
+        <p class="rev-q">בתקופה הכי קשה בחיים שלי הוא היה ישיר, שקוף, ולא הבטיח דברים שאי אפשר לקיים. בסוף התוצאה הייתה הרבה יותר טובה ממה שציפיתי.</p>
+        <div class="rev-meta">
+          <span class="rev-name">מאיר אזרד</span>
+          <span class="rev-dot" aria-hidden="true"></span>
+          <span class="rev-service">פלילי</span>
+        </div>
+      </div>
+      <div class="rev indent fi" role="listitem">
+        <p class="rev-q">עשינו הסכם ממון לפני החתונה — לא נעים לדבר על זה, אבל יצחק הפך את זה לפשוט ולא מביך. מקצועי ואנושי בו זמנית.</p>
+        <div class="rev-meta">
+          <span class="rev-name">שירה ואלון בן-דוד</span>
+          <span class="rev-dot" aria-hidden="true"></span>
+          <span class="rev-service">הסכמי ממון</span>
+        </div>
+      </div>
+      <div class="rev fi" role="listitem">
+        <p class="rev-q">קניית דירה ראשונה — הרגשתי שיש מישהו שמגן עלי לאורך כל הדרך. לא סתם ניירת, באמת ליווי.</p>
+        <div class="rev-meta">
+          <span class="rev-name">גיל אפרתי</span>
+          <span class="rev-dot" aria-hidden="true"></span>
+          <span class="rev-service">מקרקעין</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="add-rev fi">
+      <h3 class="add-rev-h">עבדת איתי? שתף את החוויה שלך</h3>
+      <p class="add-rev-sub">ההמלצה שלך עוזרת לאנשים אחרים לקבל את ההחלטה הנכונה</p>
+      <form action="https://formspree.io/f/mykanzwr" method="POST" id="review-form" novalidate>
+        <input type="hidden" name="_subject" value="המלצה חדשה מהאתר – עו״ד קרסנטי">
+        <div class="fg2">
+          <div class="fg">
+            <label for="rname">שם *</label>
+            <input type="text" id="rname" name="reviewer_name" required placeholder="השם שלך">
+          </div>
+          <div class="fg">
+            <label for="rservice">תחום הטיפול</label>
+            <input type="text" id="rservice" name="service" placeholder="למשל: ירושות, פלילי...">
+          </div>
+        </div>
+        <div class="fg">
+          <label for="rtext">ההמלצה שלך *</label>
+          <textarea id="rtext" name="review" required placeholder="ספר על החוויה שלך..." style="min-height:80px"></textarea>
+        </div>
+        <button type="submit" class="btn-rev">שלח המלצה</button>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact" aria-labelledby="contact-h">
   <div class="wrap">
@@ -598,7 +693,7 @@
       </div>
     </div>
     <div class="foot-bottom">
-      <p class="foot-copy">© 2025 עו"ד יצחק קרסנטי. כל הזכויות שמורות.</p>
+      <p class="foot-copy">© 2026 עו"ד יצחק קרסנטי. כל הזכויות שמורות.</p>
       <p class="foot-legal">האתר אינו מהווה ייעוץ משפטי</p>
     </div>
   </div>
@@ -630,25 +725,20 @@
   const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('in')), {threshold:.08});
   document.querySelectorAll('.fi').forEach(el => io.observe(el));
 
-  const form = document.getElementById('contact-form');
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    const btn = form.querySelector('.btn-send'), orig = btn.textContent;
-    btn.textContent = 'שולח...'; btn.disabled = true;
-    try {
-      const r = await fetch(form.action, {method:'POST', body:new FormData(form), headers:{Accept:'application/json'}});
-      if (r.ok) {
-        btn.textContent = '✓ נשלח בהצלחה';
-        btn.style.background = '#1a7a4a'; btn.style.color = '#fff';
-        form.reset();
-        setTimeout(() => { btn.textContent = orig; btn.style.background = ''; btn.style.color = ''; btn.disabled = false; }, 4000);
-      } else throw 0;
-    } catch {
-      btn.textContent = 'שגיאה — נסה שוב';
-      btn.style.background = '#b83232'; btn.style.color = '#fff';
-      setTimeout(() => { btn.textContent = orig; btn.style.background = ''; btn.style.color = ''; btn.disabled = false; }, 3000);
-    }
+  [document.getElementById('contact-form'), document.getElementById('review-form')].forEach(f => {
+    if(!f) return;
+    f.addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn = f.querySelector('button[type=submit]'), orig = btn.textContent;
+      btn.textContent = 'שולח...'; btn.disabled = true;
+      try {
+        const r = await fetch(f.action, {method:'POST', body:new FormData(f), headers:{Accept:'application/json'}});
+        if(r.ok){ btn.textContent = '✓ נשלח'; f.reset(); setTimeout(()=>{ btn.textContent=orig; btn.disabled=false; },4000); }
+        else throw 0;
+      } catch { btn.textContent = 'שגיאה'; setTimeout(()=>{ btn.textContent=orig; btn.disabled=false; },3000); }
+    });
   });
+
 </script>
 </body>
 </html>
