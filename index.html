@@ -100,7 +100,6 @@
     .hero-sub{
       font-size:clamp(15px,1.5vw,17px);color:rgba(255,255,255,.45);font-weight:300;line-height:1.75;
       max-width:380px;margin-bottom:clamp(36px,5vw,56px);
-      border-right:2px solid rgba(196,154,60,.35);padding-right:18px;
     }
     .hero-contacts{display:flex;flex-direction:column}
     .hero-ci{
@@ -115,14 +114,24 @@
     .hci-label{font-size:10px;color:rgba(255,255,255,.3);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:2px}
     .hci-val{font-size:15px;color:var(--white);font-weight:500}
 
-    .hero-photo{position:relative;overflow:hidden;background:#ECE8DF}
-    .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;filter:contrast(1.05)}
-    /* Gold vertical rule at the join between photo and text */
+    .hero-photo{position:relative;overflow:hidden;background:var(--navy)}
+    .hero-photo img{
+      width:100%;height:100%;object-fit:cover;object-position:top center;display:block;
+      transform:scaleX(-1);
+      filter:contrast(1.08) brightness(0.88) saturate(0.85);
+    }
     .hero-photo::before{
+      content:'';position:absolute;inset:0;
+      background:
+        linear-gradient(to right, var(--navy) 0%, transparent 35%),
+        linear-gradient(to top, var(--navy) 0%, transparent 20%);
+      z-index:2;pointer-events:none;
+    }
+    .hero-photo::after{
       content:'';position:absolute;top:12%;bottom:0;right:0;
       width:2px;
       background:linear-gradient(to bottom,transparent,var(--gold) 25%,var(--gold) 80%,transparent);
-      z-index:2;
+      z-index:3;
     }
 
     /* ── TICKER ── */
@@ -134,7 +143,7 @@
     }
     .ticker-item{font-family:var(--f-serif);font-size:14px;color:var(--navy);font-weight:700;padding:0 36px;flex-shrink:0;letter-spacing:.2px}
     .ticker-dot{width:4px;height:4px;background:rgba(15,28,54,.25);border-radius:50%;flex-shrink:0}
-    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-33.333%)}}
 
     /* ── PRACTICE ── */
     #practice{padding:clamp(72px,10vw,120px) 0;background:var(--paper)}
@@ -336,11 +345,10 @@
 <!-- HERO -->
 <section id="hero" aria-label="כותרת ראשית">
   <div class="hero-text">
-    <p class="hero-eyebrow">עורך דין · ראש העין · שירות לכל הארץ</p>
+    <p class="hero-eyebrow">עו״ד · ראש העין</p>
     <h1 class="hero-h1">
-      כשהחוק<br>
-      נוגע<br>
-      <span class="g">בחייך</span>
+      יצחק<br>
+      קרסנטי
     </h1>
     <p class="hero-sub">ליווי משפטי אישי ממישהו שמכיר את המערכת מבפנים. כל תיק מטופל ישירות, ללא תחנות ביניים.</p>
     <nav class="hero-contacts" aria-label="דרכי יצירת קשר">
@@ -373,6 +381,12 @@
 <!-- TICKER -->
 <div class="ticker" aria-hidden="true" role="presentation">
   <div class="ticker-track">
+    <span class="ticker-item">צוואות</span><span class="ticker-dot"></span>
+    <span class="ticker-item">ירושות</span><span class="ticker-dot"></span>
+    <span class="ticker-item">ייפוי כוח מתמשך</span><span class="ticker-dot"></span>
+    <span class="ticker-item">מקרקעין</span><span class="ticker-dot"></span>
+    <span class="ticker-item">פלילי</span><span class="ticker-dot"></span>
+    <span class="ticker-item">הסכמי ממון</span><span class="ticker-dot"></span>
     <span class="ticker-item">צוואות</span><span class="ticker-dot"></span>
     <span class="ticker-item">ירושות</span><span class="ticker-dot"></span>
     <span class="ticker-item">ייפוי כוח מתמשך</span><span class="ticker-dot"></span>
@@ -449,13 +463,13 @@
 <div class="blk" aria-label="התמחות בדיני פלילי">
   <div class="wrap">
     <div class="fi">
-      <span class="blk-kicker">פלילי · ייצוג שיודע איך המערכת עובדת</span>
+      <span class="blk-kicker">פלילי</span>
       <p class="blk-line">
-        מי שמכיר<br>
-        את המערכת<br>
-        מבפנים — <span class="g">מגן אחרת</span>
+        מישהו שהיה<br>
+        בצד השני<br>
+        של <span class="g">השולחן</span>
       </p>
-      <p class="blk-caption">ייצוג פלילי אמיתי מחייב יותר מידע משפטי. הוא דורש הבנה של איך החוקרים חושבים, איך התביעה בונה תיק, ואיך להשיג את התוצאה הטובה ביותר עבורך.</p>
+      <p class="blk-caption">כשמישהו מכיר את החוקרים, את התביעה, ואת הנהלים — הוא יודע בדיוק היכן להפעיל לחץ ואיפה לחפש את הפתח.</p>
     </div>
   </div>
 </div>
@@ -463,14 +477,9 @@
 <!-- ABOUT -->
 <section id="about" aria-labelledby="about-h">
   <div class="wrap">
-    <blockquote class="about-quote fi">
-      "כל לקוח מביא איתו סיפור שונה.<br>
-      <strong>תפקידי הוא להבין אותו לעומק — ולמצוא את הפתרון הנכון, לא רק את המהיר."</strong>
-    </blockquote>
     <div class="about-grid">
       <div class="about-text fi">
-        <span class="section-eyebrow">אודות</span>
-        <h2 class="about-h" id="about-h">גישה אישית.<br>הבנה שנרכשת<br>רק בשטח.</h2>
+        <h2 class="about-h" id="about-h">עו״ד יצחק קרסנטי<br>מטפל בתיק שלך<br>בעצמו.</h2>
         <p class="about-p">עו"ד יצחק קרסנטי מטפל אישית בכל תיק — מהפגישה הראשונה ועד הסגירה. לא תועבר בין אנשים, לא תקבל תשובות מוכנות מראש.</p>
         <p class="about-p">המשרד פועל בראש העין ומשרת לקוחות בכל רחבי הארץ. הגישה: ישירה, שקופה ומחויבת לתוצאה.</p>
       </div>
@@ -487,8 +496,8 @@
     <div class="contact-grid">
       <div class="fi">
         <span class="contact-eyebrow">צור קשר</span>
-        <h2 class="contact-h" id="contact-h">מוכן לדבר?<br>אנחנו כאן.</h2>
-        <p class="contact-sub">ייעוץ ראשוני ב-WhatsApp, שיחת טלפון, או מלא את הטופס ונחזור אליך.</p>
+        <h2 class="contact-h" id="contact-h">מדברים ישירות.<br>בלי תחנות ביניים.</h2>
+        <p class="contact-sub">שיחת טלפון, הודעת WhatsApp, או טופס — אחזור אליך אישית.</p>
         <a href="tel:0505075051" class="contact-phone" aria-label="050-507-5051">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .93h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.83a16 16 0 006.29 6.29l1.26-1.26a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
           050-507-5051
@@ -553,7 +562,7 @@
       <div>
         <div class="foot-brand">עו"ד יצחק קרסנטי</div>
         <div class="foot-tag">משרד עורכי דין</div>
-        <p class="foot-line">כשהחוק נוגע בחייך —<br>מגיע לך מישהו שמבין.</p>
+        <p class="foot-line">תיק אחד. עורך דין אחד. ישירות.</p>
       </div>
       <div>
         <div class="foot-col-h">ניווט</div>
