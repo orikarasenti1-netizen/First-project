@@ -178,12 +178,12 @@
     /* ── TICKER ── */
     .ticker{background:var(--gold);position:absolute;bottom:0;left:0;right:0;z-index:10}
     .ticker-track{
-      display:flex;align-items:center;justify-content:space-evenly;
-      padding:9px 16px;
+      display:grid;grid-template-columns:repeat(3,1fr);
+      padding:7px 16px;gap:4px 0;
       direction:rtl;
     }
-    .ticker-item{font-family:var(--f-serif);font-size:12px;color:var(--navy);font-weight:700;letter-spacing:.2px;white-space:nowrap;flex:1;text-align:center}
-    .ticker-dot{width:4px;height:4px;background:rgba(15,28,54,.3);border-radius:50%;flex-shrink:0}
+    .ticker-item{font-family:var(--f-serif);font-size:12px;color:var(--navy);font-weight:700;letter-spacing:.2px;text-align:center;padding:3px 0}
+    .ticker-dot{display:none}
 
     /* ── PRACTICE ── */
     #practice{padding:clamp(72px,10vw,120px) 0;background:var(--paper)}
