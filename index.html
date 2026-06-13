@@ -78,6 +78,24 @@
     .burger.open span:nth-child(2){opacity:0}
     .burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
 
+    /* ── HERO NAV ── */
+    .hero-nav{
+      position:absolute;top:0;inset-inline:0;z-index:10;
+      display:flex;align-items:center;justify-content:flex-start;gap:12px;
+      padding:20px clamp(24px,5vw,80px);
+    }
+    .hero-nav a{
+      font-family:var(--f-sans);font-size:13px;font-weight:500;
+      color:rgba(255,255,255,.75);letter-spacing:.3px;
+      padding:8px 18px;border-radius:2px;
+      border:1px solid rgba(255,255,255,.2);
+      background:rgba(15,28,54,.25);backdrop-filter:blur(8px);
+      transition:all .2s;
+    }
+    .hero-nav a:hover{color:#fff;background:rgba(15,28,54,.5);border-color:rgba(255,255,255,.4)}
+    .hero-nav-cta{border-color:rgba(196,154,60,.6)!important;color:var(--gold)!important}
+    .hero-nav-cta:hover{background:rgba(196,154,60,.15)!important;border-color:var(--gold)!important}
+
     /* ── HERO ── */
     #hero{
       height:100svh;
@@ -104,7 +122,7 @@
     }
     .hero-text{
       display:flex;flex-direction:column;justify-content:flex-end;
-      padding:clamp(80px,10vh,120px) clamp(24px,5vw,80px) calc(clamp(32px,4vh,52px) + 38px);
+      padding:clamp(56px,7vh,90px) clamp(24px,5vw,80px) calc(clamp(28px,4vh,44px) + 38px);
       position:relative;z-index:2;
       max-width:700px;
     }
@@ -369,27 +387,6 @@
 <body>
 <a href="#main-content" class="skip-link">דלג לתוכן הראשי</a>
 
-<!-- NAV -->
-<nav class="nav" id="nav" role="navigation" aria-label="ניווט ראשי">
-  <div class="wrap">
-    <div class="nav-row">
-      <a href="#" class="nav-brand" aria-label="ראש הדף">
-        עו"ד יצחק קרסנטי
-        <small>משרד עורכי דין</small>
-      </a>
-      <div class="nav-right">
-        <ul class="nav-links" id="nav-links" role="list">
-          <li><a href="#practice">תחומי עיסוק</a></li>
-          <li><a href="#about">אודות</a></li>
-          <li><a href="#contact" class="nav-cta">ייעוץ ראשוני</a></li>
-        </ul>
-        <button class="burger" id="burger" aria-label="תפריט" aria-expanded="false" aria-controls="nav-links">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-  </div>
-</nav>
 
 <!-- HERO -->
 <main id="main-content">
@@ -400,6 +397,11 @@
       <img src="./assets/lawyer.jpgnew.jpeg" alt="" fetchpriority="high" decoding="async">
     </picture>
   </div>
+  <nav class="hero-nav" aria-label="ניווט ראשי">
+    <a href="#practice">תחומי עיסוק</a>
+    <a href="#about">אודות</a>
+    <a href="#contact" class="hero-nav-cta">ייעוץ ראשוני</a>
+  </nav>
   <div class="hero-text">
     <p class="hero-eyebrow">עו״ד · ראש העין</p>
     <h1 class="hero-h1">
@@ -589,20 +591,6 @@
   </div>
 </section>
 
-<!-- BLACK STATEMENT -->
-<div class="blk" aria-label="התמחות בדיני פלילי">
-  <div class="wrap">
-    <div class="fi">
-      <span class="blk-kicker">פלילי</span>
-      <p class="blk-line">
-        מישהו שהיה<br>
-        בצד השני<br>
-        של <span class="g">השולחן</span>
-      </p>
-      <p class="blk-caption">כשמישהו מכיר את החוקרים, את התביעה, ואת הנהלים - הוא יודע בדיוק היכן להפעיל לחץ ואיפה לחפש את הפתח.</p>
-    </div>
-  </div>
-</div>
 
 
 </main>
@@ -667,21 +655,6 @@
 <!-- WA FAB removed - replaced by mobile sticky bar -->
 
 <script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => nav.classList.toggle('on', scrollY > 50), {passive:true});
-
-  const burger = document.getElementById('burger');
-  const links  = document.getElementById('nav-links');
-  burger.addEventListener('click', () => {
-    const o = links.classList.toggle('open');
-    burger.classList.toggle('open', o);
-    burger.setAttribute('aria-expanded', o);
-  });
-  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    links.classList.remove('open');
-    burger.classList.remove('open');
-    burger.setAttribute('aria-expanded','false');
-  }));
 
   const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('in')), {threshold:.08});
   document.querySelectorAll('.fi').forEach(el => io.observe(el));
