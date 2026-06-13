@@ -79,12 +79,13 @@
 
     /* ── HERO ── */
     #hero{
-      min-height:100vh;
+      min-height:100dvh;
       background:var(--navy);
       position:relative;
       overflow:hidden;
       display:flex;
-      align-items:flex-end;
+      flex-direction:column;
+      justify-content:flex-end;
     }
     .hero-bg{
       position:absolute;inset:0;z-index:0;
@@ -102,7 +103,8 @@
     }
     .hero-text{
       display:flex;flex-direction:column;justify-content:flex-end;
-      padding:120px clamp(20px,5vw,64px) clamp(56px,7vw,88px);
+      flex:1;
+      padding:120px clamp(20px,5vw,64px) clamp(40px,5vw,64px);
       position:relative;z-index:2;
       max-width:640px;
     }
@@ -142,7 +144,7 @@
     }
 
     /* ── TICKER ── */
-    .ticker{background:var(--gold);overflow:hidden}
+    .ticker{background:var(--gold);overflow:hidden;position:relative;z-index:2;flex-shrink:0}
     .ticker-track{
       display:flex;align-items:center;white-space:nowrap;
       animation:ticker 16s linear infinite;padding:17px 0;
@@ -442,7 +444,6 @@
       </a>
     </nav>
   </div>
-</section>
 
 <!-- TICKER -->
 <div class="ticker" role="region" aria-label="תחומי עיסוק: צוואות, ירושות, ייפוי כוח מתמשך, מקרקעין, פלילי, הסכמי ממון">
@@ -467,6 +468,7 @@
     <span class="ticker-item">הסכמי ממון</span><span class="ticker-dot"></span>
   </div>
 </div>
+</section>
 
 <!-- PRACTICE -->
 <section id="practice" aria-labelledby="practice-h">
