@@ -80,7 +80,7 @@
 
     /* ── HERO ── */
     #hero{
-      min-height:100vh;
+      min-height:100svh;
       background:var(--navy);
       position:relative;
       overflow:hidden;
@@ -105,7 +105,7 @@
     .hero-text{
       display:flex;flex-direction:column;justify-content:flex-end;
       flex:1;
-      padding:120px clamp(20px,5vw,64px) clamp(40px,5vw,64px);
+      padding:clamp(70px,8vh,120px) clamp(20px,5vw,64px) clamp(24px,3vh,40px);
       position:relative;z-index:2;
       max-width:640px;
     }
@@ -117,12 +117,12 @@
       color:var(--white);
       line-height:0.9;
       letter-spacing:-0.025em;
-      margin-bottom:clamp(28px,4vw,48px);
+      margin-bottom:clamp(16px,2.5vh,36px);
     }
     .hero-h1 .g{color:var(--gold)}
     .hero-sub{
       font-size:clamp(15px,1.5vw,17px);color:rgba(255,255,255,.45);font-weight:300;line-height:1.75;
-      max-width:380px;margin-bottom:clamp(36px,5vw,56px);
+      max-width:380px;margin-bottom:clamp(20px,3vh,36px);
     }
     .hero-contacts{display:flex;flex-direction:column}
     .hero-ci{
@@ -626,77 +626,6 @@
   </div>
 </div>
 
-<!-- REVIEWS -->
-<section id="reviews" aria-labelledby="reviews-h">
-  <div class="wrap">
-    <span class="reviews-kicker" id="reviews-h">מה אומרים לקוחות</span>
-    <div role="list">
-      <div class="rev fi" role="listitem">
-        <p class="rev-q">איציק ליווה אותנו בתהליך ירושה מורכב שנמשך כמעט שנה. הוא ידע בדיוק מה צריך לעשות ומתי - ולא היינו צריכים לדאוג לכלום.</p>
-        <div class="rev-meta">
-          <span class="rev-name">אורן שרעבי</span>
-          <span class="rev-dot" aria-hidden="true"></span>
-          <span class="rev-service">ירושות</span>
-        </div>
-      </div>
-      <div class="rev indent fi" role="listitem">
-        <p class="rev-q">הגעתי בלי לדעת כלום על צוואות. יצאתי עם מסמך מוכן, ברור, שיגן על הילדים שלי. ממליצה לכל מי שדוחה את זה.</p>
-        <div class="rev-meta">
-          <span class="rev-name">רינת כהן-לוי</span>
-          <span class="rev-dot" aria-hidden="true"></span>
-          <span class="rev-service">צוואות</span>
-        </div>
-      </div>
-      <div class="rev fi" role="listitem">
-        <p class="rev-q">בתקופה הכי קשה בחיים שלי הוא היה ישיר, שקוף, ולא הבטיח דברים שאי אפשר לקיים. בסוף התוצאה הייתה הרבה יותר טובה ממה שציפיתי.</p>
-        <div class="rev-meta">
-          <span class="rev-name">מאיר אזרד</span>
-          <span class="rev-dot" aria-hidden="true"></span>
-          <span class="rev-service">פלילי</span>
-        </div>
-      </div>
-      <div class="rev indent fi" role="listitem">
-        <p class="rev-q">עשינו הסכם ממון לפני החתונה - לא נעים לדבר על זה, אבל איציק הפך את זה לפשוט ולא מביך. מקצועי ואנושי בו זמנית.</p>
-        <div class="rev-meta">
-          <span class="rev-name">שירה ואלון בן-דוד</span>
-          <span class="rev-dot" aria-hidden="true"></span>
-          <span class="rev-service">הסכמי ממון</span>
-        </div>
-      </div>
-      <div class="rev fi" role="listitem">
-        <p class="rev-q">קניית דירה ראשונה - הרגשתי שיש מישהו שמגן עלי לאורך כל הדרך. לא סתם ניירת, באמת ליווי.</p>
-        <div class="rev-meta">
-          <span class="rev-name">גיל אפרתי</span>
-          <span class="rev-dot" aria-hidden="true"></span>
-          <span class="rev-service">מקרקעין</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="add-rev fi">
-      <h3 class="add-rev-h">עבדת איתי? שתף את החוויה שלך</h3>
-      <p class="add-rev-sub">ההמלצה שלך עוזרת לאנשים אחרים לקבל את ההחלטה הנכונה</p>
-      <form action="https://formspree.io/f/mykanzwr" method="POST" id="review-form" novalidate>
-        <input type="hidden" name="_subject" value="המלצה חדשה מהאתר – עו״ד קרסנטי">
-        <div class="fg2">
-          <div class="fg">
-            <label for="rname">שם *</label>
-            <input type="text" id="rname" name="reviewer_name" required placeholder="השם שלך">
-          </div>
-          <div class="fg">
-            <label for="rservice">תחום הטיפול</label>
-            <input type="text" id="rservice" name="service" placeholder="למשל: ירושות, פלילי...">
-          </div>
-        </div>
-        <div class="fg">
-          <label for="rtext">ההמלצה שלך *</label>
-          <textarea id="rtext" name="review" required placeholder="ספר על החוויה שלך..." style="min-height:80px"></textarea>
-        </div>
-        <button type="submit" class="btn-rev">שלח המלצה</button>
-      </form>
-    </div>
-  </div>
-</section>
 
 </main>
 
