@@ -41,7 +41,7 @@
     }
 
     html{scroll-behavior:smooth}
-    body{font-family:var(--f-sans);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;line-height:1.6;padding-bottom:64px}
+    body{font-family:var(--f-sans);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;line-height:1.6}
     img{display:block;max-width:100%}
     a{color:inherit;text-decoration:none}
     :focus-visible{outline:3px solid var(--gold);outline-offset:4px;border-radius:2px}
@@ -324,24 +324,21 @@
     /* ── STICKY BAR (all screens) ── */
     .mob-bar{
       display:block;
-      position:fixed;bottom:0;inset-inline:0;z-index:98;
-      background:var(--navy);border-top:1px solid rgba(196,154,60,.2);
-      padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+      position:fixed;top:16px;left:16px;z-index:98;
+      background:rgba(15,28,54,.82);backdrop-filter:blur(10px);
+      border:1px solid rgba(196,154,60,.2);border-radius:6px;
+      padding:6px 8px;
     }
-    .mob-bar-inner{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .mob-bar-inner{display:flex;gap:6px}
     .mob-btn{
-      display:flex;align-items:center;justify-content:center;gap:8px;
-      padding:13px 8px;border-radius:2px;font-family:var(--f-sans);font-size:14px;font-weight:600;
-      text-align:center;transition:opacity .2s;
+      display:flex;align-items:center;justify-content:center;gap:6px;
+      padding:7px 12px;border-radius:4px;font-family:var(--f-sans);font-size:12px;font-weight:600;
+      transition:opacity .2s;white-space:nowrap;
     }
     .mob-btn:active{opacity:.8}
     .mob-btn-call{background:var(--gold);color:var(--navy)}
-    .mob-btn-wa{background:rgba(37,211,102,.12);color:#25D366;border:1px solid rgba(37,211,102,.25)}
-    .mob-btn svg{width:17px;height:17px;flex-shrink:0}
-    @media(min-width:769px){
-      .mob-bar-inner{max-width:340px;margin:0 auto}
-      .mob-btn{font-size:15px;padding:14px 20px}
-    }
+    .mob-btn-wa{background:rgba(37,211,102,.15);color:#25D366;border:1px solid rgba(37,211,102,.3)}
+    .mob-btn svg{width:13px;height:13px;flex-shrink:0}
 
     /* ── WA FAB ── */
     .wa-fab{
