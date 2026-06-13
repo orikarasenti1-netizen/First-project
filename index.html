@@ -1,152 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grain — Daily Habit Tracker</title>
-    <meta name="description" content="Build consistency one day at a time. Grain tracks your daily habits with clarity and without noise.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tools — Get paid. Build habits.</title>
+  <meta name="description" content="Two simple tools for freelancers and solopreneurs. Create professional invoices and track daily habits — no account required.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="app" id="app">
 
-        <header class="header">
-            <div class="header-left">
-                <div class="brand" aria-label="Grain">
-                    <span class="brand-gem" aria-hidden="true">◆</span>
-                    <span class="brand-name">Grain</span>
-                </div>
-                <p class="header-date" id="header-date" aria-live="polite"></p>
-            </div>
-            <button class="btn-add" id="btn-add" aria-label="Add new habit">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                    <line x1="7" y1="1" x2="7" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="1" y1="7" x2="13" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                New Habit
-            </button>
-        </header>
-
-        <main class="main">
-
-            <!-- Today's habits -->
-            <section class="panel panel-today" aria-labelledby="today-heading">
-                <div class="panel-head">
-                    <h2 class="panel-title" id="today-heading">Today</h2>
-                    <span class="tally" id="tally" aria-live="polite" aria-atomic="true">0 / 0</span>
-                </div>
-
-                <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar">
-                    <div class="progress-fill" id="progress-fill"></div>
-                </div>
-
-                <ul class="habit-list" id="habit-list" aria-label="Today's habits"></ul>
-
-                <div class="empty" id="empty" hidden>
-                    <span class="empty-gem" aria-hidden="true">◇</span>
-                    <p class="empty-title">No habits yet</p>
-                    <p class="empty-sub">Add your first habit and start building a streak.</p>
-                    <button class="btn-empty" id="btn-empty">Add a habit</button>
-                </div>
-            </section>
-
-            <!-- Activity -->
-            <section class="panel panel-activity" aria-labelledby="activity-heading">
-                <div class="panel-head">
-                    <h2 class="panel-title" id="activity-heading">Activity</h2>
-                    <span class="sub-label">Last 15 weeks</span>
-                </div>
-
-                <div class="stats-grid" id="stats-grid">
-                    <div class="stat">
-                        <span class="stat-val" id="stat-streak">0</span>
-                        <span class="stat-label">Day streak</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-val" id="stat-today">—</span>
-                        <span class="stat-label">Today</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-val" id="stat-week">—</span>
-                        <span class="stat-label">This week</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-val" id="stat-best">0</span>
-                        <span class="stat-label">Best streak</span>
-                    </div>
-                </div>
-
-                <div class="heatmap-wrap">
-                    <div class="heatmap-day-labels" aria-hidden="true">
-                        <span>Mon</span>
-                        <span></span>
-                        <span>Wed</span>
-                        <span></span>
-                        <span>Fri</span>
-                        <span></span>
-                        <span>Sun</span>
-                    </div>
-                    <div class="heatmap-grid" id="heatmap-grid" aria-label="15-week activity heatmap"></div>
-                </div>
-
-                <div class="heatmap-legend" aria-hidden="true">
-                    <span>Less</span>
-                    <div class="legend-swatches">
-                        <div class="lswatch l0"></div>
-                        <div class="lswatch l1"></div>
-                        <div class="lswatch l2"></div>
-                        <div class="lswatch l3"></div>
-                        <div class="lswatch l4"></div>
-                    </div>
-                    <span>More</span>
-                </div>
-            </section>
-
-        </main>
+  <header class="site-header">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-dot"></span>
+        Tools
+      </div>
+      <nav>
+        <a href="invoice/">Folio — Invoicing</a>
+        <a href="grain/">Grain — Habits</a>
+      </nav>
     </div>
+  </header>
 
-    <!-- Modal -->
-    <div class="modal-backdrop" id="modal-backdrop" aria-hidden="true">
-        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-heading" id="modal">
-            <button class="modal-close" id="modal-close" aria-label="Close">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                    <line x1="2" y1="2" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="12" y1="2" x2="2" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </button>
+  <main>
 
-            <h3 class="modal-title" id="modal-heading">New habit</h3>
-
-            <form id="habit-form" class="habit-form">
-                <div class="field">
-                    <label class="field-label" for="habit-name">What do you want to do every day?</label>
-                    <input
-                        type="text"
-                        id="habit-name"
-                        class="field-input"
-                        placeholder="e.g., Read for 20 minutes"
-                        maxlength="60"
-                        autocomplete="off"
-                        required
-                    >
-                </div>
-
-                <div class="field">
-                    <span class="field-label" id="color-label">Pick a color</span>
-                    <div class="color-picker" id="color-picker" role="radiogroup" aria-labelledby="color-label"></div>
-                </div>
-
-                <div class="modal-actions">
-                    <button type="button" class="btn-cancel" id="btn-cancel">Cancel</button>
-                    <button type="submit" class="btn-save">Add Habit</button>
-                </div>
-            </form>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow">Built for freelancers &amp; solopreneurs</p>
+        <h1>Get paid faster.<br>Build better habits.</h1>
+        <p class="hero-sub">Two simple tools that work in your browser. No sign-up. No subscription to start.</p>
+        <div class="hero-ctas">
+          <a class="btn-primary" href="invoice/">Create your first invoice →</a>
+          <a class="btn-ghost" href="grain/">Track your habits</a>
         </div>
-    </div>
+      </div>
+    </section>
 
-    <script src="app.js"></script>
+    <!-- Products -->
+    <section class="products">
+      <div class="container">
+        <div class="product-grid">
+
+          <!-- Folio -->
+          <div class="product-card">
+            <div class="product-header">
+              <div class="product-icon folio-icon">F</div>
+              <div>
+                <h2>Folio</h2>
+                <p class="product-tagline">Professional invoicing</p>
+              </div>
+            </div>
+            <p class="product-desc">
+              A bank records money that already arrived. <strong>Folio helps you request payment</strong> — professionally, before it happens.
+            </p>
+            <ul class="feature-list">
+              <li>Create a professional invoice in under 2 minutes</li>
+              <li>Know exactly who owes you and how much</li>
+              <li>Download a branded PDF your clients take seriously</li>
+              <li>Send directly from your email in one click</li>
+              <li>See overdue invoices at a glance — never forget a payment</li>
+              <li>Multi-currency: USD, EUR, GBP, CAD, AUD, JPY</li>
+            </ul>
+            <div class="product-pricing">
+              <div class="price-tier">
+                <span class="price-amount">Free</span>
+                <span class="price-desc">up to 3 invoices / month</span>
+              </div>
+              <div class="price-tier pro">
+                <span class="price-amount">$12 <small>/mo</small></span>
+                <span class="price-desc">Pro — unlimited + payment reminders</span>
+              </div>
+            </div>
+            <a class="btn-product folio-btn" href="invoice/">Open Folio →</a>
+          </div>
+
+          <!-- Grain -->
+          <div class="product-card">
+            <div class="product-header">
+              <div class="product-icon grain-icon">G</div>
+              <div>
+                <h2>Grain</h2>
+                <p class="product-tagline">Daily habit tracker</p>
+              </div>
+            </div>
+            <p class="product-desc">
+              Small actions compound into big results. <strong>Grain tracks your daily habits</strong> so you can see the progress you're building.
+            </p>
+            <ul class="feature-list">
+              <li>Add any habit, check it off each day</li>
+              <li>See your consistency as a 15-week visual heatmap</li>
+              <li>Streak counter keeps you motivated</li>
+              <li>Works completely offline — data stays on your device</li>
+            </ul>
+            <div class="product-pricing">
+              <div class="price-tier">
+                <span class="price-amount">Free</span>
+                <span class="price-desc">always, no strings attached</span>
+              </div>
+            </div>
+            <a class="btn-product grain-btn" href="grain/">Open Grain →</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Folio vs bank -->
+    <section class="why-section">
+      <div class="container">
+        <h2 class="section-title">Why Folio instead of just your bank?</h2>
+        <div class="comparison-grid">
+          <div class="comparison-col bank-col">
+            <h3>Your bank</h3>
+            <ul>
+              <li>Shows you money that has already arrived</li>
+              <li>No client names or project context</li>
+              <li>No way to see who hasn't paid yet</li>
+              <li>Can't create or send documents to clients</li>
+              <li>Clients don't know what they're paying for</li>
+            </ul>
+          </div>
+          <div class="comparison-col folio-col">
+            <h3>Folio</h3>
+            <ul>
+              <li>Helps you <em>request</em> payment before it happens</li>
+              <li>Organises every invoice by client &amp; project</li>
+              <li>Flags overdue invoices automatically</li>
+              <li>Produces a professional PDF in one click</li>
+              <li>Clients know exactly what they owe and why</li>
+            </ul>
+          </div>
+        </div>
+        <p class="comparison-quote">A bank records what happened. Folio makes it happen.</p>
+      </div>
+    </section>
+
+    <!-- Trust signals -->
+    <section class="trust-section">
+      <div class="container">
+        <div class="trust-grid">
+          <div class="trust-item">
+            <span class="trust-icon">🔒</span>
+            <h4>Private by default</h4>
+            <p>Your invoices and habits stay on your device. Nothing is sent to any server.</p>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">⚡</span>
+            <h4>No account needed</h4>
+            <p>Open the app and start immediately. No email, no password, no waiting.</p>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">📄</span>
+            <h4>PDF in one click</h4>
+            <p>Download a clean, printable invoice your clients will trust and pay faster.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <p class="footer-brand"><span class="logo-dot"></span> Tools</p>
+        <div class="footer-links">
+          <a href="invoice/">Folio</a>
+          <a href="grain/">Grain</a>
+        </div>
+        <p class="footer-note">No tracking. No account required. Works offline.</p>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
