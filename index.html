@@ -41,7 +41,7 @@
     }
 
     html{scroll-behavior:smooth}
-    body{font-family:var(--f-sans);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;line-height:1.6}
+    body{font-family:var(--f-sans);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;line-height:1.6;padding-bottom:64px}
     img{display:block;max-width:100%}
     a{color:inherit;text-decoration:none}
     :focus-visible{outline:3px solid var(--gold);outline-offset:4px;border-radius:2px}
@@ -321,9 +321,9 @@
     .foot-bottom{border-top:1px solid rgba(255,255,255,.05);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
     .foot-copy,.foot-legal{font-size:11px;color:rgba(255,255,255,.16)}
 
-    /* ── MOBILE STICKY BAR ── */
+    /* ── STICKY BAR (all screens) ── */
     .mob-bar{
-      display:none;
+      display:block;
       position:fixed;bottom:0;inset-inline:0;z-index:98;
       background:var(--navy);border-top:1px solid rgba(196,154,60,.2);
       padding:10px 16px calc(10px + env(safe-area-inset-bottom));
@@ -338,7 +338,10 @@
     .mob-btn-call{background:var(--gold);color:var(--navy)}
     .mob-btn-wa{background:rgba(37,211,102,.12);color:#25D366;border:1px solid rgba(37,211,102,.25)}
     .mob-btn svg{width:17px;height:17px;flex-shrink:0}
-    @media(max-width:768px){.mob-bar{display:block}}
+    @media(min-width:769px){
+      .mob-bar-inner{max-width:340px;margin:0 auto}
+      .mob-btn{font-size:15px;padding:14px 20px}
+    }
 
     /* ── WA FAB ── */
     .wa-fab{
@@ -471,42 +474,42 @@
           <span class="prow-title">צוואות</span>
           <span class="prow-plus" aria-hidden="true">+</span>
         </summary>
-        <div class="prow-body"><p>עריכת צוואה שתבטיח שרצונותיך יכובדו במלואם. ייעוץ אישי ומקיף, תוך מחשבה על כל תרחיש אפשרי.</p></div>
+        <div class="prow-body"><p>צוואה שנכתבת ללא ייעוץ משפטי עלולה להיפסל בבית משפט — ולהותיר את משפחתך במחלוקת במקום בנחת. עורך דין מוודא שהצוואה עומדת בכל הדרישות החוקיות ומשקפת את רצונך המדויק.</p></div>
       </details>
       <details class="prow">
         <summary>
           <span class="prow-title">ירושות</span>
           <span class="prow-plus" aria-hidden="true">+</span>
         </summary>
-        <div class="prow-body"><p>ניהול הליכי ירושה בצורה חלקה, יעילה ומסודרת מול הרשויות - תוך שמירה על האינטרסים של כל הצדדים.</p></div>
+        <div class="prow-body"><p>הליך ירושה ללא ייצוג יכול להתמשך שנים, לכלול טעויות מול הרשם לענייני ירושה ולעלות ביוקר. עורך דין מקצר את התהליך, מונע חסמים בירוקרטיים ושומר על חלקך בעיזבון.</p></div>
       </details>
       <details class="prow">
         <summary>
           <span class="prow-title">ייפוי כוח מתמשך</span>
           <span class="prow-plus" aria-hidden="true">+</span>
         </summary>
-        <div class="prow-body"><p>הגנה על עתידך ועל יקיריך. קביעת מי יטפל בענייניך הרפואיים, הכלכליים והאישיים - כשלא תוכל לעשות זאת בעצמך.</p></div>
+        <div class="prow-body"><p>אם לא מינית מיופה כוח בזמן — בית המשפט יחליט במקומך מי ינהל את חייך. ייפוי כוח מתמשך שנערך נכון מאפשר לך לבחור מראש מי יטפל בענייניך הרפואיים והכלכליים, ומונע הליכי אפוטרופסות יקרים וכואבים.</p></div>
       </details>
       <details class="prow">
         <summary>
           <span class="prow-title">מקרקעין</span>
           <span class="prow-plus" aria-hidden="true">+</span>
         </summary>
-        <div class="prow-body"><p>ליווי מלא בעסקאות נדל"ן מהמשא ומתן ועד הרישום. הגנה מקצועית על האינטרסים שלך בכל שלב בעסקה.</p></div>
+        <div class="prow-body"><p>עסקת נדל"ן ללא עורך דין חושפת אותך לחוזים בעייתיים, עיקולים נסתרים ובעיות רישום שיכולות לעלות בעשרות אלפי שקלים. עורך דין בודק את הנכס, מגן עליך במשא ומתן ומבטיח שהכסף שלך מאובטח.</p></div>
       </details>
       <details class="prow">
         <summary>
           <span class="prow-title">פלילי</span>
           <span class="prow-plus" aria-hidden="true">+</span>
         </summary>
-        <div class="prow-body"><p>ייצוג בהליכים פליליים מתוך הבנה מעמיקה של המערכת - מחקירה ועד פסיקה. ידע שנרכש מהצד השני של השולחן.</p></div>
+        <div class="prow-body"><p>בחקירה פלילית, כל מילה שתאמר יכולה לשמש נגדך. עורך דין פלילי שמכיר את המערכת מבפנים יודע מתי לשתוק, מתי לדבר, ואיפה להפעיל לחץ — לפני שהנזק נעשה.</p></div>
       </details>
       <details class="prow">
         <summary>
           <span class="prow-title">הסכמי ממון</span>
           <span class="prow-plus" aria-hidden="true">+</span>
         </summary>
-        <div class="prow-body"><p>עריכת הסכמי ממון לפני ואחרי נישואים, להגדרה ברורה של זכויות כל הצדדים ולמניעת מחלוקות עתידיות.</p></div>
+        <div class="prow-body"><p>ללא הסכם ממון, פירוד עלול להסתיים בחלוקה שלא תכננת — כולל נכסים שהיו שלך לפני הנישואים. הסכם שנערך נכון מגן על שני הצדדים ומונע מחלוקות יקרות וכואבות בעתיד.</p></div>
       </details>
     </div>
   </div>
