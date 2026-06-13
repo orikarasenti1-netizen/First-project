@@ -47,7 +47,15 @@ body { font-family: var(--font); background: var(--bg); color: var(--ink); displ
   padding: 1.5rem 0;
 }
 
-.sidebar-top { display: flex; flex-direction: column; gap: 2rem; }
+.sidebar-top { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.sidebar-home { padding: 0 1.25rem 0; }
+.home-link {
+  font-size: 0.75rem; color: var(--muted);
+  text-decoration: none; font-weight: 500;
+  transition: color var(--ease);
+}
+.home-link:hover { color: var(--ink); }
 
 .logo {
   display: flex;
@@ -334,7 +342,19 @@ select {
   transition: border-color var(--ease), background var(--ease);
 }
 .item-input:focus { outline: none; border-color: var(--primary); background: white; box-shadow: 0 0 0 3px rgba(29,78,216,.08); }
-.item-amount { font-size: 0.875rem; font-weight: 500; color: var(--ink); padding-left: 0.5rem; font-variant-numeric: tabular-nums; }
+.item-amount {
+  display: block;
+  font-size: 0.875rem; font-weight: 500; color: var(--ink-mid);
+  padding: 0.45rem 0.6rem;
+  font-variant-numeric: tabular-nums;
+  background: var(--bg); border-radius: var(--r-sm);
+  text-align: right;
+}
+
+.th-auto {
+  font-size: 0.65rem; font-weight: 400; color: var(--muted);
+  text-transform: none; letter-spacing: 0;
+}
 
 .del-item-btn {
   background: none; border: none; cursor: pointer;

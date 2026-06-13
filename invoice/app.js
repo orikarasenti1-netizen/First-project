@@ -24,9 +24,10 @@ let db = {
   invoices: [],
 };
 
-let currentFilter  = 'all';
-let editingId      = null;   // null = new invoice
-let itemIdCounter  = 0;
+let currentFilter    = 'all';
+let editingId        = null;   // null = new invoice
+let itemIdCounter    = 0;
+let currentPreviewId = null;
 
 function load() {
   try { const r = localStorage.getItem(KEY); if (r) db = JSON.parse(r); } catch (_) {}
@@ -224,7 +225,7 @@ function openEditInvoice(id) {
 }
 
 function newItem() {
-  return { id: ++itemIdCounter, description: '', qty: 1, rate: 0 };
+  return { id: ++itemIdCounter, description: '', qty: 1, rate: '' };
 }
 
 function renderFormItems() {
@@ -238,7 +239,7 @@ function renderFormItems() {
     tr.innerHTML = `
       <td class="col-desc"><input class="item-input" type="text" placeholder="Description of service or product" value="${esc(item.description)}" data-field="description"></td>
       <td class="col-qty"><input class="item-input" type="number" value="${item.qty}" min="0" step="any" data-field="qty" style="text-align:right"></td>
-      <td class="col-rate"><input class="item-input" type="number" value="${item.rate}" min="0" step="any" data-field="rate" style="text-align:right"></td>
+      <td class="col-rate"><input class="item-input" type="number" value="${item.rate}" min="0" step="any" placeholder="0.00" data-field="rate" style="text-align:right"></td>
       <td class="col-amount"><span class="item-amount">${fmt(amount, currency)}</span></td>
       <td class="col-del">
         <button type="button" class="del-item-btn" title="Remove line">
@@ -317,6 +318,7 @@ function saveInvoice(status) {
 /* ─── Preview ────────────────────────────── */
 
 function openPreview(id) {
+  currentPreviewId = id || null;
   const inv = id ? db.invoices.find(i => i.id === id) : collectInvoice(editingId ? computeStatus(db.invoices.find(i => i.id === editingId)) : 'draft');
   if (!inv) return;
 
@@ -434,6 +436,41 @@ function showFlash(msg) {
   el._t = setTimeout(() => { el.style.opacity = '0'; }, 2200);
 }
 
+/* ─── Email invoice ──────────────────────── */
+
+function emailInvoice(inv) {
+  const lines = (inv.items || []).map(it => {
+    const amt = (parseFloat(it.qty) || 0) * (parseFloat(it.rate) || 0);
+    return `  - ${it.description || 'Service'}: ${it.qty} x ${fmt(parseFloat(it.rate) || 0, inv.currency)} = ${fmt(amt, inv.currency)}`;
+  }).join('\n');
+
+  const body = [
+    `Hi ${inv.clientName || 'there'},`,
+    '',
+    `Please find invoice ${inv.number} attached below.`,
+    '',
+    `Invoice: ${inv.number}`,
+    `Date:    ${displayDate(inv.issueDate)}`,
+    `Due:     ${displayDate(inv.dueDate)}`,
+    '',
+    'Items:',
+    lines,
+    '',
+    inv.discountPct > 0 ? `Discount (${inv.discountPct}%): -${fmt(inv.discountAmt || 0, inv.currency)}` : '',
+    inv.taxPct > 0 ? `Tax (${inv.taxPct}%): ${fmt(inv.taxAmt || 0, inv.currency)}` : '',
+    `Total due: ${fmt(inv.total || 0, inv.currency)}`,
+    inv.notes ? `\nNotes:\n${inv.notes}` : '',
+    '',
+    `Thank you for your business,`,
+    inv.fromName || '',
+    inv.fromEmail || '',
+  ].filter(l => l !== '').join('\n');
+
+  const subject = `Invoice ${inv.number} from ${inv.fromName || 'your provider'}`;
+  const mailto = `mailto:${encodeURIComponent(inv.clientEmail || '')}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.location.href = mailto;
+}
+
 /* ─── DOM helpers ────────────────────────── */
 
 function gv(id) { return document.getElementById(id)?.value ?? ''; }
@@ -544,6 +581,14 @@ function openPreviewDirect(inv) {
 document.getElementById('preview-back').addEventListener('click', () => {
   if (editingId) { showView('form'); }
   else { renderDashboard(); showView('dashboard'); }
+});
+
+// Send by email
+document.getElementById('btn-email').addEventListener('click', () => {
+  const inv = currentPreviewId
+    ? db.invoices.find(i => i.id === currentPreviewId)
+    : collectInvoice('draft');
+  if (inv) emailInvoice(inv);
 });
 
 // Print
