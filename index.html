@@ -93,12 +93,12 @@
     }
     .hero-bg img{
       width:100%;height:100%;object-fit:cover;object-position:65% top;display:block;
-      filter:brightness(0.72) contrast(1.06) saturate(0.8);
+      filter:brightness(0.95) contrast(1.02) saturate(0.85);
     }
     .hero-bg::after{
       content:'';position:absolute;inset:0;
       background:
-        linear-gradient(to left, transparent 0%, rgba(15,28,54,.85) 45%, var(--navy) 75%);
+        linear-gradient(to left, transparent 0%, rgba(15,28,54,.45) 35%, rgba(15,28,54,.9) 62%, var(--navy) 78%);
       pointer-events:none;
     }
     .hero-text{
@@ -145,8 +145,8 @@
     /* ── TICKER ── */
     .ticker{background:var(--gold);overflow:hidden;position:relative;z-index:2;flex-shrink:0}
     .ticker-track{
-      display:flex;align-items:center;white-space:nowrap;
-      animation:ticker 8s linear infinite;padding:17px 0;
+      display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
+      gap:0;padding:14px 0;
       direction:ltr;
     }
     .ticker-item{font-family:var(--f-serif);font-size:14px;color:var(--navy);font-weight:700;padding:0 36px;flex-shrink:0;letter-spacing:.2px}
@@ -458,19 +458,7 @@
     <span class="ticker-item">ייפוי כוח מתמשך</span><span class="ticker-dot"></span>
     <span class="ticker-item">מקרקעין</span><span class="ticker-dot"></span>
     <span class="ticker-item">פלילי</span><span class="ticker-dot"></span>
-    <span class="ticker-item">הסכמי ממון</span><span class="ticker-dot"></span>
-    <span class="ticker-item">צוואות</span><span class="ticker-dot"></span>
-    <span class="ticker-item">ירושות</span><span class="ticker-dot"></span>
-    <span class="ticker-item">ייפוי כוח מתמשך</span><span class="ticker-dot"></span>
-    <span class="ticker-item">מקרקעין</span><span class="ticker-dot"></span>
-    <span class="ticker-item">פלילי</span><span class="ticker-dot"></span>
-    <span class="ticker-item">הסכמי ממון</span><span class="ticker-dot"></span>
-    <span class="ticker-item">צוואות</span><span class="ticker-dot"></span>
-    <span class="ticker-item">ירושות</span><span class="ticker-dot"></span>
-    <span class="ticker-item">ייפוי כוח מתמשך</span><span class="ticker-dot"></span>
-    <span class="ticker-item">מקרקעין</span><span class="ticker-dot"></span>
-    <span class="ticker-item">פלילי</span><span class="ticker-dot"></span>
-    <span class="ticker-item">הסכמי ממון</span><span class="ticker-dot"></span>
+    <span class="ticker-item">הסכמי ממון</span>
   </div>
 </div>
 
