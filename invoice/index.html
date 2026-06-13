@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Folio — Professional Invoicing</title>
+  <meta name="description" content="Create and send professional invoices in seconds. Download as PDF, track payments, get paid faster.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <div class="logo">
+        <span class="logo-mark">F</span>
+        <span class="logo-name">Folio</span>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-view="dashboard">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="9" y="1" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="1" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="9" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/></svg>
+          Dashboard
+        </button>
+        <button class="nav-item" data-view="form" id="nav-new">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><line x1="8" y1="2" x2="8" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="8" x2="14" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          New Invoice
+        </button>
+        <button class="nav-item" data-view="settings">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3.1 3.1l1.06 1.06M11.84 11.84l1.06 1.06M3.1 12.9l1.06-1.06M11.84 4.16l1.06-1.06" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Settings
+        </button>
+      </nav>
+    </div>
+    <div class="sidebar-upgrade">
+      <div class="upgrade-badge">PRO</div>
+      <p class="upgrade-title">Unlock Pro</p>
+      <p class="upgrade-sub">Custom templates, payment links, and automatic reminders.</p>
+      <button class="upgrade-btn">Upgrade — $12/mo</button>
+    </div>
+  </aside>
+
+  <div class="main">
+
+    <div class="view" id="view-dashboard">
+      <div class="view-header">
+        <div>
+          <h1 class="view-title">Invoices</h1>
+          <p class="view-sub" id="dash-sub">Loading…</p>
+        </div>
+        <button class="btn-primary" id="dash-new-btn">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="7" y1="1" x2="7" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="1" y1="7" x2="13" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          New Invoice
+        </button>
+      </div>
+      <div class="stats-row" id="stats-row">
+        <div class="stat-card"><span class="stat-val" id="stat-total">$0</span><span class="stat-lbl">Total invoiced</span></div>
+        <div class="stat-card"><span class="stat-val green" id="stat-paid">$0</span><span class="stat-lbl">Collected</span></div>
+        <div class="stat-card"><span class="stat-val blue" id="stat-outstanding">$0</span><span class="stat-lbl">Outstanding</span></div>
+        <div class="stat-card"><span class="stat-val red" id="stat-overdue">$0</span><span class="stat-lbl">Overdue</span></div>
+      </div>
+      <div class="filter-row">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="draft">Draft</button>
+        <button class="filter-btn" data-filter="sent">Sent</button>
+        <button class="filter-btn" data-filter="paid">Paid</button>
+        <button class="filter-btn" data-filter="overdue">Overdue</button>
+      </div>
+      <div class="table-wrap">
+        <table class="invoice-table">
+          <thead><tr><th>Invoice</th><th>Client</th><th>Date</th><th>Due</th><th>Amount</th><th>Status</th><th></th></tr></thead>
+          <tbody id="invoice-tbody"></tbody>
+        </table>
+        <div class="table-empty" id="table-empty" hidden>
+          <p class="empty-icon">📄</p>
+          <p class="empty-title">No invoices yet</p>
+          <p class="empty-sub">Create your first invoice to get started.</p>
+          <button class="btn-primary" id="empty-new-btn">Create Invoice</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="view hidden" id="view-form">
+      <div class="view-header">
+        <div>
+          <button class="back-btn" id="form-back">← Back</button>
+          <h1 class="view-title" id="form-title">New Invoice</h1>
+        </div>
+        <div class="form-actions">
+          <button class="btn-ghost" id="btn-save-draft">Save Draft</button>
+          <button class="btn-ghost" id="btn-preview">Preview</button>
+          <button class="btn-primary" id="btn-send">Mark as Sent</button>
+        </div>
+      </div>
+      <form class="invoice-form" id="invoice-form" novalidate>
+        <div class="form-grid">
+          <div class="form-card">
+            <h3 class="form-card-title">From</h3>
+            <div class="fields">
+              <div class="field"><label>Your name / company</label><input type="text" id="f-from-name" placeholder="Acme Corp" required></div>
+              <div class="field"><label>Email</label><input type="email" id="f-from-email" placeholder="you@company.com"></div>
+              <div class="field"><label>Address</label><textarea id="f-from-address" rows="3" placeholder="123 Main St&#10;New York, NY 10001"></textarea></div>
+            </div>
+          </div>
+          <div class="form-card">
+            <h3 class="form-card-title">Bill To</h3>
+            <div class="fields">
+              <div class="field"><label>Client name / company</label><input type="text" id="f-to-name" placeholder="Client Corp" required></div>
+              <div class="field"><label>Client email</label><input type="email" id="f-to-email" placeholder="client@company.com"></div>
+              <div class="field"><label>Address</label><textarea id="f-to-address" rows="3" placeholder="456 Market St&#10;San Francisco, CA 94103"></textarea></div>
+            </div>
+          </div>
+          <div class="form-card form-card-wide">
+            <div class="meta-row">
+              <div class="field"><label>Invoice number</label><input type="text" id="f-number" placeholder="INV-2026-001" required></div>
+              <div class="field"><label>Issue date</label><input type="date" id="f-issue-date" required></div>
+              <div class="field"><label>Due date</label><input type="date" id="f-due-date" required></div>
+              <div class="field"><label>Currency</label><select id="f-currency"><option value="USD">USD — US Dollar</option><option value="EUR">EUR — Euro</option><option value="GBP">GBP — British Pound</option><option value="CAD">CAD — Canadian Dollar</option><option value="AUD">AUD — Australian Dollar</option><option value="JPY">JPY — Japanese Yen</option></select></div>
+            </div>
+          </div>
+          <div class="form-card form-card-wide">
+            <h3 class="form-card-title">Line Items</h3>
+            <div class="items-table-wrap">
+              <table class="items-table">
+                <thead><tr><th class="col-desc">Description</th><th class="col-qty">Qty</th><th class="col-rate">Rate</th><th class="col-amount">Amount</th><th class="col-del"></th></tr></thead>
+                <tbody id="items-tbody"></tbody>
+              </table>
+            </div>
+            <button type="button" class="btn-add-item" id="btn-add-item">+ Add line item</button>
+            <div class="totals">
+              <div class="total-row"><span>Subtotal</span><span id="t-subtotal">$0.00</span></div>
+              <div class="total-row"><span>Discount <input type="number" id="f-discount" class="pct-input" value="0" min="0" max="100" step="0.1">%</span><span id="t-discount">−$0.00</span></div>
+              <div class="total-row"><span>Tax <input type="number" id="f-tax" class="pct-input" value="0" min="0" max="100" step="0.1">%</span><span id="t-tax">$0.00</span></div>
+              <div class="total-row total-final"><span>Total</span><span id="t-total">$0.00</span></div>
+            </div>
+          </div>
+          <div class="form-card form-card-wide">
+            <h3 class="form-card-title">Notes</h3>
+            <textarea id="f-notes" rows="3" placeholder="Payment terms, bank details, thank-you note…" style="width:100%"></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="view hidden" id="view-preview">
+      <div class="view-header no-print">
+        <button class="back-btn" id="preview-back">← Back</button>
+        <div class="preview-actions">
+          <button class="btn-ghost" id="btn-mark-paid">Mark as Paid</button>
+          <button class="btn-primary" id="btn-print">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="5" width="10" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M4 5V2.5C4 2.22 4.22 2 4.5 2h5c.28 0 .5.22.5.5V5" stroke="currentColor" stroke-width="1.5"/><line x1="4" y1="9" x2="10" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="11" x2="8" y2="11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Download PDF
+          </button>
+        </div>
+      </div>
+      <div class="invoice-doc" id="invoice-doc">
+        <div class="doc-header">
+          <div class="doc-from">
+            <p class="doc-company" id="doc-from-name"></p>
+            <p class="doc-address" id="doc-from-email"></p>
+            <p class="doc-address" id="doc-from-address"></p>
+          </div>
+          <div class="doc-meta">
+            <h2 class="doc-title">INVOICE</h2>
+            <table class="doc-meta-table">
+              <tr><td>Invoice</td><td id="doc-number"></td></tr>
+              <tr><td>Date</td><td id="doc-issue-date"></td></tr>
+              <tr><td>Due</td><td id="doc-due-date"></td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="doc-divider"></div>
+        <div class="doc-bill-to">
+          <p class="doc-label">BILL TO</p>
+          <p class="doc-client-name" id="doc-to-name"></p>
+          <p class="doc-address" id="doc-to-email"></p>
+          <p class="doc-address" id="doc-to-address"></p>
+        </div>
+        <table class="doc-items">
+          <thead><tr><th class="doc-col-desc">Description</th><th class="doc-col-qty">Qty</th><th class="doc-col-rate">Rate</th><th class="doc-col-amount">Amount</th></tr></thead>
+          <tbody id="doc-items-tbody"></tbody>
+        </table>
+        <div class="doc-totals">
+          <div class="doc-total-row"><span>Subtotal</span><span id="doc-subtotal"></span></div>
+          <div class="doc-total-row" id="doc-discount-row"><span id="doc-discount-label">Discount</span><span id="doc-discount"></span></div>
+          <div class="doc-total-row" id="doc-tax-row"><span id="doc-tax-label">Tax</span><span id="doc-tax"></span></div>
+          <div class="doc-total-row doc-total-final"><span>Total</span><span id="doc-total"></span></div>
+        </div>
+        <div class="doc-notes-wrap" id="doc-notes-wrap">
+          <p class="doc-label">NOTES</p>
+          <p class="doc-notes" id="doc-notes"></p>
+        </div>
+        <div class="doc-stamp paid-stamp" id="doc-paid-stamp">PAID</div>
+      </div>
+    </div>
+
+    <div class="view hidden" id="view-settings">
+      <div class="view-header">
+        <h1 class="view-title">Settings</h1>
+        <button class="btn-primary" id="btn-save-settings">Save Changes</button>
+      </div>
+      <div class="settings-grid">
+        <div class="form-card">
+          <h3 class="form-card-title">Your Business</h3>
+          <div class="fields">
+            <div class="field"><label>Business name</label><input type="text" id="s-name" placeholder="Your Company"></div>
+            <div class="field"><label>Email</label><input type="email" id="s-email" placeholder="you@company.com"></div>
+            <div class="field"><label>Phone</label><input type="tel" id="s-phone" placeholder="+1 (555) 000-0000"></div>
+            <div class="field"><label>Address</label><textarea id="s-address" rows="3" placeholder="123 Main St&#10;City, State ZIP"></textarea></div>
+          </div>
+        </div>
+        <div class="form-card">
+          <h3 class="form-card-title">Invoice Defaults</h3>
+          <div class="fields">
+            <div class="field"><label>Default currency</label><select id="s-currency"><option value="USD">USD — US Dollar</option><option value="EUR">EUR — Euro</option><option value="GBP">GBP — British Pound</option><option value="CAD">CAD — Canadian Dollar</option><option value="AUD">AUD — Australian Dollar</option><option value="JPY">JPY — Japanese Yen</option></select></div>
+            <div class="field"><label>Default tax rate (%)</label><input type="number" id="s-tax" value="0" min="0" max="100" step="0.1"></div>
+            <div class="field"><label>Payment terms</label><select id="s-terms"><option>Due on receipt</option><option>Net 7</option><option selected>Net 30</option><option>Net 60</option><option>Net 90</option></select></div>
+            <div class="field"><label>Invoice number prefix</label><input type="text" id="s-prefix" value="INV" placeholder="INV"></div>
+            <div class="field"><label>Default notes</label><textarea id="s-notes" rows="3" placeholder="Thank you for your business!"></textarea></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
