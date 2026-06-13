@@ -80,7 +80,7 @@
 
     /* ── HERO ── */
     #hero{
-      height:calc(100svh - 51px);
+      height:100svh;
       background:var(--navy);
       position:relative;
       overflow:hidden;
@@ -144,7 +144,7 @@
     }
 
     /* ── TICKER ── */
-    .ticker{background:var(--gold);overflow:hidden;position:relative;z-index:2;flex-shrink:0}
+    .ticker{background:var(--gold);overflow:hidden;position:absolute;bottom:0;left:0;right:0;z-index:10}
     .ticker-track{
       display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
       gap:0;padding:14px 0;
@@ -440,20 +440,19 @@
     </nav>
   </div>
 
+  <!-- TICKER -->
+  <div class="ticker" role="region" aria-label="תחומי עיסוק">
+    <div class="ticker-track">
+      <span class="ticker-item">צוואות</span><span class="ticker-dot"></span>
+      <span class="ticker-item">ירושות</span><span class="ticker-dot"></span>
+      <span class="ticker-item">ייפוי כוח מתמשך</span><span class="ticker-dot"></span>
+      <span class="ticker-item">מקרקעין</span><span class="ticker-dot"></span>
+      <span class="ticker-item">פלילי</span><span class="ticker-dot"></span>
+      <span class="ticker-item">הסכמי ממון</span>
+    </div>
+  </div>
 
 </section>
-
-<!-- TICKER -->
-<div class="ticker" role="region" aria-label="תחומי עיסוק: צוואות, ירושות, ייפוי כוח מתמשך, מקרקעין, פלילי, הסכמי ממון">
-  <div class="ticker-track">
-    <span class="ticker-item">צוואות</span><span class="ticker-dot"></span>
-    <span class="ticker-item">ירושות</span><span class="ticker-dot"></span>
-    <span class="ticker-item">ייפוי כוח מתמשך</span><span class="ticker-dot"></span>
-    <span class="ticker-item">מקרקעין</span><span class="ticker-dot"></span>
-    <span class="ticker-item">פלילי</span><span class="ticker-dot"></span>
-    <span class="ticker-item">הסכמי ממון</span>
-  </div>
-</div>
 
 <!-- PRACTICE -->
 <section id="practice" aria-labelledby="practice-h">
