@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grain — Daily Habit Tracker</title>
+    <meta name="description" content="Build consistency one day at a time. Grain tracks your daily habits with clarity and without noise.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app" id="app">
+
+        <header class="header">
+            <div class="header-left">
+                <div class="brand" aria-label="Grain">
+                    <span class="brand-gem" aria-hidden="true">◆</span>
+                    <span class="brand-name">Grain</span>
+                </div>
+                <p class="header-date" id="header-date" aria-live="polite"></p>
+            </div>
+            <button class="btn-add" id="btn-add" aria-label="Add new habit">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <line x1="7" y1="1" x2="7" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="1" y1="7" x2="13" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                New Habit
+            </button>
+        </header>
+
+        <main class="main">
+
+            <!-- Today's habits -->
+            <section class="panel panel-today" aria-labelledby="today-heading">
+                <div class="panel-head">
+                    <h2 class="panel-title" id="today-heading">Today</h2>
+                    <span class="tally" id="tally" aria-live="polite" aria-atomic="true">0 / 0</span>
+                </div>
+
+                <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+
+                <ul class="habit-list" id="habit-list" aria-label="Today's habits"></ul>
+
+                <div class="empty" id="empty" hidden>
+                    <span class="empty-gem" aria-hidden="true">◇</span>
+                    <p class="empty-title">No habits yet</p>
+                    <p class="empty-sub">Add your first habit and start building a streak.</p>
+                    <button class="btn-empty" id="btn-empty">Add a habit</button>
+                </div>
+            </section>
+
+            <!-- Activity -->
+            <section class="panel panel-activity" aria-labelledby="activity-heading">
+                <div class="panel-head">
+                    <h2 class="panel-title" id="activity-heading">Activity</h2>
+                    <span class="sub-label">Last 15 weeks</span>
+                </div>
+
+                <div class="stats-grid" id="stats-grid">
+                    <div class="stat">
+                        <span class="stat-val" id="stat-streak">0</span>
+                        <span class="stat-label">Day streak</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-val" id="stat-today">—</span>
+                        <span class="stat-label">Today</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-val" id="stat-week">—</span>
+                        <span class="stat-label">This week</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-val" id="stat-best">0</span>
+                        <span class="stat-label">Best streak</span>
+                    </div>
+                </div>
+
+                <div class="heatmap-wrap">
+                    <div class="heatmap-day-labels" aria-hidden="true">
+                        <span>Mon</span>
+                        <span></span>
+                        <span>Wed</span>
+                        <span></span>
+                        <span>Fri</span>
+                        <span></span>
+                        <span>Sun</span>
+                    </div>
+                    <div class="heatmap-grid" id="heatmap-grid" aria-label="15-week activity heatmap"></div>
+                </div>
+
+                <div class="heatmap-legend" aria-hidden="true">
+                    <span>Less</span>
+                    <div class="legend-swatches">
+                        <div class="lswatch l0"></div>
+                        <div class="lswatch l1"></div>
+                        <div class="lswatch l2"></div>
+                        <div class="lswatch l3"></div>
+                        <div class="lswatch l4"></div>
+                    </div>
+                    <span>More</span>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-backdrop" id="modal-backdrop" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-heading" id="modal">
+            <button class="modal-close" id="modal-close" aria-label="Close">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <line x1="2" y1="2" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="12" y1="2" x2="2" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+
+            <h3 class="modal-title" id="modal-heading">New habit</h3>
+
+            <form id="habit-form" class="habit-form">
+                <div class="field">
+                    <label class="field-label" for="habit-name">What do you want to do every day?</label>
+                    <input
+                        type="text"
+                        id="habit-name"
+                        class="field-input"
+                        placeholder="e.g., Read for 20 minutes"
+                        maxlength="60"
+                        autocomplete="off"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <span class="field-label" id="color-label">Pick a color</span>
+                    <div class="color-picker" id="color-picker" role="radiogroup" aria-labelledby="color-label"></div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" id="btn-cancel">Cancel</button>
+                    <button type="submit" class="btn-save">Add Habit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
