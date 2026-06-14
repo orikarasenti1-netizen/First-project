@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freelance Rate Calculator — Know Exactly What to Charge | Folio</title>
+  <meta name="description" content="Calculate your minimum freelance hourly rate in 60 seconds. Based on your income goals, expenses, tax, and billable hours. Free, no signup, instant results.">
+  <meta name="keywords" content="freelance rate calculator, how much to charge freelance, hourly rate calculator freelancer, freelance pricing calculator">
+  <meta property="og:title" content="Freelance Rate Calculator — Know Exactly What to Charge">
+  <meta property="og:description" content="Stop guessing. Calculate your freelance rate based on real numbers — income goals, expenses, tax, and billable hours. Free and instant.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="top-bar">
+    <a href="../" class="back-link">← All tools</a>
+    <div class="top-logo">
+      <span class="logo-dot"></span>
+      <span>Folio — Rate Calculator</span>
+    </div>
+    <a href="../invoice/" class="top-cta">Create Invoice →</a>
+  </header>
+
+  <div class="page">
+
+    <div class="hero">
+      <p class="eyebrow">Free — no signup needed</p>
+      <h1>Know exactly what to charge</h1>
+      <p class="hero-sub">Most freelancers undercharge because they guess. This calculator shows the minimum rate you need to hit your income goals — and what you should actually charge.</p>
+    </div>
+
+    <div class="calc-wrap">
+
+      <!-- Inputs -->
+      <div class="inputs-col">
+        <h2 class="col-title">Your numbers</h2>
+
+        <div class="input-group">
+          <div class="input-label-row">
+            <label for="income">Annual take-home target</label>
+          </div>
+          <div class="money-row">
+            <span class="currency-sym">$</span>
+            <input type="number" id="income" value="80000" min="10000" max="500000" step="1000">
+          </div>
+          <input type="range" class="slider" id="income-range" value="80000" min="20000" max="300000" step="5000">
+          <div class="slider-labels"><span>$20k</span><span>$300k</span></div>
+        </div>
+
+        <div class="input-group">
+          <div class="input-label-row">
+            <label>Weeks off per year</label>
+            <span class="live-val" id="vacation-val">4 weeks</span>
+          </div>
+          <input type="range" class="slider" id="vacation" value="4" min="0" max="12" step="1">
+          <div class="slider-labels"><span>None</span><span>12 weeks</span></div>
+        </div>
+
+        <div class="input-group">
+          <div class="input-label-row">
+            <label>Hours worked per week</label>
+            <span class="live-val" id="hours-val">40 hrs</span>
+          </div>
+          <input type="range" class="slider" id="hours" value="40" min="10" max="60" step="1">
+          <div class="slider-labels"><span>10 hrs</span><span>60 hrs</span></div>
+        </div>
+
+        <div class="input-group">
+          <div class="input-label-row">
+            <label>Billable time</label>
+            <span class="live-val" id="billable-val">60%</span>
+          </div>
+          <input type="range" class="slider" id="billable" value="60" min="20" max="90" step="5">
+          <div class="slider-labels"><span>20%</span><span>90%</span></div>
+          <p class="hint">Most freelancers spend 30–40% of their time on admin, sales, proposals, and learning — none of which is billable.</p>
+        </div>
+
+        <div class="input-group">
+          <div class="input-label-row">
+            <label for="expenses">Annual business expenses</label>
+          </div>
+          <div class="money-row">
+            <span class="currency-sym">$</span>
+            <input type="number" id="expenses" value="4000" min="0" max="100000" step="500">
+          </div>
+          <p class="hint">Software, equipment, office, insurance, professional courses, marketing.</p>
+        </div>
+
+        <div class="input-group">
+          <div class="input-label-row">
+            <label>Effective tax rate</label>
+            <span class="live-val" id="tax-val">28%</span>
+          </div>
+          <input type="range" class="slider" id="tax" value="28" min="10" max="50" step="1">
+          <div class="slider-labels"><span>10%</span><span>50%</span></div>
+          <p class="hint">Self-employment tax (~15%) + income tax combined. Consult an accountant for your actual rate.</p>
+        </div>
+
+      </div>
+
+      <!-- Results -->
+      <div class="results-col">
+        <h2 class="col-title">Your rates</h2>
+
+        <div class="rate-card rate-card-floor">
+          <p class="rate-card-label">Minimum hourly rate</p>
+          <p class="rate-card-amount" id="min-hourly">$85</p>
+          <p class="rate-card-note">Below this, you're working at a loss</p>
+        </div>
+
+        <div class="rate-card rate-card-target">
+          <div class="rate-badge">Recommended</div>
+          <p class="rate-card-label">Target hourly rate <span class="rate-badge-sub">(+25% buffer)</span></p>
+          <p class="rate-card-amount target" id="rec-hourly">$106</p>
+          <p class="rate-card-note">Covers slow months, unexpected costs, and profit</p>
+        </div>
+
+        <div class="rate-table">
+          <div class="rate-row">
+            <span>Half-day rate (4 hrs)</span>
+            <span class="rate-val" id="half-day-rate">$0</span>
+          </div>
+          <div class="rate-row">
+            <span>Full-day rate (8 hrs)</span>
+            <span class="rate-val" id="day-rate">$0</span>
+          </div>
+          <div class="rate-row">
+            <span>Weekly rate</span>
+            <span class="rate-val" id="week-rate">$0</span>
+          </div>
+          <div class="rate-row rate-row-final">
+            <span>Monthly retainer</span>
+            <span class="rate-val" id="month-rate">$0</span>
+          </div>
+        </div>
+
+        <div class="insight-card" id="insight-card">
+          <p class="insight-icon">📊</p>
+          <p class="insight-text" id="insight-text">Adjust the sliders to see your personalized rate.</p>
+        </div>
+
+        <div class="results-ctas">
+          <a href="../invoice/" class="btn-primary">Create your first invoice →</a>
+          <a href="../proposal/" class="btn-ghost">Write a proposal</a>
+        </div>
+
+        <p class="disclaimer">This calculator provides estimates for planning purposes. Consult a financial advisor for tax guidance.</p>
+      </div>
+
+    </div>
+
+    <!-- Why section -->
+    <section class="why-section">
+      <h2>Why most freelancers undercharge</h2>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">⏱</div>
+          <h3>They forget non-billable time</h3>
+          <p>Proposals, client calls, admin, invoicing, and professional development all take time you can't charge for. A 40-hour week typically yields 22–26 billable hours.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">💸</div>
+          <h3>They skip business costs</h3>
+          <p>Software subscriptions, equipment, health insurance, professional development, and slow months can easily add $5,000–$15,000 per year to your real cost of operations.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">📉</div>
+          <h3>They compare to salaries</h3>
+          <p>A $100K employee costs their employer ~$140K in total. As an independent freelancer, your rate needs to cover everything an employer would otherwise pay for.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool links -->
+    <section class="tools-section">
+      <h2>Next steps after knowing your rate</h2>
+      <div class="tools-grid">
+        <a href="../proposal/" class="tool-link-card">
+          <div class="tlc-icon proposal-icon">P</div>
+          <div>
+            <h3>Write a proposal</h3>
+            <p>Turn your rate into a winning pitch. Create a professional proposal with scope, timeline, and pricing in minutes.</p>
+          </div>
+          <span class="tlc-arrow">→</span>
+        </a>
+        <a href="../invoice/" class="tool-link-card">
+          <div class="tlc-icon folio-icon">F</div>
+          <div>
+            <h3>Send an invoice</h3>
+            <p>Once the client says yes, create a professional invoice with your rate in under 2 minutes. No account needed.</p>
+          </div>
+          <span class="tlc-arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span><span class="logo-dot"></span> Folio Tools</span>
+      <div class="footer-links">
+        <a href="../">Home</a>
+        <a href="../invoice/">Invoice</a>
+        <a href="../proposal/">Proposal</a>
+        <a href="../pricing/">Pricing</a>
+      </div>
+      <span class="footer-note">No tracking. No account. Works offline.</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

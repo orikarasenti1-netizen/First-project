@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing — Folio Pro | Freelance Tools Suite</title>
+  <meta name="description" content="Folio Pro unlocks unlimited proposals, removes branding, and gets you priority support. $9/mo — less than one lost client. Cancel anytime.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:        #0F172A;
+      --ink-mid:    #334155;
+      --muted:      #64748B;
+      --surface:    #FFFFFF;
+      --bg:         #F8FAFC;
+      --border:     #E2E8F0;
+      --primary:    #1D4ED8;
+      --primary-dk: #1E40AF;
+      --primary-lt: #EFF6FF;
+      --green:      #059669;
+      --green-lt:   #ECFDF5;
+      --purple:     #6D28D9;
+      --purple-lt:  #F5F3FF;
+      --font: 'Inter', system-ui, sans-serif;
+      --r: 12px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; line-height: 1.6; }
+
+    /* Top bar */
+    .top-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.875rem 1.5rem;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 30;
+    }
+    .back-link { font-size: 0.8rem; color: var(--muted); text-decoration: none; font-weight: 500; transition: color 0.15s; }
+    .back-link:hover { color: var(--ink); }
+    .top-logo { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; font-weight: 600; color: var(--ink); }
+    .logo-dot { width: 7px; height: 7px; background: var(--primary); border-radius: 50%; flex-shrink: 0; }
+    .top-cta { font-size: 0.8rem; font-weight: 600; color: var(--primary); text-decoration: none; transition: opacity 0.15s; }
+    .top-cta:hover { opacity: 0.7; }
+
+    .page { max-width: 1060px; margin: 0 auto; padding: 0 1.5rem 6rem; }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 0 3rem; }
+    .eyebrow { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--primary); margin-bottom: 1rem; }
+    .hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--ink); letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 1rem; }
+    .hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 520px; margin: 0 auto; line-height: 1.65; }
+
+    /* Toggle */
+    .billing-toggle { display: flex; align-items: center; justify-content: center; gap: 0.875rem; margin: 2rem 0; }
+    .billing-toggle span { font-size: 0.875rem; font-weight: 500; color: var(--ink-mid); }
+    .toggle-pill {
+      width: 44px; height: 24px; background: var(--primary);
+      border-radius: 12px; position: relative; cursor: pointer;
+      border: none; flex-shrink: 0;
+    }
+    .toggle-pill::after {
+      content: ''; position: absolute; top: 3px; left: 3px;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: white; transition: transform 0.2s;
+    }
+    .toggle-pill.annual::after { transform: translateX(20px); }
+    .save-pill {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+      background: var(--green); color: white; padding: 3px 7px; border-radius: 4px;
+    }
+
+    /* Plans grid */
+    .plans-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+    @media (max-width: 780px) { .plans-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; } }
+
+    .plan-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 2rem 1.75rem;
+      display: flex; flex-direction: column;
+    }
+    .plan-card.featured {
+      border-color: var(--primary); border-width: 2px;
+      box-shadow: 0 4px 24px rgba(29,78,216,0.12);
+      position: relative;
+    }
+
+    .plan-featured-badge {
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: var(--primary); color: white;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 20px;
+    }
+
+    .plan-name { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.875rem; }
+
+    .plan-price { display: flex; align-items: baseline; gap: 0.25rem; margin-bottom: 0.375rem; }
+    .plan-amount { font-size: 2.75rem; font-weight: 800; color: var(--ink); letter-spacing: -0.04em; line-height: 1; }
+    .plan-per { font-size: 0.875rem; color: var(--muted); font-weight: 500; }
+
+    .plan-billing { font-size: 0.78rem; color: var(--muted); margin-bottom: 1.5rem; min-height: 1.2rem; }
+
+    .plan-divider { height: 1px; background: var(--border); margin-bottom: 1.5rem; }
+
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; flex: 1; margin-bottom: 1.75rem; }
+    .plan-features li {
+      display: flex; align-items: flex-start; gap: 0.625rem;
+      font-size: 0.875rem; color: var(--ink-mid); line-height: 1.45;
+    }
+    .check { color: var(--green); flex-shrink: 0; margin-top: 1px; }
+    .check-muted { color: var(--muted); flex-shrink: 0; margin-top: 1px; }
+
+    .plan-cta {
+      display: block; width: 100%; text-align: center;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px; text-decoration: none;
+      font-size: 0.9rem; font-weight: 600; font-family: var(--font);
+      transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    }
+    .cta-primary { background: var(--primary); color: white; border: 2px solid var(--primary); }
+    .cta-primary:hover { background: var(--primary-dk); border-color: var(--primary-dk); transform: translateY(-1px); }
+    .cta-ghost { background: none; color: var(--ink-mid); border: 1.5px solid var(--border); }
+    .cta-ghost:hover { border-color: var(--ink); color: var(--ink); }
+
+    .plan-note { font-size: 0.72rem; color: var(--muted); text-align: center; margin-top: 0.625rem; }
+
+    /* Comparison */
+    .compare-section { margin: 2rem 0 4rem; }
+    .compare-section h2 { font-size: 1.25rem; font-weight: 700; color: var(--ink); margin-bottom: 1.5rem; letter-spacing: -0.02em; text-align: center; }
+
+    .compare-table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+    .compare-table th {
+      text-align: center; padding: 1rem; font-size: 0.78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.06em; background: var(--bg);
+      border-bottom: 1px solid var(--border); color: var(--muted);
+    }
+    .compare-table th:first-child { text-align: left; }
+    .compare-table th.col-pro { background: var(--primary-lt); color: var(--primary); }
+    .compare-table td { padding: 0.875rem 1rem; font-size: 0.875rem; border-bottom: 1px solid var(--border); color: var(--ink-mid); }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table td:not(:first-child) { text-align: center; }
+    .compare-table td.col-pro { background: rgba(239,246,255,0.4); font-weight: 500; color: var(--ink); }
+    .td-feature { font-weight: 500; color: var(--ink); }
+
+    /* FAQ */
+    .faq-section { margin: 3rem 0; }
+    .faq-section h2 { font-size: 1.25rem; font-weight: 700; color: var(--ink); margin-bottom: 2rem; letter-spacing: -0.02em; text-align: center; }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 640px) { .faq-grid { grid-template-columns: 1fr; } }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 1.5rem; }
+    .faq-q { font-size: 0.9rem; font-weight: 600; color: var(--ink); margin-bottom: 0.5rem; }
+    .faq-a { font-size: 0.83rem; color: var(--muted); line-height: 1.65; }
+
+    /* Trust */
+    .trust-bar { display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: wrap; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }
+    .trust-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--muted); }
+    .trust-icon { font-size: 1rem; }
+
+    /* Footer */
+    .site-footer { border-top: 1px solid var(--border); padding: 2rem 1.5rem; }
+    .footer-inner { max-width: 1060px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; font-size: 0.78rem; }
+    .footer-inner > span { display: flex; align-items: center; gap: 0.4rem; font-weight: 600; color: var(--ink); }
+    .footer-links { display: flex; gap: 1.25rem; }
+    .footer-links a { color: var(--muted); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: var(--ink); }
+    .footer-note { color: var(--muted); }
+  </style>
+</head>
+<body>
+
+  <header class="top-bar">
+    <a href="../" class="back-link">← All tools</a>
+    <div class="top-logo"><span class="logo-dot"></span><span>Folio Tools</span></div>
+    <a href="../invoice/" class="top-cta">Open Invoice →</a>
+  </header>
+
+  <div class="page">
+
+    <div class="hero">
+      <p class="eyebrow">Simple, honest pricing</p>
+      <h1>Free forever.<br>Pro when you need it.</h1>
+      <p class="hero-sub">Folio's core tools are free — no account, no limits on invoices. Pro unlocks proposals, removes our branding, and adds priority support.</p>
+    </div>
+
+    <div class="billing-toggle">
+      <span>Monthly</span>
+      <button class="toggle-pill" id="billing-toggle" title="Switch to annual"></button>
+      <span>Annual <span class="save-pill">Save 20%</span></span>
+    </div>
+
+    <div class="plans-grid">
+
+      <!-- Free -->
+      <div class="plan-card">
+        <p class="plan-name">Free</p>
+        <div class="plan-price">
+          <span class="plan-amount">$0</span>
+        </div>
+        <p class="plan-billing">Always free, no card needed</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li><svg class="check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Unlimited invoices</li>
+          <li><svg class="check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>PDF download & email send</li>
+          <li><svg class="check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Rate calculator</li>
+          <li><svg class="check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Works offline</li>
+          <li><svg class="check-muted" width="16" height="16" viewBox="0 0 16 16" fill="none"><line x1="4" y1="8" x2="12" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span style="color:var(--muted)">3 proposals / month</span></li>
+          <li><svg class="check-muted" width="16" height="16" viewBox="0 0 16 16" fill="none"><line x1="4" y1="8" x2="12" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span style="color:var(--muted)">Folio branding on PDFs</span></li>
+        </ul>
+        <a href="../invoice/" class="plan-cta cta-ghost">Start for free</a>
+      </div>
+
+      <!-- Pro — featured -->
+      <div class="plan-card featured">
+        <span class="plan-featured-badge">Most popular</span>
+        <p class="plan-name">Pro</p>
+        <div class="plan-price">
+          <span class="plan-amount" id="pro-price">$9</span>
+          <span class="plan-per">/mo</span>
+        </div>
+        <p class="plan-billing" id="pro-billing">Billed monthly · cancel anytime</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li><svg class="check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in Free</li>
+          <li><svg class="check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Unlimited proposals</li>
+          <li><svg class="check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No Folio branding on PDFs</li>
+          <li><svg class="check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Proposal-to-invoice conversion</li>
+          <li><svg class="check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Priority email support</li>
+          <li><svg class="check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Early access to new tools</li>
+        </ul>
+        <a href="https://buy.stripe.com/test_placeholder" class="plan-cta cta-primary" id="pro-cta">Get Pro — $9/mo</a>
+        <p class="plan-note">No contract. Cancel from your dashboard anytime.</p>
+      </div>
+
+      <!-- Team -->
+      <div class="plan-card">
+        <p class="plan-name">Team</p>
+        <div class="plan-price">
+          <span class="plan-amount">$29</span>
+          <span class="plan-per">/mo</span>
+        </div>
+        <p class="plan-billing" id="team-billing">Billed monthly · up to 5 seats</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li><svg class="check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in Pro</li>
+          <li><svg class="check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>5 team seats</li>
+          <li><svg class="check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Shared client & proposal library</li>
+          <li><svg class="check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Custom branding (logo + colours)</li>
+          <li><svg class="check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Dedicated onboarding call</li>
+        </ul>
+        <a href="mailto:hello@folio.tools?subject=Team plan interest" class="plan-cta cta-ghost">Contact us</a>
+        <p class="plan-note">$6/seat/mo for additional seats.</p>
+      </div>
+
+    </div>
+
+    <!-- Comparison table -->
+    <div class="compare-section">
+      <h2>How we compare</h2>
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Folio Free</th>
+              <th class="col-pro">Folio Pro</th>
+              <th>HoneyBook</th>
+              <th>Bonsai</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="td-feature">Starting price</td><td>Free</td><td class="col-pro">$9/mo</td><td>$36/mo</td><td>$21/mo</td></tr>
+            <tr><td class="td-feature">Invoices</td><td>✓ Unlimited</td><td class="col-pro">✓ Unlimited</td><td>✓</td><td>✓</td></tr>
+            <tr><td class="td-feature">Proposals</td><td>3/mo</td><td class="col-pro">✓ Unlimited</td><td>✓</td><td>✓</td></tr>
+            <tr><td class="td-feature">No account needed</td><td>✓</td><td class="col-pro">✓</td><td>✗</td><td>✗</td></tr>
+            <tr><td class="td-feature">Works offline</td><td>✓</td><td class="col-pro">✓</td><td>✗</td><td>✗</td></tr>
+            <tr><td class="td-feature">Rate calculator</td><td>✓</td><td class="col-pro">✓</td><td>✗</td><td>✗</td></tr>
+            <tr><td class="td-feature">Data privacy</td><td>✓ Local only</td><td class="col-pro">✓ Local only</td><td>Cloud stored</td><td>Cloud stored</td></tr>
+            <tr><td class="td-feature">Free plan</td><td>✓ Forever</td><td class="col-pro">✓</td><td>Trial only</td><td>Trial only</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.72rem;color:var(--muted);text-align:center;margin-top:0.75rem">Pricing as of June 2026. HoneyBook raised prices 89% in February 2025.</p>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-section">
+      <h2>Frequently asked questions</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <p class="faq-q">Is Folio really free?</p>
+          <p class="faq-a">Yes. Invoices are unlimited and free forever — no trial, no credit card, no signup. We make money when you upgrade to Pro for proposals and extra features.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q">Where does my data go?</p>
+          <p class="faq-a">Nowhere. All your invoices and proposals live in your browser's localStorage. We have no servers, no database, and no access to your data. It can't leak because we never see it.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q">Can I cancel anytime?</p>
+          <p class="faq-a">Yes, cancel any time from your Stripe billing portal. No questions asked. You keep Pro access until the end of your current billing period.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q">What's included in "no branding"?</p>
+          <p class="faq-a">Free plan PDFs include a small "Made with Folio" footer. Pro removes it entirely so your client only sees your name and work.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q">What happens to my data if I cancel Pro?</p>
+          <p class="faq-a">Your data stays in your browser. You'll drop back to the 3-proposal limit going forward, but nothing you've already created disappears.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q">Do you offer refunds?</p>
+          <p class="faq-a">If you're not happy within the first 14 days, email us and we'll refund you in full. After that, we handle refunds case-by-case.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trust -->
+    <div class="trust-bar">
+      <div class="trust-item"><span class="trust-icon">🔒</span> No data ever leaves your browser</div>
+      <div class="trust-item"><span class="trust-icon">💳</span> Payments secured by Stripe</div>
+      <div class="trust-item"><span class="trust-icon">🚫</span> No ads, no tracking, no accounts</div>
+      <div class="trust-item"><span class="trust-icon">↩️</span> 14-day money-back guarantee</div>
+    </div>
+
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span><span class="logo-dot"></span> Folio Tools</span>
+      <div class="footer-links">
+        <a href="../">Home</a>
+        <a href="../invoice/">Invoice</a>
+        <a href="../proposal/">Proposal</a>
+        <a href="../calculator/">Rate Calculator</a>
+      </div>
+      <span class="footer-note">Questions? hello@folio.tools</span>
+    </div>
+  </footer>
+
+  <script>
+    // Billing toggle
+    let annual = false;
+    const toggle = document.getElementById('billing-toggle');
+    const proPrice = document.getElementById('pro-price');
+    const proBilling = document.getElementById('pro-billing');
+    const proCta = document.getElementById('pro-cta');
+
+    toggle.addEventListener('click', () => {
+      annual = !annual;
+      toggle.classList.toggle('annual', annual);
+      if (annual) {
+        proPrice.textContent = '$7';
+        proBilling.textContent = 'Billed $84/yr · save $24';
+        proCta.textContent = 'Get Pro — $7/mo';
+      } else {
+        proPrice.textContent = '$9';
+        proBilling.textContent = 'Billed monthly · cancel anytime';
+        proCta.textContent = 'Get Pro — $9/mo';
+      }
+    });
+  </script>
+</body>
+</html>

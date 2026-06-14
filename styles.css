@@ -58,6 +58,11 @@ body { font-family: var(--font); background: var(--bg); color: var(--ink); -webk
   transition: color 0.15s;
 }
 .site-header nav a:hover { color: var(--ink); }
+.site-header nav .nav-pro {
+  background: var(--primary); color: white !important;
+  padding: 0.35rem 0.75rem; border-radius: 6px; font-weight: 600;
+}
+.site-header nav .nav-pro:hover { background: var(--primary-dk); }
 
 /* ─── Hero ───────────────────────────────── */
 
@@ -106,9 +111,29 @@ body { font-family: var(--font); background: var(--bg); color: var(--ink); -webk
 }
 .btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
 
+.hero-trust {
+  margin-top: 1.25rem; font-size: 0.75rem; color: var(--muted);
+}
+
+/* ─── Migration banner ───────────────────── */
+
+.migration-banner {
+  background: #FFFBEB; border-top: 1px solid #FDE68A; border-bottom: 1px solid #FDE68A;
+  padding: 0.875rem 0;
+}
+.migration-inner {
+  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+  font-size: 0.83rem; color: #78350F;
+}
+.migration-tag { font-weight: 700; white-space: nowrap; }
+.migration-inner p { flex: 1; line-height: 1.5; }
+.migration-inner strong { color: #92400E; }
+.migration-inner a { color: #B45309; font-weight: 600; text-decoration: none; white-space: nowrap; }
+.migration-inner a:hover { text-decoration: underline; }
+
 /* ─── Products ───────────────────────────── */
 
-.products { padding: 1rem 0 5rem; }
+.products { padding: 3rem 0 5rem; }
 
 .product-grid {
   display: grid;
@@ -133,8 +158,10 @@ body { font-family: var(--font); background: var(--bg); color: var(--ink); -webk
   display: grid; place-items: center;
   font-weight: 800; font-size: 1.1rem; color: white;
 }
-.folio-icon { background: var(--primary); }
-.grain-icon { background: #1E5E2C; }
+.folio-icon    { background: var(--primary); }
+.grain-icon    { background: #1E5E2C; }
+.proposal-icon { background: #6D28D9; }
+.calc-icon     { background: #0F766E; }
 
 .product-header h2 { font-size: 1.2rem; font-weight: 700; color: var(--ink); margin-bottom: 0.1rem; }
 .product-tagline { font-size: 0.8rem; color: var(--muted); font-weight: 500; }
@@ -174,8 +201,10 @@ body { font-family: var(--font); background: var(--bg); color: var(--ink); -webk
   color: white;
 }
 .btn-product:hover { opacity: 0.88; transform: translateY(-1px); }
-.folio-btn { background: var(--primary); }
-.grain-btn { background: #1E5E2C; }
+.folio-btn    { background: var(--primary); }
+.grain-btn    { background: #1E5E2C; }
+.proposal-btn { background: #6D28D9; }
+.calc-btn     { background: #0F766E; }
 
 /* ─── Why section ────────────────────────── */
 
@@ -230,10 +259,35 @@ body { font-family: var(--font); background: var(--bg); color: var(--ink); -webk
 .trust-section { padding: 5rem 0; }
 
 .trust-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
+  display: grid; grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
 }
-@media (max-width: 600px) { .trust-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
+@media (max-width: 700px) { .trust-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; } }
+@media (max-width: 400px) { .trust-grid { grid-template-columns: 1fr; } }
+
+/* ─── Pro CTA section ────────────────────── */
+
+.pro-cta-section {
+  background: var(--primary-lt); border-top: 1px solid #BFDBFE;
+  padding: 4rem 0;
+}
+.pro-cta-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 2rem; flex-wrap: wrap;
+}
+.pro-cta-inner h2 { font-size: 1.4rem; font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+.pro-cta-inner p { font-size: 0.9rem; color: var(--ink-mid); line-height: 1.6; max-width: 480px; }
+.pro-cta-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem; }
+.btn-primary-lg {
+  display: inline-flex; align-items: center;
+  padding: 0.875rem 1.75rem;
+  background: var(--primary); color: white;
+  border-radius: 10px; text-decoration: none;
+  font-family: var(--font); font-size: 1rem; font-weight: 700;
+  transition: background 0.15s, transform 0.1s; white-space: nowrap;
+}
+.btn-primary-lg:hover { background: var(--primary-dk); transform: translateY(-1px); }
+.pro-cta-note { font-size: 0.72rem; color: var(--muted); }
 
 .trust-item { text-align: center; }
 .trust-icon { font-size: 2rem; display: block; margin-bottom: 0.875rem; }
