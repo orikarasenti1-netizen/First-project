@@ -113,9 +113,10 @@
     /* ── HERO ── */
     #hero{
       height:100svh;
+      min-height:600px;
       background:var(--navy);
       position:relative;
-      overflow:visible;
+      overflow:clip;
       display:flex;
       flex-direction:column;
       justify-content:flex-end;
@@ -140,7 +141,7 @@
       position:relative;z-index:2;
       max-width:700px;
     }
-    .hero-eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:clamp(16px,2vh,24px);font-weight:500}
+    .hero-eyebrow{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:clamp(16px,2vh,24px);font-weight:700;text-shadow:0 1px 6px rgba(0,0,0,.6)}
     .hero-h1{
       font-family:var(--f-serif);
       font-size:clamp(40px,5vw,76px);
@@ -176,7 +177,7 @@
     }
 
     /* ── TICKER ── */
-    .ticker{background:var(--gold);position:absolute;bottom:0;left:0;right:0;z-index:10;overflow:hidden}
+    .ticker{background:var(--gold);position:absolute;bottom:0;left:0;right:0;z-index:20;overflow:hidden}
     .ticker-track{
       display:grid;grid-template-columns:repeat(3,1fr);
       padding:7px 16px;gap:4px 0;
