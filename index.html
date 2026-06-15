@@ -112,11 +112,11 @@
 
     /* ── HERO ── */
     #hero{
-      height:100svh;
-      min-height:600px;
+      height:calc(100svh - 56px);
+      min-height:540px;
       background:var(--navy);
       position:relative;
-      overflow:clip;
+      overflow:hidden;
       display:flex;
       flex-direction:column;
       justify-content:flex-end;
@@ -177,8 +177,7 @@
     }
 
     /* ── TICKER ── */
-    .ticker{background:var(--gold);position:absolute;bottom:0;left:0;right:0;z-index:20;overflow:hidden}
-    @media(max-width:768px){.ticker{bottom:calc(58px + env(safe-area-inset-bottom));position:fixed}}
+    .ticker{background:var(--gold);width:100%;z-index:20;overflow:hidden}
     .ticker-track{
       display:grid;grid-template-columns:repeat(3,1fr);
       padding:7px 16px;gap:4px 0;
@@ -463,19 +462,19 @@
     </nav>
   </div>
 
-  <!-- TICKER -->
-  <div class="ticker" role="region" aria-label="תחומי עיסוק">
-    <div class="ticker-track">
-      <span class="ticker-item">צוואות</span><span class="ticker-dot"></span>
-      <span class="ticker-item">ירושות</span><span class="ticker-dot"></span>
-      <span class="ticker-item">ייפוי כוח מתמשך</span><span class="ticker-dot"></span>
-      <span class="ticker-item">מקרקעין</span><span class="ticker-dot"></span>
-      <span class="ticker-item">פלילי</span><span class="ticker-dot"></span>
-      <span class="ticker-item">הסכמי ממון</span>
-    </div>
-  </div>
-
 </section>
+
+<!-- TICKER -->
+<div class="ticker" role="region" aria-label="תחומי עיסוק">
+  <div class="ticker-track">
+    <span class="ticker-item">צוואות</span><span class="ticker-dot"></span>
+    <span class="ticker-item">ירושות</span><span class="ticker-dot"></span>
+    <span class="ticker-item">ייפוי כוח מתמשך</span><span class="ticker-dot"></span>
+    <span class="ticker-item">מקרקעין</span><span class="ticker-dot"></span>
+    <span class="ticker-item">פלילי</span><span class="ticker-dot"></span>
+    <span class="ticker-item">הסכמי ממון</span>
+  </div>
+</div>
 
 <!-- PRACTICE -->
 <section id="practice" aria-labelledby="practice-h">
