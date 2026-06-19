@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Folio Proposal — Write Winning Freelance Proposals</title>
+  <meta name="description" content="Create professional freelance proposals in minutes. Scope, deliverables, timeline, and pricing — all in one beautiful PDF. No signup needed.">
+  <meta name="keywords" content="freelance proposal generator, proposal template freelancer, free proposal maker, project proposal generator">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <div class="logo">
+        <span class="logo-mark proposal-mark">P</span>
+        <span class="logo-name">Proposal</span>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-view="dashboard">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="9" y="1" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="1" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="9" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/></svg>
+          Dashboard
+        </button>
+        <button class="nav-item" data-view="form" id="nav-new">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><line x1="8" y1="2" x2="8" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="8" x2="14" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          New Proposal
+        </button>
+        <button class="nav-item" data-view="settings">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3.1 3.1l1.06 1.06M11.84 11.84l1.06 1.06M3.1 12.9l1.06-1.06M11.84 4.16l1.06-1.06" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Settings
+        </button>
+      </nav>
+    </div>
+    <div class="sidebar-home">
+      <a href="../" class="home-link">← All tools</a>
+    </div>
+    <div class="sidebar-upgrade">
+      <div class="upgrade-badge">PRO</div>
+      <p class="upgrade-title">Unlock Pro</p>
+      <p class="upgrade-sub">Unlimited proposals, remove branding, priority support.</p>
+      <a class="upgrade-btn" href="../pricing/">Upgrade — $9/mo</a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- Dashboard -->
+    <div class="view" id="view-dashboard">
+      <div class="view-header">
+        <div>
+          <h1 class="view-title">Proposals</h1>
+          <p class="view-sub" id="dash-sub">No proposals yet</p>
+        </div>
+        <button class="btn-primary" id="dash-new-btn">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="7" y1="1" x2="7" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="1" y1="7" x2="13" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          New Proposal
+        </button>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card"><span class="stat-val" id="stat-total">0</span><span class="stat-lbl">Total sent</span></div>
+        <div class="stat-card"><span class="stat-val green" id="stat-accepted">0</span><span class="stat-lbl">Accepted</span></div>
+        <div class="stat-card"><span class="stat-val blue" id="stat-pending">0</span><span class="stat-lbl">Pending</span></div>
+        <div class="stat-card"><span class="stat-val" id="stat-value">$0</span><span class="stat-lbl">Total value</span></div>
+      </div>
+
+      <div class="filter-row">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="draft">Draft</button>
+        <button class="filter-btn" data-filter="sent">Sent</button>
+        <button class="filter-btn" data-filter="accepted">Accepted</button>
+        <button class="filter-btn" data-filter="rejected">Rejected</button>
+      </div>
+
+      <div class="table-wrap">
+        <table class="invoice-table">
+          <thead>
+            <tr>
+              <th>Proposal</th>
+              <th>Client</th>
+              <th>Project</th>
+              <th>Date</th>
+              <th>Value</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="proposal-tbody"></tbody>
+        </table>
+        <div class="table-empty" id="table-empty" hidden>
+          <p class="empty-icon">📋</p>
+          <p class="empty-title">No proposals yet</p>
+          <p class="empty-sub">A strong proposal is often what separates a yes from a maybe.</p>
+          <button class="btn-primary" id="empty-new-btn">Write your first proposal</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Proposal Form -->
+    <div class="view hidden" id="view-form">
+      <div class="view-header">
+        <div>
+          <button class="back-btn" id="form-back">← Back</button>
+          <h1 class="view-title" id="form-title">New Proposal</h1>
+        </div>
+        <div class="form-actions">
+          <button class="btn-ghost" id="btn-save-draft">Save Draft</button>
+          <button class="btn-ghost" id="btn-preview">Preview</button>
+          <button class="btn-primary" id="btn-send">Mark as Sent</button>
+        </div>
+      </div>
+
+      <form id="proposal-form" novalidate>
+        <div class="form-grid">
+
+          <!-- Client -->
+          <div class="form-card">
+            <h3 class="form-card-title">Client</h3>
+            <div class="fields">
+              <div class="field"><label>Client name</label><input type="text" id="f-client-name" placeholder="Jane Smith" required></div>
+              <div class="field"><label>Company</label><input type="text" id="f-client-company" placeholder="Acme Corp (optional)"></div>
+              <div class="field"><label>Client email</label><input type="email" id="f-client-email" placeholder="jane@acmecorp.com"></div>
+            </div>
+          </div>
+
+          <!-- Proposal Meta -->
+          <div class="form-card">
+            <h3 class="form-card-title">Proposal details</h3>
+            <div class="fields">
+              <div class="field"><label>Project title</label><input type="text" id="f-project-title" placeholder="Brand Redesign &amp; Website" required></div>
+              <div class="field"><label>Proposal number</label><input type="text" id="f-number" placeholder="PROP-2026-001"></div>
+              <div class="field meta-two">
+                <div class="field"><label>Date</label><input type="date" id="f-date"></div>
+                <div class="field"><label>Valid until</label><input type="date" id="f-valid-until"></div>
+              </div>
+              <div class="field">
+                <label>Currency</label>
+                <select id="f-currency">
+                  <option value="USD">USD — US Dollar</option>
+                  <option value="EUR">EUR — Euro</option>
+                  <option value="GBP">GBP — British Pound</option>
+                  <option value="CAD">CAD — Canadian Dollar</option>
+                  <option value="AUD">AUD — Australian Dollar</option>
+                  <option value="JPY">JPY — Japanese Yen</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project context -->
+          <div class="form-card form-card-wide">
+            <h3 class="form-card-title">Project overview</h3>
+            <div class="fields">
+              <div class="field">
+                <label>The challenge <span class="field-hint">— What problem are you solving for this client?</span></label>
+                <textarea id="f-challenge" rows="4" placeholder="Describe the problem or opportunity the client is facing. Be specific — it shows you listened."></textarea>
+              </div>
+              <div class="field">
+                <label>Your approach <span class="field-hint">— How will you solve it?</span></label>
+                <textarea id="f-approach" rows="4" placeholder="Explain your methodology, process, or strategy. Why is this the right solution for them?"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Deliverables -->
+          <div class="form-card form-card-wide">
+            <h3 class="form-card-title">Scope &amp; deliverables</h3>
+            <div class="deliverables-wrap" id="deliverables-wrap"></div>
+            <button type="button" class="btn-add-item" id="btn-add-deliverable">+ Add deliverable</button>
+          </div>
+
+          <!-- Timeline -->
+          <div class="form-card form-card-wide">
+            <h3 class="form-card-title">Timeline</h3>
+            <div class="meta-two" style="margin-bottom: 1rem;">
+              <div class="field"><label>Project start</label><input type="date" id="f-start-date"></div>
+              <div class="field"><label>Estimated completion</label><input type="date" id="f-end-date"></div>
+            </div>
+            <div class="milestones-wrap" id="milestones-wrap"></div>
+            <button type="button" class="btn-add-item" id="btn-add-milestone">+ Add milestone</button>
+          </div>
+
+          <!-- Investment -->
+          <div class="form-card form-card-wide">
+            <h3 class="form-card-title">Investment</h3>
+
+            <div class="pricing-type-row">
+              <label class="radio-opt">
+                <input type="radio" name="pricing-type" value="fixed" id="pt-fixed" checked>
+                <span>Fixed price</span>
+              </label>
+              <label class="radio-opt">
+                <input type="radio" name="pricing-type" value="items" id="pt-items">
+                <span>Itemised</span>
+              </label>
+            </div>
+
+            <div id="fixed-pricing">
+              <div class="fields">
+                <div class="field">
+                  <label>Project total</label>
+                  <div class="money-input-wrap">
+                    <span class="currency-sym" id="fixed-sym">$</span>
+                    <input type="number" id="f-fixed-total" value="" min="0" step="100" placeholder="5000">
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Deposit required</label>
+                  <div class="pct-row">
+                    <input type="number" id="f-deposit" class="pct-input" value="50" min="0" max="100" step="10">
+                    <span class="pct-sym">%</span>
+                    <span class="deposit-calc" id="deposit-calc">upfront</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="items-pricing" style="display:none">
+              <div class="price-items-wrap" id="price-items-wrap"></div>
+              <button type="button" class="btn-add-item" id="btn-add-price-item">+ Add line item</button>
+              <div class="totals" id="items-total-row">
+                <div class="total-row total-final"><span>Total</span><span id="items-total">$0</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Terms -->
+          <div class="form-card form-card-wide">
+            <h3 class="form-card-title">Terms</h3>
+            <div class="fields meta-four">
+              <div class="field">
+                <label>Revisions included</label>
+                <input type="number" id="f-revisions" value="2" min="0" max="20">
+              </div>
+              <div class="field">
+                <label>Payment terms</label>
+                <select id="f-payment-terms">
+                  <option>Due on acceptance</option>
+                  <option>Net 7</option>
+                  <option selected>Net 14</option>
+                  <option>Net 30</option>
+                  <option>Net 60</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>IP ownership</label>
+                <select id="f-ip">
+                  <option>Transfers on full payment</option>
+                  <option>Client owns all work</option>
+                  <option>You retain rights</option>
+                  <option>Shared ownership</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Next steps -->
+          <div class="form-card form-card-wide">
+            <h3 class="form-card-title">Next steps &amp; notes</h3>
+            <div class="fields">
+              <div class="field">
+                <label>How to accept <span class="field-hint">— shown at the bottom of the proposal</span></label>
+                <textarea id="f-next-steps" rows="3" placeholder="Reply to this email, or sign and return the attached contract. We'll send a deposit invoice within 24 hours."></textarea>
+              </div>
+              <div class="field">
+                <label>Additional notes</label>
+                <textarea id="f-notes" rows="2" placeholder="e.g. This proposal is valid for 30 days. Rate does not include third-party costs."></textarea>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+
+    <!-- Preview -->
+    <div class="view hidden" id="view-preview">
+      <div class="view-header no-print">
+        <button class="back-btn" id="preview-back">← Back</button>
+        <div class="preview-actions">
+          <button class="btn-ghost" id="btn-mark-accepted">Mark as Accepted</button>
+          <button class="btn-ghost" id="btn-email">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="8" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M1 4.5l6 4 6-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Send by Email
+          </button>
+          <button class="btn-ghost" id="btn-to-invoice">Convert to Invoice</button>
+          <button class="btn-primary" id="btn-print">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="5" width="10" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M4 5V2.5C4 2.22 4.22 2 4.5 2h5c.28 0 .5.22.5.5V5" stroke="currentColor" stroke-width="1.5"/><line x1="4" y1="9" x2="10" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Download PDF
+          </button>
+        </div>
+      </div>
+
+      <div class="proposal-doc" id="proposal-doc">
+        <div class="pdoc-header">
+          <div class="pdoc-from">
+            <p class="pdoc-company" id="pdoc-from-name"></p>
+            <p class="pdoc-contact" id="pdoc-from-email"></p>
+          </div>
+          <div class="pdoc-meta-block">
+            <h2 class="pdoc-title">PROPOSAL</h2>
+            <table class="pdoc-meta-table">
+              <tr><td>Proposal</td><td id="pdoc-number"></td></tr>
+              <tr><td>Date</td><td id="pdoc-date"></td></tr>
+              <tr><td>Valid until</td><td id="pdoc-valid"></td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="pdoc-divider"></div>
+        <div class="pdoc-to">
+          <p class="pdoc-label">PREPARED FOR</p>
+          <p class="pdoc-client-name" id="pdoc-client-name"></p>
+          <p class="pdoc-client-company" id="pdoc-client-company"></p>
+          <p class="pdoc-client-email" id="pdoc-client-email"></p>
+        </div>
+        <h2 class="pdoc-project-title" id="pdoc-project-title"></h2>
+        <div class="pdoc-section" id="pdoc-challenge-section">
+          <h3 class="pdoc-section-title">The Challenge</h3>
+          <p class="pdoc-section-body" id="pdoc-challenge"></p>
+        </div>
+        <div class="pdoc-section" id="pdoc-approach-section">
+          <h3 class="pdoc-section-title">Our Approach</h3>
+          <p class="pdoc-section-body" id="pdoc-approach"></p>
+        </div>
+        <div class="pdoc-section" id="pdoc-deliverables-section">
+          <h3 class="pdoc-section-title">What We'll Deliver</h3>
+          <div id="pdoc-deliverables"></div>
+        </div>
+        <div class="pdoc-section" id="pdoc-timeline-section">
+          <h3 class="pdoc-section-title">Timeline</h3>
+          <div class="pdoc-timeline-dates">
+            <div class="pdoc-tl-range"><span class="pdoc-label">Start</span><span id="pdoc-start-date" class="pdoc-tl-date"></span></div>
+            <div class="pdoc-tl-range"><span class="pdoc-label">Completion</span><span id="pdoc-end-date" class="pdoc-tl-date"></span></div>
+          </div>
+          <div id="pdoc-milestones"></div>
+        </div>
+        <div class="pdoc-section">
+          <h3 class="pdoc-section-title">Investment</h3>
+          <div id="pdoc-investment"></div>
+          <div class="pdoc-terms-line" id="pdoc-terms-line"></div>
+        </div>
+        <div class="pdoc-section pdoc-next-steps">
+          <h3 class="pdoc-section-title">Next Steps</h3>
+          <p class="pdoc-section-body" id="pdoc-next-steps"></p>
+        </div>
+        <div class="pdoc-notes" id="pdoc-notes-wrap">
+          <p class="pdoc-notes-text" id="pdoc-notes"></p>
+        </div>
+        <div class="pdoc-footer">
+          <p id="pdoc-footer-name"></p>
+          <p id="pdoc-footer-email"></p>
+        </div>
+        <div class="pdoc-stamp accepted-stamp" id="pdoc-stamp">ACCEPTED</div>
+      </div>
+    </div>
+
+    <!-- Settings -->
+    <div class="view hidden" id="view-settings">
+      <div class="view-header">
+        <h1 class="view-title">Settings</h1>
+        <button class="btn-primary" id="btn-save-settings">Save Changes</button>
+      </div>
+      <div class="settings-grid">
+        <div class="form-card">
+          <h3 class="form-card-title">Your business</h3>
+          <div class="fields">
+            <div class="field"><label>Your name / company</label><input type="text" id="s-name" placeholder="Your Company"></div>
+            <div class="field"><label>Email</label><input type="email" id="s-email" placeholder="you@company.com"></div>
+            <div class="field"><label>Website</label><input type="url" id="s-website" placeholder="https://yourcompany.com"></div>
+            <div class="field"><label>Phone</label><input type="tel" id="s-phone" placeholder="+1 (555) 000-0000"></div>
+          </div>
+        </div>
+        <div class="form-card">
+          <h3 class="form-card-title">Proposal defaults</h3>
+          <div class="fields">
+            <div class="field"><label>Default currency</label>
+              <select id="s-currency">
+                <option value="USD">USD — US Dollar</option>
+                <option value="EUR">EUR — Euro</option>
+                <option value="GBP">GBP — British Pound</option>
+                <option value="CAD">CAD — Canadian Dollar</option>
+                <option value="AUD">AUD — Australian Dollar</option>
+                <option value="JPY">JPY — Japanese Yen</option>
+              </select>
+            </div>
+            <div class="field"><label>Default validity (days)</label><input type="number" id="s-validity" value="30" min="1" max="365"></div>
+            <div class="field"><label>Proposal prefix</label><input type="text" id="s-prefix" value="PROP" placeholder="PROP"></div>
+            <div class="field"><label>Default next steps</label><textarea id="s-next-steps" rows="3" placeholder="Reply to this email to proceed..."></textarea></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
