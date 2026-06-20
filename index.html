@@ -309,6 +309,9 @@
     }
     .btn-send:hover{background:#d4a940}
     .form-note{font-size:11px;color:rgba(255,255,255,.18);text-align:center;margin-top:11px}
+    .field-err{display:none;font-size:12px;color:#ff6b6b;margin-top:5px}
+    .fg.has-error input,.fg.has-error textarea{border-bottom-color:#ff6b6b}
+    .fg.has-error .field-err{display:block}
 
     /* ── REVIEWS ── */
     #reviews{padding:clamp(72px,10vw,120px) 0;background:var(--ink)}
@@ -596,28 +599,30 @@
         <h3>השאר פרטים</h3>
         <p class="form-sub">ונחזור אליך לייעוץ ראשוני בהקדם</p>
         <form action="https://formspree.io/f/mykanzwr" method="POST" id="contact-form" novalidate aria-label="טופס יצירת קשר">
-          <input type="hidden" name="_subject" value="פנייה חדשה מהאתר – עו״ד קרסנטי">
+          <input type="hidden" name="_subject" value="פנייה חדשה מהאתר - עו״ד קרסנטי">
           <input type="hidden" name="_cc" value="orikarasenti1@gmail.com,itzikkarase@gmail.com">
-          <div class="fg2">
-            <div class="fg">
-              <label for="fname">שם מלא *</label>
-              <input type="text" id="fname" name="name" required autocomplete="name" placeholder="ישראל ישראלי" aria-required="true">
-            </div>
-            <div class="fg">
-              <label for="fphone">טלפון *</label>
-              <input type="tel" id="fphone" name="phone" required autocomplete="tel" placeholder="050-000-0000" aria-required="true">
-            </div>
+          <div class="fg">
+            <label for="fname">שם מלא *</label>
+            <input type="text" id="fname" name="name" required autocomplete="name" placeholder="ישראל ישראלי" aria-required="true" inputmode="text">
+            <span class="field-err" id="fname-err">נא להזין שם מלא</span>
           </div>
           <div class="fg">
-            <label for="femail">אימייל</label>
-            <input type="email" id="femail" name="email" autocomplete="email" placeholder="example@gmail.com">
+            <label for="fphone">טלפון *</label>
+            <input type="tel" id="fphone" name="phone" required autocomplete="tel" placeholder="050-000-0000" aria-required="true" inputmode="tel">
+            <span class="field-err" id="fphone-err">נא להזין מספר טלפון תקין</span>
           </div>
           <div class="fg">
-            <label for="fmsg">תיאור הפנייה *</label>
-            <textarea id="fmsg" name="message" required aria-required="true" placeholder="ספר לנו במה נוכל לעזור..."></textarea>
+            <label for="fmsg">במה נוכל לעזור? *</label>
+            <textarea id="fmsg" name="message" required aria-required="true" placeholder="תאר בקצרה את הנושא..." style="min-height:80px;resize:none"></textarea>
+            <span class="field-err" id="fmsg-err">נא לכתוב הודעה קצרה</span>
           </div>
-          <button type="submit" class="btn-send">שלח פנייה</button>
+          <button type="submit" class="btn-send" id="form-submit-btn">שלח פנייה</button>
+          <div id="form-success" style="display:none;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.3);border-radius:6px;padding:16px;text-align:center;color:#25D366;font-weight:600;margin-top:12px">✓ הפנייה נשלחה בהצלחה! ניצור קשר בקרוב.</div>
           <p class="form-note">הפרטים שלך ישמרו בסודיות מלאה</p>
+          <a href="https://wa.me/972505075051?text=%D7%94%D7%99%D7%99%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%93%D7%A8%D7%9A%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A0%D7%99%20%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F%20%D7%9C%D7%99%D7%99%D7%A2%D7%95%D7%A5%20%D7%9E%D7%A9%D7%A4%D7%98%D7%99." target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;color:#25D366;font-size:14px;font-weight:600">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.474 2 2 6.473 2 12c0 1.989.518 3.86 1.426 5.482L2 22l4.644-1.393A9.947 9.947 0 0 0 12.004 22C17.53 22 22 17.527 22 12S17.53 2 12.004 2zm0 18.105a8.09 8.09 0 0 1-4.122-1.124l-.296-.175-3.067.921.878-3.001-.193-.308A8.096 8.096 0 0 1 3.9 12c0-4.474 3.636-8.11 8.104-8.11 4.469 0 8.1 3.636 8.1 8.11 0 4.473-3.631 8.105-8.1 8.105z"/></svg>
+            או דברו איתנו בוואטסאפ
+          </a>
         </form>
       </div>
     </div>
@@ -677,19 +682,55 @@
 
   document.querySelectorAll('.fi').forEach(el => io.observe(el));
 
-  [document.getElementById('contact-form'), document.getElementById('review-form')].forEach(f => {
-    if(!f) return;
-    f.addEventListener('submit', async e => {
+  // Contact form with validation + GA4
+  const contactForm = document.getElementById('contact-form');
+  if(contactForm){
+    // GA4 form_start
+    contactForm.addEventListener('focusin', () => {
+      if(!contactForm._started){ contactForm._started=true; gtag('event','form_start',{form_id:'contact'}); }
+    }, {once:false});
+
+    contactForm.addEventListener('submit', async e => {
       e.preventDefault();
-      const btn = f.querySelector('button[type=submit]'), orig = btn.textContent;
+      let valid = true;
+
+      // Validate name
+      const name = document.getElementById('fname');
+      const nameGrp = name.closest('.fg');
+      if(!name.value.trim()){ nameGrp.classList.add('has-error'); valid=false; }
+      else nameGrp.classList.remove('has-error');
+
+      // Validate phone
+      const phone = document.getElementById('fphone');
+      const phoneGrp = phone.closest('.fg');
+      if(!phone.value.trim() || phone.value.replace(/\D/g,'').length < 9){ phoneGrp.classList.add('has-error'); valid=false; }
+      else phoneGrp.classList.remove('has-error');
+
+      // Validate message
+      const msg = document.getElementById('fmsg');
+      const msgGrp = msg.closest('.fg');
+      if(!msg.value.trim()){ msgGrp.classList.add('has-error'); valid=false; }
+      else msgGrp.classList.remove('has-error');
+
+      if(!valid) return;
+
+      const btn = document.getElementById('form-submit-btn');
       btn.textContent = 'שולח...'; btn.disabled = true;
       try {
-        const r = await fetch(f.action, {method:'POST', body:new FormData(f), headers:{Accept:'application/json'}});
-        if(r.ok){ btn.textContent = '✓ נשלח'; f.reset(); setTimeout(()=>{ btn.textContent=orig; btn.disabled=false; },4000); }
-        else throw 0;
-      } catch { btn.textContent = 'שגיאה'; setTimeout(()=>{ btn.textContent=orig; btn.disabled=false; },3000); }
+        const r = await fetch(contactForm.action, {method:'POST', body:new FormData(contactForm), headers:{Accept:'application/json'}});
+        if(r.ok){
+          document.getElementById('form-success').style.display='block';
+          contactForm.reset();
+          btn.style.display='none';
+          // GA4 form_submit
+          gtag('event','form_submit',{form_id:'contact'});
+        } else throw 0;
+      } catch {
+        btn.textContent = 'שגיאה - נסה שוב';
+        setTimeout(()=>{ btn.textContent='שלח פנייה'; btn.disabled=false; },3000);
+      }
     });
-  });
+  }
 
 </script>
 
