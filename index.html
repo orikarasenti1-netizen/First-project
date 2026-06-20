@@ -598,7 +598,7 @@
       <div class="form-box fi">
         <h3>השאר פרטים</h3>
         <p class="form-sub">ונחזור אליך לייעוץ ראשוני בהקדם</p>
-        <form action="https://formsubmit.co/orikarasenti1@gmail.com" method="POST" id="contact-form" novalidate aria-label="טופס יצירת קשר">
+        <form action="https://formsubmit.co/ajax/orikarasenti1@gmail.com" method="POST" id="contact-form" novalidate aria-label="טופס יצירת קשר">
           <input type="hidden" name="_subject" value="פנייה חדשה מהאתר - עו״ד קרסנטי">
           <input type="hidden" name="_cc" value="itzikkarase@gmail.com">
           <input type="hidden" name="_captcha" value="false">
@@ -719,7 +719,15 @@
       const btn = document.getElementById('form-submit-btn');
       btn.textContent = 'שולח...'; btn.disabled = true;
       try {
-        const r = await fetch(contactForm.action, {method:'POST', body:new FormData(contactForm), headers:{Accept:'application/json'}});
+        const data = {
+          name: document.getElementById('fname').value,
+          phone: document.getElementById('fphone').value,
+          message: document.getElementById('fmsg').value,
+          _subject: 'פנייה חדשה מהאתר - עו״ד קרסנטי',
+          _cc: 'itzikkarase@gmail.com',
+          _captcha: 'false'
+        };
+        const r = await fetch(contactForm.action, {method:'POST', body:JSON.stringify(data), headers:{'Accept':'application/json','Content-Type':'application/json'}});
         if(r.ok){
           document.getElementById('form-success').style.display='block';
           contactForm.reset();
