@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#1E2740">
+  <title>חוזרים — ניהול הכרטיסייה</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;700&family=Suez+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="logo" href="./"><span class="logo-mark">↺</span>חוזרים</a>
+    <div id="who-wrap" hidden><span class="who" id="who"></span> <button type="button" id="logout">יציאה</button></div>
+  </header>
+
+  <p id="loading" class="fine" style="text-align:center;margin-top:30vh">טוען…</p>
+  <div id="setup" class="narrow" hidden><div class="notice bad">המערכת עדיין לא מחוברת למסד נתונים. ראו chozrim/README.md ← "עלייה לאוויר".</div></div>
+
+  <!-- Sign in -->
+  <section id="auth" class="narrow" hidden>
+    <h1 style="font-size:1.9rem;margin-top:10px">כניסה לבעלי עסקים</h1>
+    <p class="fine">חודש ראשון חינם. בלי כרטיס אשראי.</p>
+    <button class="btn ghost block" id="google" type="button">כניסה עם Google</button>
+    <p class="fine" style="text-align:center;margin:14px 0">או עם מייל</p>
+    <form id="auth-form" novalidate>
+      <label class="field">מייל<input name="email" type="email" autocomplete="email" dir="ltr" required></label>
+      <label class="field">סיסמה (לפחות 6 תווים)<input name="pw" type="password" autocomplete="current-password" dir="ltr" required minlength="6"></label>
+      <p class="err" id="auth-err" hidden></p>
+      <div style="display:grid;gap:8px">
+        <button class="btn block" type="submit" data-mode="in">כניסה</button>
+        <button class="btn ghost block" type="submit" data-mode="up">הרשמה חדשה</button>
+      </div>
+      <button type="button" id="reset" class="fine" style="background:none;border:none;margin-top:10px;cursor:pointer;text-decoration:underline">שכחתי סיסמה</button>
+    </form>
+  </section>
+
+  <!-- Create / edit card -->
+  <section id="editor" class="panel" hidden>
+    <h1 id="editor-title" style="font-size:1.8rem">בואו נעצב את הכרטיסייה</h1>
+    <div class="split">
+      <form id="card-form" novalidate>
+        <label class="field">שם העסק<input name="name" maxlength="40" required placeholder="קפה נועה"></label>
+        <label class="field">מה מקבלים בסוף?<input name="reward" maxlength="60" required placeholder="קפה חינם"></label>
+        <label class="field">כמה חותמות?
+          <select name="goal"><option>5</option><option>6</option><option>8</option><option selected>10</option><option>12</option></select>
+        </label>
+        <div class="field">צבע<div class="swatches" id="swatches"></div></div>
+        <div class="field">סמל<div class="emojis" id="emojis"></div></div>
+        <label class="field">הוואטסאפ של העסק (לא חובה)<input name="whatsapp" type="tel" dir="ltr" placeholder="050-0000000" maxlength="16"></label>
+        <p class="err" id="card-err" hidden></p>
+        <button class="btn brand block" type="submit" id="card-save">יצירת הכרטיסייה</button>
+        <button class="btn ghost block" type="button" id="card-cancel" style="margin-top:8px" hidden>ביטול</button>
+      </form>
+      <div><p class="fine">ככה הלקוחות יראו אותה:</p><div id="card-preview"></div></div>
+    </div>
+  </section>
+
+  <!-- Main app -->
+  <section id="main" hidden>
+    <nav class="tabs" role="tablist">
+      <button role="tab" data-tab="register" aria-selected="true">קופה</button>
+      <button role="tab" data-tab="customers" aria-selected="false">לקוחות</button>
+      <button role="tab" data-tab="poster" aria-selected="false">פוסטר להדפסה</button>
+      <button role="tab" data-tab="settings" aria-selected="false">הגדרות</button>
+    </nav>
+    <div id="billing-banner" class="panel" style="padding-bottom:0" hidden></div>
+
+    <div class="panel" data-panel="register">
+      <div id="register-ok">
+        <p style="text-align:center;margin-bottom:4px;font-weight:700">הקלידו את הקוד של הלקוח</p>
+        <div class="code-display" id="code-display" aria-live="polite"></div>
+        <div class="keypad" id="keypad"></div>
+        <div class="field" style="max-width:340px;margin:18px auto 0">או חפשו לפי שם / טלפון<input id="search" type="search" autocomplete="off"></div>
+        <div id="search-results" class="list" style="max-width:340px;margin:0 auto"></div>
+        <div id="found" style="max-width:420px;margin:0 auto"></div>
+        <div style="text-align:center;margin-top:22px">
+          <button class="btn ghost" type="button" id="show-join">לקוח חדש? הציגו לו QR להצטרפות</button>
+        </div>
+        <div id="join-qr" hidden style="max-width:320px;margin:16px auto;text-align:center"></div>
+      </div>
+      <div id="register-blocked" hidden></div>
+    </div>
+
+    <div class="panel" data-panel="customers" hidden>
+      <div class="stats" id="stats"></div>
+      <div class="filters" id="filters"></div>
+      <p class="fine" id="filter-hint"></p>
+      <div class="list" id="people"></div>
+    </div>
+
+    <div class="panel" data-panel="poster" hidden>
+      <div class="poster-wrap">
+        <p class="fine no-print">הדפיסו ותלו ליד הקופה. לקוחות סורקים עם המצלמה ומצטרפים תוך 10 שניות.</p>
+        <div class="poster" id="poster"></div>
+        <div class="linkbox no-print"><input id="join-link" readonly><button class="btn ghost" type="button" id="copy-link">העתקה</button></div>
+        <button class="btn brand no-print" type="button" onclick="window.print()">הדפסה / שמירה כ-PDF</button>
+      </div>
+    </div>
+
+    <div class="panel" data-panel="settings" hidden>
+      <h2>מנוי</h2>
+      <div id="billing-detail"></div>
+      <h2 style="margin-top:28px">הכרטיסייה</h2>
+      <button class="btn ghost" type="button" id="edit-card">עריכת עיצוב והטבה</button>
+      <p class="fine" style="margin-top:18px">שינוי מספר החותמות חל על כל הכרטיסיות הקיימות.</p>
+    </div>
+  </section>
+
+  <script src="js/config.js"></script>
+  <script src="vendor/qrcode.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>חוזרים — כרטיסייה דיגיטלית שמחזירה לקוחות</title>
+  <meta name="description" content="כרטיסייה דיגיטלית לבתי קפה, מספרות, מסעדות וכל עסק קטן. בלי אפליקציה ללקוחות. רואים מי הפסיק להגיע ומחזירים אותו בהודעת וואטסאפ אחת. חודש ראשון חינם.">
+  <meta property="og:title" content="חוזרים — כרטיסייה דיגיטלית שמחזירה לקוחות">
+  <meta property="og:description" content="בלי אפליקציה, בלי כרטיסי נייר שהולכים לאיבוד. חודש ראשון חינם.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;700&family=Suez+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body { background: var(--paper); }
+    .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(24px, 5vw, 64px); align-items: center; padding: clamp(36px, 7vw, 88px) 0 clamp(28px, 5vw, 56px); }
+    @media (max-width: 860px) { .hero { grid-template-columns: 1fr; } }
+    .hero h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); }
+    .hero h1 em { font-style: normal; color: var(--brand); }
+    .lede { font-size: 1.2rem; color: var(--ink-2); max-width: 32em; }
+    .cta-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 22px 0 8px; }
+    .demo { position: relative; }
+    .demo .punch { transform: rotate(-2deg); }
+    .phone-chip { position: absolute; inset-inline-start: -10px; bottom: -22px; background: var(--ink); color: var(--paper); border-radius: 12px; padding: 10px 14px; font-weight: 700; font-size: .95rem; transform: rotate(2deg); box-shadow: 0 12px 24px -12px rgba(0,0,0,.5); }
+    .band { padding: clamp(36px, 6vw, 72px) 0; border-top: 1px solid var(--line); }
+    .band h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; counter-reset: s; }
+    @media (max-width: 760px) { .steps { grid-template-columns: 1fr; } }
+    .steps div { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 18px; counter-increment: s; }
+    .steps div::before { content: counter(s); display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--brand); color: #fff; font: 700 1rem var(--mono); margin-bottom: 8px; }
+    .steps h3 { font-family: var(--body); font-weight: 800; font-size: 1.15rem; }
+    .steps p { margin: 0; color: var(--ink-2); }
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 680px) { .compare { grid-template-columns: 1fr; } }
+    .compare > div { border-radius: var(--r); padding: 18px 20px; }
+    .compare .paper { background: var(--kraft); }
+    .compare .digital { background: var(--ink); color: var(--paper); }
+    .compare ul { margin: 0; padding-inline-start: 1.1rem; }
+    .compare li { margin-bottom: .45rem; }
+    .comeback { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; }
+    @media (max-width: 760px) { .comeback { grid-template-columns: 1fr; } }
+    .wa-bubble { background: #DCF8C6; color: #111; border-radius: 14px 14px 4px 14px; padding: 12px 14px; max-width: 360px; box-shadow: 0 2px 0 rgba(0,0,0,.08); font-size: 1rem; }
+    .wa-meta { font-size: .8rem; color: var(--muted); margin-top: 6px; }
+    .price-card { background: var(--card); border: 2px solid var(--brand); border-radius: 18px; padding: 24px; max-width: 460px; }
+    .price-card .big { font: 800 3rem var(--mono); }
+    .price-card .big small { font: 600 1rem var(--body); color: var(--muted); }
+    .price-card ul { padding-inline-start: 1.1rem; }
+    .faq details { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin-bottom: 8px; }
+    .faq summary { font-weight: 800; cursor: pointer; }
+    .faq p { margin: .6rem 0 0; color: var(--ink-2); }
+    footer { padding: 28px 0 48px; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="logo" href="./"><span class="logo-mark">↺</span>חוזרים</a>
+    <a class="btn brand" href="app.html" style="min-height:0;padding:.5rem 1rem">כניסה לעסקים</a>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <h1>הלקוחות שלך<br><em>חוזרים.</em></h1>
+        <p class="lede">כרטיסייה דיגיטלית לבתי קפה, מספרות, מסעדות וכל עסק שכונתי. הלקוח סורק QR בקופה ומקבל כרטיסייה בטלפון — בלי אפליקציה. ואתם רואים מי הפסיק להגיע, ומחזירים אותו בהודעת וואטסאפ אחת.</p>
+        <div class="cta-row">
+          <a class="btn brand" href="app.html">פתחו כרטיסייה — חודש ראשון חינם</a>
+          <a class="btn ghost" href="#how">איך זה עובד</a>
+        </div>
+        <p class="fine">הקמה ב-2 דקות. בלי כרטיס אשראי. ביטול בכל רגע.</p>
+      </div>
+      <div class="demo" aria-label="הדגמה של כרטיסייה">
+        <div id="demo-card"></div>
+        <div class="phone-chip" id="demo-chip">+1 חותמת ☕</div>
+      </div>
+    </section>
+
+    <section class="band" id="how">
+      <h2>שלושה צעדים, ואתם באוויר</h2>
+      <div class="steps">
+        <div><h3>מעצבים כרטיסייה</h3><p>שם העסק, ההטבה (למשל "קפה עשירי חינם"), צבע וסמל. מוכן תוך 2 דקות.</p></div>
+        <div><h3>תולים פוסטר ליד הקופה</h3><p>הלקוח סורק עם המצלמה, כותב שם, ומקבל כרטיסייה עם קוד בן 4 ספרות.</p></div>
+        <div><h3>מחתימים בכל ביקור</h3><p>מקלידים את הקוד בטלפון של העסק ולוחצים "+1". החותמת מופיעה אצל הלקוח מיד.</p></div>
+      </div>
+    </section>
+
+    <section class="band">
+      <h2>למה לא פשוט כרטיסיית נייר?</h2>
+      <div class="compare">
+        <div class="paper"><h3>כרטיסיית נייר</h3><ul><li>הולכת לאיבוד בכביסה ובארנק</li><li>קל לזייף חותמות</li><li>אין לכם מושג מי הלקוחות</li><li>לקוח שהפסיק להגיע — נעלם</li></ul></div>
+        <div class="digital"><h3>חוזרים</h3><ul><li>תמיד בטלפון של הלקוח, מתעדכנת בזמן אמת</li><li>רק אתם יכולים להחתים</li><li>רשימת לקוחות: מי מגיע, כמה, ומתי בפעם האחרונה</li><li>רואים מי לא חזר 3 שבועות — ושולחים לו הודעה בלחיצה</li></ul></div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="comeback">
+        <div>
+          <h2>הכפתור שמחזיר לקוחות</h2>
+          <p class="lede" style="font-size:1.1rem">במסך "לקוחות" תראו מי היה קבוע ונעלם, ומי במרחק חותמת אחת מההטבה. לחיצה על "וואטסאפ" פותחת הודעה אישית מוכנה — אתם רק לוחצים שליחה.</p>
+          <p class="fine">הודעות נשלחות רק ללקוחות שאישרו לקבל עדכונים כשהצטרפו.</p>
+        </div>
+        <div>
+          <div class="wa-bubble">היי יוסי! מתגעגעים אליך בקפה נועה ☕ יש לך כבר 7 מתוך 10 חותמות — עוד 3 וקפה חינם עלינו. מחכים לך!</div>
+          <div class="wa-meta">דוגמה להודעה שנוצרת אוטומטית</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="pricing">
+      <h2>מחיר אחד, פשוט</h2>
+      <div class="price-card">
+        <div class="big"><span id="price">₪59</span> <small>לחודש לעסק</small></div>
+        <p id="founding" style="color:var(--brand);font-weight:800"></p>
+        <ul>
+          <li>חודש ראשון חינם, בלי כרטיס אשראי</li>
+          <li>לקוחות והחתמות ללא הגבלה</li>
+          <li>פוסטר מוכן להדפסה עם QR</li>
+          <li>רשימת לקוחות + הודעות וואטסאפ מוכנות</li>
+          <li>ביטול בכל רגע. הכרטיסיות של הלקוחות לא נמחקות</li>
+        </ul>
+        <a class="btn brand block" href="app.html">מתחילים בחינם</a>
+      </div>
+    </section>
+
+    <section class="band faq">
+      <h2>שאלות</h2>
+      <details><summary>הלקוחות צריכים להוריד אפליקציה?</summary><p>לא. סורקים QR עם המצלמה, כותבים שם, וזהו. הכרטיסייה נפתחת בדפדפן ואפשר לשמור אותה במסך הבית.</p></details>
+      <details><summary>מה אני צריך בעסק?</summary><p>רק טלפון או טאבלט עם אינטרנט בקופה, ודף מודפס עם ה-QR (אנחנו מייצרים אותו בשבילכם).</p></details>
+      <details><summary>מה אם לקוח החליף טלפון או איבד את הכרטיסייה?</summary><p>החותמות שמורות אצלנו, לא בטלפון. מחפשים את הלקוח לפי שם או טלפון ושולחים לו את הקישור לכרטיסייה בוואטסאפ.</p></details>
+      <details><summary>אפשר לזייף חותמות?</summary><p>לא. רק החשבון של בעל העסק יכול להוסיף חותמות.</p></details>
+      <details><summary>של מי המידע על הלקוחות?</summary><p>שלכם. אנחנו שומרים רק שם, וטלפון אם הלקוח בחר לתת, ולא משתמשים בו לשום דבר אחר.</p></details>
+      <details><summary>מה קורה אחרי חודש הניסיון?</summary><p>אם תרצו להמשיך — משלמים ₪59 לחודש (או מחיר לקוחות ראשונים). אם לא — ההחתמה נעצרת, ושום דבר לא נמחק.</p></details>
+    </section>
+  </main>
+  <footer class="wrap" id="foot">חוזרים — כרטיסייה דיגיטלית לעסקים קטנים. · <a href="privacy.html">פרטיות</a></footer>
+
+  <script src="js/config.js"></script>
+  <script type="module">
+    import { punchCard, el } from './js/ui.js';
+    const op = (window.CHOZRIM_CONFIG || {}).operator || {};
+    document.getElementById('price').textContent = '₪' + (op.priceMonthly || 59);
+    if (op.foundingPrice) document.getElementById('founding').textContent = `ל-10 העסקים הראשונים: ₪${op.foundingPrice} לחודש, לתמיד.`;
+    if (op.whatsapp) document.getElementById('foot').append(' · ', el('a', { href: 'https://wa.me/' + op.whatsapp, target: '_blank', rel: 'noopener' }, 'דברו איתנו בוואטסאפ'));
+    const demo = { name: 'קפה נועה', reward: 'קפה חינם', goal: 10, color: '#B4532A', emoji: '☕' };
+    const slot = document.getElementById('demo-card');
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let n = reduce ? 7 : 3;
+    const draw = (pop) => slot.replaceChildren(punchCard(demo, n, { popFrom: pop }));
+    draw();
+    if (!reduce) setInterval(() => { const prev = n; n = n >= 10 ? 3 : n + 1; draw(n > prev ? prev : null); }, 1600);
+  </script>
+</body>
+</html>

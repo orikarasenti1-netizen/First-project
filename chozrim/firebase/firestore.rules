@@ -1,0 +1,96 @@
+rules_version = '2';
+
+// Chozrim (חוזרים) — digital loyalty cards.
+// Data model:
+//   businesses/{b}                 card config (public by id), owned by ownerUid
+//   businesses/{b}/members/{m}     one customer's card; the random id is the customer's secret link
+//   businesses/{b}/codes/{code}    4-digit lookup code -> member id (owner only)
+//   businesses/{b}/events/{e}      stamp / redeem log (owner only)
+// Billing: a business can stamp during a 30-day trial + 7-day grace, or while paidUntil is in the future.
+// paidUntil / plan are set by the operator in the Firebase console, never by the business owner.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function biz(b) { return get(/databases/$(database)/documents/businesses/$(b)).data; }
+    function isOwner(b) { return signedIn() && biz(b).ownerUid == request.auth.uid; }
+    function isActive(b) {
+      let d = biz(b);
+      return request.time < d.createdAt + duration.value(37, 'd')
+        || (d.get('paidUntil', null) != null && request.time < d.paidUntil);
+    }
+    function validText(v, max) { return v is string && v.size() <= max; }
+
+    match /businesses/{b} {
+      allow get: if true;
+      // Owners may list only their own businesses; nobody can enumerate our customers.
+      allow list: if signedIn() && resource.data.ownerUid == request.auth.uid;
+
+      allow create: if signedIn()
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.resource.data.createdAt == request.time
+        && !request.resource.data.keys().hasAny(['paidUntil', 'plan'])
+        && request.resource.data.keys().hasOnly(['ownerUid', 'name', 'reward', 'goal', 'color', 'emoji', 'whatsapp', 'createdAt'])
+        && validCard(request.resource.data);
+
+      allow update: if isOwner(b)
+        && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['ownerUid', 'createdAt', 'paidUntil', 'plan'])
+        && validCard(request.resource.data);
+
+      allow delete: if isOwner(b);
+
+      function validCard(d) {
+        return validText(d.name, 40) && d.name.size() > 0
+          && validText(d.reward, 60) && d.reward.size() > 0
+          && d.goal is int && d.goal >= 3 && d.goal <= 20
+          && d.color is string && d.color.matches('^#[0-9a-fA-F]{6}$')
+          && validText(d.emoji, 8)
+          && d.whatsapp is string && d.whatsapp.matches('^[0-9]{0,15}$');
+      }
+
+      match /members/{m} {
+        // Anyone holding the (unguessable) member id can read that one card.
+        allow get: if true;
+        allow list: if isOwner(b);
+        // Joining: a fresh card with zero stamps, while the business is active.
+        allow create: if isActive(b)
+          && request.resource.data.keys().hasOnly(['name', 'phone', 'consent', 'code', 'stamps', 'totalStamps', 'rewards', 'joinedAt', 'lastVisit'])
+          && request.resource.data.keys().hasAll(['name', 'phone', 'consent', 'code', 'stamps', 'totalStamps', 'rewards', 'joinedAt', 'lastVisit'])
+          && validText(request.resource.data.name, 40) && request.resource.data.name.size() > 0
+          && request.resource.data.phone is string && request.resource.data.phone.matches('^[0-9+]{0,16}$')
+          && request.resource.data.consent is bool
+          && request.resource.data.code is string && request.resource.data.code.matches('^[0-9]{4}$')
+          && request.resource.data.stamps == 0 && request.resource.data.totalStamps == 0 && request.resource.data.rewards == 0
+          && request.resource.data.joinedAt == request.time
+          && request.resource.data.lastVisit == null;
+        // Stamping and redeeming: owner only, only while active, counts must stay sane.
+        allow update: if isOwner(b) && isActive(b)
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['stamps', 'totalStamps', 'rewards', 'lastVisit', 'name', 'phone', 'consent'])
+          && request.resource.data.stamps is int && request.resource.data.stamps >= 0
+          && request.resource.data.totalStamps >= resource.data.totalStamps
+          && request.resource.data.rewards >= resource.data.rewards;
+        allow delete: if isOwner(b);
+      }
+
+      match /codes/{code} {
+        allow get, list: if isOwner(b);
+        // A code can be claimed once, in the same batch that creates the member carrying that code.
+        allow create: if code.matches('^[0-9]{4}$')
+          && request.resource.data.keys().hasOnly(['memberId'])
+          && existsAfter(/databases/$(database)/documents/businesses/$(b)/members/$(request.resource.data.memberId))
+          && getAfter(/databases/$(database)/documents/businesses/$(b)/members/$(request.resource.data.memberId)).data.code == code;
+        allow update, delete: if isOwner(b);
+      }
+
+      match /events/{e} {
+        allow read: if isOwner(b);
+        allow create: if isOwner(b) && isActive(b)
+          && request.resource.data.keys().hasOnly(['type', 'memberId', 'n', 'at'])
+          && request.resource.data.type in ['stamp', 'redeem']
+          && request.resource.data.at == request.time;
+      }
+    }
+
+    match /{document=**} { allow read, write: if false; }
+  }
+}
