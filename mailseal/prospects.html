@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>MailSeal — Prospect scanner (internal)</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 24px 16px 64px; }
+    textarea, input, select { font: .9rem var(--mono); padding: .6rem; border: 1px solid var(--ink-2); border-radius: 8px; background: var(--card); color: var(--ink); width: 100%; }
+    .grid { display: grid; grid-template-columns: 2fr 1fr; gap: 1rem; }
+    @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
+    .controls { display: grid; gap: .6rem; align-content: start; }
+    .controls label { display: grid; gap: .25rem; font-size: .85rem; color: var(--ink-2); }
+    .table-wrap { overflow-x: auto; margin-top: 1.2rem; border: 1px solid var(--line); border-radius: 8px; background: var(--card); }
+    table { border-collapse: collapse; width: 100%; font-size: .85rem; }
+    th, td { padding: .45rem .6rem; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { font: 600 .75rem var(--mono); text-transform: uppercase; color: var(--muted); background: var(--paper); position: sticky; top: 0; }
+    td.g { font: 800 1.1rem var(--display); }
+    .hot { background: var(--wax-lt); }
+    #draft { min-height: 260px; font-family: var(--body); }
+    .row { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
+    .btn { padding: .55rem .9rem; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="brand" href="./"><span class="seal-mini"></span>MailSeal · prospects</a>
+    <p class="sub">Internal tool. Paste one prospect per line: <code>domain, Business name, Contact first name</code> (name fields optional). Scans run in this browser against public DNS; nothing is uploaded or stored.</p>
+    <div class="grid">
+      <textarea id="domains" rows="10" spellcheck="false" placeholder="example-law.co.il, Example Law Offices, Dana"></textarea>
+      <div class="controls">
+        <label>Message language<select id="msg-lang"><option value="he">עברית</option><option value="en">English</option></select></label>
+        <label>Your name (signature)<input id="sender" placeholder="Ori"></label>
+        <label>Public report base URL<input id="base" placeholder="https://USER.github.io/First-project/mailseal/"></label>
+        <div class="row">
+          <button class="btn wax" id="run" type="button">Scan all</button>
+          <button class="btn ghost" id="csv" type="button">Download CSV</button>
+        </div>
+        <p class="fine" id="status"></p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Domain</th><th>Business</th><th>Grade</th><th>Spoofable</th><th>Provider</th><th>SPF</th><th>DMARC</th><th>DKIM</th><th>Main issue</th><th></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+
+    <h3 class="sec-h">Draft first-touch message</h3>
+    <p class="fine">Informational, asks permission before pitching, includes an opt-out. Send manually and personally — one at a time — from your own account. Review every message before sending.</p>
+    <input id="subject" readonly>
+    <textarea id="draft" readonly style="margin-top:.5rem"></textarea>
+    <div class="row" style="margin-top:.5rem"><button class="btn ink" id="copy" type="button">Copy subject + message</button></div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="checker.js"></script>
+  <script>
+  (function () {
+    'use strict';
+    var $ = function (id) { return document.getElementById(id); };
+    var dns = MailSeal.dohAdapter();
+    var results = [];
+    try {
+      $('sender').value = localStorage.getItem('ms-sender') || '';
+      $('base').value = localStorage.getItem('ms-base') || location.href.replace(/prospects\.html.*$/, '');
+    } catch (e) { $('base').value = location.href.replace(/prospects\.html.*$/, ''); }
+    ['sender', 'base'].forEach(function (id) {
+      $(id).addEventListener('change', function () { try { localStorage.setItem('ms-' + id, $(id).value); } catch (e) {} });
+    });
+
+    function issue(r, lang) {
+      var he = lang === 'he';
+      if (!r.receivesMail && r.spoofable) return he ? 'הדומיין לא מוגן מפני שליחת מיילים מזויפים בשמו (אין מדיניות DMARC reject)' : 'the domain has no DMARC reject policy, so email can be forged from it';
+      if (r.dmarc.status === 'missing') return he ? 'אין לדומיין רשומת DMARC' : 'it has no DMARC record';
+      if (r.dmarc.status !== 'present') return he ? 'רשומת ה-DMARC שלו לא תקינה' : 'its DMARC record is invalid';
+      if (r.dmarc.policy === 'none') return he ? 'מדיניות ה-DMARC שלו במצב מעקב בלבד (p=none)' : 'its DMARC policy is monitor-only (p=none)';
+      if (r.spf.status === 'missing') return he ? 'אין לו רשומת SPF' : 'it has no SPF record';
+      if (r.spf.status === 'multiple') return he ? 'יש לו כמה רשומות SPF סותרות' : 'it has conflicting SPF records';
+      if (r.findings.some(function (f) { return f.code === 'spf_too_many_lookups'; })) return he ? 'רשומת ה-SPF שלו חורגת ממגבלת 10 הבדיקות' : 'its SPF record exceeds the 10-lookup limit';
+      if (r.dkim.status === 'not_found') return he ? 'לא מצאתי עליו חתימת DKIM' : 'I could not find DKIM signing';
+      return '';
+    }
+
+    function draft(item) {
+      var r = item.r, lang = $('msg-lang').value, who = item.contact, me = $('sender').value || '[your name]';
+      var link = ($('base').value || '').replace(/\/?$/, '/') + '?d=' + encodeURIComponent(r.domain) + '&lang=' + lang;
+      var iss = issue(r, lang);
+      if (lang === 'he') {
+        $('subject').value = 'הערת אבטחה קצרה לגבי ' + r.domain;
+        $('draft').value = [
+          'שלום' + (who ? ' ' + who : '') + ',',
+          '',
+          'הרצתי בדיקה ציבורית על הגדרות המייל של ' + r.domain + ' ושמתי לב ש' + iss + '.',
+          'בפועל זה אומר שמישהו יכול לשלוח מייל שנראה כאילו נשלח מכתובת @' + r.domain + ' — למשל "עדכון פרטי חשבון בנק" ללקוחות שלכם — ול-Gmail או Outlook אין הוראה לחסום אותו.',
+          '',
+          'הדוח המלא כאן (הוא קורא רק רשומות DNS ציבוריות): ' + link,
+          '',
+          'אם זה רלוונטי, אשמח לעבור איתך או עם איש ה-IT על התיקון — בערך חצי שעה. מעניין אותך?',
+          '',
+          me,
+          '',
+          '(אם אינך מעוניין/ת לשמוע ממני, פשוט השב/י "לא" ולא אפנה שוב.)'
+        ].join('\n');
+      } else {
+        $('subject').value = 'Quick security note about ' + r.domain;
+        $('draft').value = [
+          'Hi' + (who ? ' ' + who : '') + ',',
+          '',
+          'I ran a public check on ' + r.domain + '’s email settings and noticed ' + iss + '.',
+          'In practice that means someone could send an email that appears to come from an @' + r.domain + ' address — say, an "updated bank details" message to your clients — and Gmail or Outlook have no instruction to block it.',
+          '',
+          'The full report is here (it only reads public DNS records): ' + link,
+          '',
+          'If it’s useful, I can walk you or your IT person through the fix in about 30 minutes. Would that help?',
+          '',
+          me,
+          '',
+          '(If you’d rather not hear from me, just reply "no" and I won’t write again.)'
+        ].join('\n');
+      }
+    }
+
+    function cell(tr, text, cls) { var td = document.createElement('td'); td.textContent = text; if (cls) td.className = cls; tr.appendChild(td); return td; }
+
+    function addRow(item) {
+      var tr = document.createElement('tr');
+      if (item.error) {
+        cell(tr, item.raw); cell(tr, item.name || ''); cell(tr, '—'); cell(tr, item.error); for (var i = 0; i < 6; i++) cell(tr, '');
+      } else {
+        var r = item.r;
+        if (r.spoofable) tr.className = 'hot';
+        cell(tr, r.domain); cell(tr, item.name || ''); cell(tr, r.grade, 'g'); cell(tr, r.spoofable ? 'YES' : 'no');
+        cell(tr, r.receivesMail ? (r.provider ? r.provider.name : 'other') : 'no MX');
+        cell(tr, r.spf.status + (r.spf.all ? ' (' + r.spf.all + 'all)' : ''));
+        cell(tr, r.dmarc.status === 'present' ? 'p=' + r.dmarc.policy : r.dmarc.status);
+        cell(tr, r.dkim.status);
+        cell(tr, issue(r, 'en') || 'none');
+        var td = cell(tr, ''), b = document.createElement('button');
+        b.className = 'btn ghost'; b.type = 'button'; b.textContent = 'Draft';
+        b.disabled = !r.spoofable && !issue(r, 'en');
+        b.addEventListener('click', function () { draft(item); $('draft').scrollIntoView({ behavior: 'smooth', block: 'center' }); });
+        td.appendChild(b);
+      }
+      $('rows').appendChild(tr);
+    }
+
+    $('run').addEventListener('click', async function () {
+      var lines = $('domains').value.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
+      results = []; $('rows').textContent = '';
+      var queue = lines.slice(), done = 0;
+      $('run').disabled = true;
+      async function worker() {
+        while (queue.length) {
+          var line = queue.shift(), parts = line.split(',').map(function (s) { return s.trim(); });
+          var item = { raw: parts[0], name: parts[1] || '', contact: parts[2] || '' };
+          var d = MailSeal.normalizeDomain(parts[0]);
+          if (!d) item.error = 'invalid domain';
+          else { try { item.r = await MailSeal.scan(d, dns); } catch (e) { item.error = 'lookup failed'; } }
+          results.push(item); addRow(item);
+          $('status').textContent = (++done) + ' / ' + lines.length + ' scanned';
+        }
+      }
+      await Promise.all([worker(), worker(), worker()]);
+      var hot = results.filter(function (i) { return i.r && i.r.spoofable; }).length;
+      $('status').textContent = done + ' scanned · ' + hot + ' spoofable';
+      $('run').disabled = false;
+    });
+
+    $('csv').addEventListener('click', function () {
+      var head = ['domain', 'business', 'contact', 'grade', 'score', 'spoofable', 'provider', 'spf', 'dmarc_policy', 'dkim', 'main_issue', 'error'];
+      var esc = function (v) { v = String(v == null ? '' : v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
+      var rows = results.map(function (i) {
+        var r = i.r || {};
+        return [r.domain || i.raw, i.name, i.contact, r.grade, r.score, r.spoofable, r.provider ? r.provider.name : (r.receivesMail === false ? 'no MX' : ''),
+          r.spf ? r.spf.status : '', r.dmarc ? (r.dmarc.policy || r.dmarc.status) : '', r.dkim ? r.dkim.status : '', i.r ? issue(i.r, 'en') : '', i.error || ''].map(esc).join(',');
+      });
+      var blob = new Blob(['﻿' + head.join(',') + '\n' + rows.join('\n')], { type: 'text/csv;charset=utf-8' });
+      var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'mailseal-prospects.csv'; a.click();
+    });
+
+    $('copy').addEventListener('click', function () {
+      var t = 'Subject: ' + $('subject').value + '\n\n' + $('draft').value;
+      if (navigator.clipboard) navigator.clipboard.writeText(t);
+    });
+  })();
+  </script>
+</body>
+</html>
