@@ -270,6 +270,8 @@
     // DKIM — 30 points
     if (dkim.status === 'found') { score += 30; f.push({ severity: 'ok', code: 'dkim_ok', params: { list: dkim.selectors.join(', ') } }); }
     else {
+      // Unverifiable rather than proven absent: DKIM may use a custom selector (big senders often do).
+      score += 10;
       f.push({ severity: 'high', code: 'dkim_not_found', params: { n: dkim.probed } });
       fixes.push({ code: prov ? 'fix_dkim_' + prov.id.replace(/-eu$/, '') : 'fix_dkim_generic', type: 'INFO', host: '', fqdn: '', value: '' });
     }

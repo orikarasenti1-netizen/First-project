@@ -1,0 +1,2 @@
+date_found,domain,business,contact_name,channel,grade_at_scan,spoofable,main_issue,date_contacted,follow_up_date,status,notes,amount_quoted,invoice_sent,cash_received_date,amount_received
+2026-10-15,example.com,Example (template row - delete),,warm|partner|consent-note|fiverr|inbound,F,yes,no DMARC record,,,identified|contacted|replied|call-booked|verbal-yes|invoiced|paid|delivered|no,,,,,

@@ -51,7 +51,7 @@ async function scanAll(domains) {
 }
 
 if (monitor) {
-  const spec = (process.env.MAILSEAL_CUSTOMERS || '').split(/[,\n]/).map(s => s.trim()).filter(Boolean);
+  const spec = (process.env.MAILSEAL_CUSTOMERS || '').split(/[,\n]/).map(s => s.trim()).filter(s => s && s.toLowerCase() !== 'none');
   if (!spec.length) { console.log('No customers configured (set repository variable MAILSEAL_CUSTOMERS). Nothing to do.'); process.exit(0); }
   const customers = spec.map((s, i) => { const [domain, min] = s.split(':'); return { n: i + 1, domain: domain.trim(), min: (min || 'A').trim().toUpperCase() }; });
   if (inCI) customers.forEach(c => console.log('::add-mask::' + c.domain));
