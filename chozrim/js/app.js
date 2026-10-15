@@ -5,7 +5,7 @@ import { el, punchCard, toast, qrSvg, ago } from './ui.js';
 const $ = id => document.getElementById(id);
 const CFG = window.CHOZRIM_CONFIG || {};
 const OP = CFG.operator || {};
-const COLORS = ['#B4532A', '#1F6F5C', '#2C4C9A', '#8A2D5E', '#C2851B', '#1E2740', '#5B3A8C', '#2E7D32'];
+const COLORS = ['#FF5A36', '#111827', '#2563EB', '#0E9F6E', '#7C3AED', '#DB2777', '#D97706', '#0891B2'];
 const EMOJIS = ['☕', '🥐', '🍕', '💈', '💅', '🍦', '🥙', '🌮', '🧁', '🍣', '🐾', '🧺', '🌸', '🏋️'];
 let user = null, biz = null, members = [], membersLoaded = 0, code = '', current = null, filter = 'all';
 let editing = { color: COLORS[0], emoji: EMOJIS[0] };
@@ -267,9 +267,8 @@ async function renderCustomers() {
 function renderPoster() {
   const url = joinUrl();
   $('join-link').value = url;
-  $('poster').style.borderTopColor = biz.color;
   $('poster').replaceChildren(
-    el('div', {}, el('div', { class: 'p-emoji' }, biz.emoji), el('h2', {}, biz.name)),
+    el('div', { class: 'p-head' }, el('div', { class: 'p-emoji' }, biz.emoji), el('h2', {}, biz.name)),
     el('div', { class: 'p-offer' }, `כל ביקור = חותמת. ${biz.goal} חותמות = ${biz.reward}`),
     qrSvg(url, 8),
     el('div', { class: 'p-steps' }, 'סורקים במצלמה ← כותבים שם ← זהו!', el('br'), 'בלי אפליקציה, בחינם'));

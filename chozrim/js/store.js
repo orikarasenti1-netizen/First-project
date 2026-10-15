@@ -42,7 +42,7 @@ export function cleanCard(d) {
     name: String(d.name || '').trim().slice(0, 40),
     reward: String(d.reward || '').trim().slice(0, 60),
     goal: Math.min(20, Math.max(3, parseInt(d.goal, 10) || 10)),
-    color: /^#[0-9a-f]{6}$/i.test(d.color) ? d.color : '#B4532A',
+    color: /^#[0-9a-f]{6}$/i.test(d.color) ? d.color : '#FF5A36',
     emoji: String(d.emoji || '☕').slice(0, 8),
     whatsapp: toIntlPhone(d.whatsapp || '')
   };

@@ -44,7 +44,8 @@ async function ctx(opts) {
     const name = r.request().url().split('/').pop();
     r.fulfill({ status: 200, contentType: 'text/javascript', body: await readFile(join(fbDir, name)) });
   });
-  await c.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
+  if (process.env.FONT_ROUTE) await (await import(process.env.FONT_ROUTE)).routeFonts(c);   // optional: real fonts for screenshots
+  else await c.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
   return c;
 }
 const errors = [];
@@ -120,7 +121,7 @@ check((await phone.textContent('#ready')).includes('קפה חינם'), 'customer
 await owner.click('#redeem');
 await phone.waitForFunction(() => document.querySelectorAll('.hole.on').length === 0, null, { timeout: 10000 });
 check(await phone.isHidden('#ready'), 'after redemption the card resets');
-check((await phone.textContent('#stats-line')).includes('1'), 'customer sees rewards count');
+check((await phone.textContent('#stats-line')).includes('הטבה אחת'), 'customer sees rewards count');
 
 // 5. Returning to the card later from the same phone works without the link
 await phone.goto(`http://localhost:${PORT}/c.html?b=${bizId}`);
@@ -185,7 +186,15 @@ for (const [p, label] of [[phone, 'card'], [owner, 'app']]) {
   check(over <= 1, `no horizontal scroll on ${label} at 375px (overflow=${over})`);
 }
 if (process.env.SHOT_DIR) {
+  await phone.setViewportSize({ width: 390, height: 844 });
   await phone.screenshot({ path: process.env.SHOT_DIR + '/card.png' });
+  await owner.setViewportSize({ width: 1100, height: 900 });
+  await owner.click('.tabs button[data-tab=register]');
+  for (const d of code) await owner.click(`#keypad button[aria-label="${d}"]`);
+  await owner.waitForSelector('#found h3');
+  await owner.screenshot({ path: process.env.SHOT_DIR + '/register.png' });
+  await owner.click('.tabs button[data-tab=poster]'); await owner.waitForSelector('#poster svg');
+  await owner.screenshot({ path: process.env.SHOT_DIR + '/poster.png' });
   await owner.click('.tabs button[data-tab=customers]'); await owner.waitForSelector('.person');
   await owner.screenshot({ path: process.env.SHOT_DIR + '/customers.png', fullPage: true });
 }

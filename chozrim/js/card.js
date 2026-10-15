@@ -67,7 +67,7 @@ function openCard(memberId, isNew) {
     const ready = m.stamps >= biz.goal;
     $('ready').hidden = !ready;
     $('ready').textContent = `🎉 ${biz.reward} מחכה לך! הראו את המסך הזה בקופה`;
-    $('stats-line').textContent = m.rewards ? `כבר מימשת ${m.rewards} הטבות כאן. כל הכבוד!` : '';
+    $('stats-line').textContent = !m.rewards ? '' : m.rewards === 1 ? 'כבר מימשת כאן הטבה אחת. כל הכבוד!' : `כבר מימשת כאן ${m.rewards} הטבות. כל הכבוד!`;
     show('mycard');
     if (isNew) { toast('ברוכים הבאים! זו הכרטיסייה שלך'); isNew = false; }
   }, () => message('אין חיבור כרגע. נסו לרענן בעוד רגע.', 'notice bad'));

@@ -13,9 +13,6 @@ export function el(tag, attrs, ...kids) {
   return e;
 }
 
-// Deterministic small rotation per hole so stamps look hand-pressed but don't jump between renders.
-const rot = i => ((i * 37) % 17) - 8;
-
 export function punchCard(b, stamps, opts = {}) {
   const goal = b.goal;
   const shown = Math.min(stamps, goal);
@@ -23,7 +20,7 @@ export function punchCard(b, stamps, opts = {}) {
   for (let i = 0; i < goal; i++) {
     const on = i < shown;
     const cls = 'hole' + (on ? ' on' : '') + (i === goal - 1 ? ' gift' : '') + (on && opts.popFrom != null && i >= opts.popFrom ? ' pop' : '');
-    holes.append(el('div', { class: cls, style: '--rot:' + rot(i) + 'deg;' + (on ? 'transform:rotate(' + rot(i) + 'deg)' : ''), 'aria-hidden': 'true' }, on && i !== goal - 1 ? b.emoji : ''));
+    holes.append(el('div', { class: cls, 'aria-hidden': 'true' }, on && i !== goal - 1 ? b.emoji : ''));
   }
   const left = Math.max(0, goal - stamps);
   const card = el('section', { class: 'punch', style: '--c:' + b.color, 'aria-label': `כרטיסייה: ${shown} מתוך ${goal} חותמות` },
@@ -33,7 +30,7 @@ export function punchCard(b, stamps, opts = {}) {
     holes,
     el('div', { class: 'punch-foot' },
       el('span', { class: 'progress-txt' }, left === 0 ? el('b', {}, 'ההטבה מחכה לך!') : ['עוד ', el('b', {}, String(left)), ` ל${b.reward}`]),
-      opts.footRight || ''));
+      el('b', { dir: 'ltr' }, `${shown}/${goal}`)));
   return card;
 }
 
