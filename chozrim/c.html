@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#F8F2E7">
+  <title>הכרטיסייה שלי</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main class="narrow">
+    <p id="loading" class="fine" style="text-align:center;margin-top:30vh">טוען…</p>
+    <div id="msg" hidden></div>
+
+    <section id="join" hidden>
+      <div id="join-preview"></div>
+      <h1 style="margin-top:22px;font-size:1.7rem">מצטרפים בחינם, ב-10 שניות</h1>
+      <p class="fine">בלי אפליקציה ובלי סיסמה. בכל ביקור מראים את הקוד שלך בקופה ומקבלים חותמת.</p>
+      <form id="join-form" novalidate>
+        <label class="field">שם<input name="name" autocomplete="given-name" required maxlength="40"></label>
+        <label class="field">טלפון (לא חובה)<input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="16" dir="ltr" placeholder="050-0000000"></label>
+        <label class="check"><input type="checkbox" name="consent"> <span id="consent-txt">אשמח לקבל מהעסק עדכונים והטבות בוואטסאפ (אפשר להפסיק בכל רגע)</span></label>
+        <p class="err" id="join-err" hidden></p>
+        <button class="btn brand block" type="submit" id="join-btn">קבלו את הכרטיסייה</button>
+        <p class="fine" style="text-align:center;margin-top:10px">בהצטרפות נשמרים רק השם והטלפון. <a href="privacy.html">פרטיות</a></p>
+      </form>
+    </section>
+
+    <section id="mycard" hidden>
+      <div id="card-slot"></div>
+      <div class="code-box">
+        <div class="lbl">הקוד שלך — אומרים אותו בקופה</div>
+        <div class="code" id="code"></div>
+      </div>
+      <div id="ready" class="ready-banner" hidden></div>
+      <div class="notice" id="save-tip" style="margin-top:18px">
+        💡 כדי לא לאבד את הכרטיסייה: <span id="save-how">שמרו את הדף במסך הבית</span>.
+        <button class="btn ghost block" id="share-btn" type="button" style="margin-top:10px">שמירת הקישור לכרטיסייה</button>
+      </div>
+      <p class="fine" style="text-align:center;margin-top:16px" id="stats-line"></p>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="vendor/qrcode.js"></script>
+  <script type="module" src="js/card.js"></script>
+</body>
+</html>

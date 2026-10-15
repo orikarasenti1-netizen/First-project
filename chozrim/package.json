@@ -1,0 +1,16 @@
+{
+  "name": "chozrim",
+  "private": true,
+  "description": "Chozrim — digital loyalty cards. Dev/test dependencies only; the site itself is static.",
+  "scripts": {
+    "test:rules": "cd firebase && firebase emulators:exec --only firestore --project demo-chozrim \"node --test ../tests/rules.test.mjs\"",
+    "test:e2e": "cd firebase && firebase emulators:exec --only firestore,auth --project demo-chozrim \"node ../tests/e2e.mjs\"",
+    "test": "npm run test:rules && npm run test:e2e"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^3.0.4",
+    "firebase": "10.14.1",
+    "firebase-tools": "^13.35.1",
+    "playwright": "1.56.1"
+  }
+}
