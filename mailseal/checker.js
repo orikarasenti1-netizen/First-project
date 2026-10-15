@@ -8,6 +8,7 @@
  * Adapter interface:
  *   txt(name) -> Promise<string[]>                 (each TXT record, chunks joined; [] if none)
  *   mx(name)  -> Promise<{priority:number, host:string}[]>  ([] if none)
+ *   ns(name)  -> Promise<string[]>                 (only needed for findLookalikes)
  * Adapters must resolve [] for NXDOMAIN / NODATA and reject only on real lookup failures.
  */
 (function (root, factory) {
@@ -318,6 +319,72 @@
     return r;
   }
 
+
+  // ---------- Lookalike domains ----------
+  // Scammers impersonating a law firm usually register a near-identical domain (cohen-iaw.co.il, cohenlaw.com)
+  // and write to clients at the moment of payment. DMARC cannot stop that; watching for new registrations can.
+  var HOMOGLYPHS = { l: ['1', 'i'], i: ['1', 'l'], o: ['0'], '0': ['o'], m: ['rn'], w: ['vv'], e: ['3'], s: ['5'], a: ['4'], g: ['q'], n: ['m'] };
+  var ALT_SUFFIXES = ['co.il', 'com', 'org.il', 'net', 'co', 'org', 'net.il', 'info', 'law'];
+  var LAW_WORDS = ['law', 'adv', 'legal', 'lawyers', 'office'];
+
+  function lookalikeCandidates(domain, limit) {
+    var org = orgDomain(normalizeDomain(domain) || domain);
+    var dot = org.indexOf('.');
+    var name = org.slice(0, dot), suffix = org.slice(dot + 1);
+    var out = [], seen = {};
+    function add(n, sfx, technique) {
+      n = n.replace(/^-+|-+$/g, '').replace(/--+/g, '-');
+      var cand = n + '.' + (sfx || suffix);
+      if (!/^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$/.test(n) || cand === org || seen[cand]) return;
+      seen[cand] = true;
+      out.push({ domain: cand, technique: technique });
+    }
+    var i;
+    for (i = 0; i < name.length; i++) {
+      var ch = name.charAt(i);
+      (HOMOGLYPHS[ch] || []).forEach(function (g) { add(name.slice(0, i) + g + name.slice(i + 1), null, 'homoglyph'); });
+    }
+    if (name.indexOf('rn') !== -1) add(name.replace('rn', 'm'), null, 'homoglyph');
+    if (name.indexOf('-') !== -1) add(name.replace(/-/g, ''), null, 'hyphen');
+    else for (i = 2; i < name.length - 1; i++) add(name.slice(0, i) + '-' + name.slice(i), null, 'hyphen');
+    for (i = 0; i < name.length - 1; i++) if (name[i] !== name[i + 1]) add(name.slice(0, i) + name[i + 1] + name[i] + name.slice(i + 2), null, 'swap');
+    if (name.length > 4) for (i = 0; i < name.length; i++) add(name.slice(0, i) + name.slice(i + 1), null, 'omission');
+    for (i = 0; i < name.length; i++) if (/[a-z]/.test(name[i])) add(name.slice(0, i + 1) + name[i] + name.slice(i + 1), null, 'repetition');
+    ALT_SUFFIXES.forEach(function (sfx) { if (sfx !== suffix) add(name, sfx, 'tld'); });
+    // Add legal words only to bare names; stripping a word (cohen-law -> cohen) would flag unrelated owners.
+    if (!LAW_WORDS.some(function (w) { return name.indexOf(w) !== -1; })) {
+      LAW_WORDS.forEach(function (w) { add(name + w, null, 'word'); add(name + '-' + w, null, 'word'); add(name + w, 'com', 'word'); });
+    }
+    // Most convincing first: homoglyph, word, tld, hyphen, then mechanical typos.
+    var rank = { homoglyph: 0, word: 1, tld: 2, hyphen: 3, swap: 4, omission: 5, repetition: 6 };
+    out.sort(function (a, b) { return rank[a.technique] - rank[b.technique]; });
+    return out.slice(0, limit || 120);
+  }
+
+  async function findLookalikes(domain, dns, opts) {
+    opts = opts || {};
+    var cands = lookalikeCandidates(domain, opts.limit);
+    var found = [], idx = 0, done = 0, errors = 0;
+    async function worker() {
+      while (idx < cands.length) {
+        var c = cands[idx++];
+        try {
+          var ns = await dns.ns(c.domain);
+          if (!ns.length) continue;
+          var mx = [];
+          try { mx = (await dns.mx(c.domain)).filter(function (m) { return m.host && m.host !== '.'; }); } catch (e) { /* treat as unknown */ }
+          found.push({ domain: c.domain, technique: c.technique, mail: mx.length > 0, ns: ns.slice(0, 2) });
+        } catch (e) { errors++; }
+        finally { done++; if (opts.onProgress) opts.onProgress(done, cands.length); }
+      }
+    }
+    var workers = [];
+    for (var w = 0; w < (opts.concurrency || 6); w++) workers.push(worker());
+    await Promise.all(workers);
+    found.sort(function (a, b) { return (b.mail - a.mail) || a.domain.localeCompare(b.domain); });
+    return { checked: cands.length, found: found, errors: errors };
+  }
+
   // ---------- Browser DNS-over-HTTPS adapter ----------
   function parseTxtData(data) {
     if (data.charAt(0) !== '"') return data;
@@ -350,7 +417,7 @@
             var json = await res.json();
             if (json.Status === 3) return [];            // NXDOMAIN
             if (json.Status !== 0) throw new Error('dns_status_' + json.Status);
-            var want = type === 'TXT' ? 16 : 15;
+            var want = { TXT: 16, MX: 15, NS: 2 }[type];
             return (json.Answer || []).filter(function (a) { return a.type === want; }).map(function (a) { return a.data; });
           } catch (e) { lastErr = e; }
           finally { if (timer) clearTimeout(timer); }
@@ -367,12 +434,13 @@
         return query(name, 'MX').then(function (arr) {
           return arr.map(function (d) { var p = d.trim().split(/\s+/); return { priority: parseInt(p[0], 10), host: (p[1] || '').replace(/\.$/, '') || '.' }; });
         });
-      }
+      },
+      ns: function (name) { return query(name, 'NS').then(function (arr) { return arr.map(function (d) { return d.replace(/\.$/, ''); }); }); }
     };
   }
 
   return {
-    scan: scan, normalizeDomain: normalizeDomain, orgDomain: orgDomain, dohAdapter: dohAdapter,
+    scan: scan, findLookalikes: findLookalikes, lookalikeCandidates: lookalikeCandidates, normalizeDomain: normalizeDomain, orgDomain: orgDomain, dohAdapter: dohAdapter,
     parseTxtData: parseTxtData, parseDmarc: parseDmarc, PROVIDERS: PROVIDERS, COMMON_SELECTORS: COMMON_SELECTORS
   };
 });

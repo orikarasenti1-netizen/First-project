@@ -14,6 +14,10 @@ function mockDns(zone, failNames = []) {
     async mx(name) {
       if (failNames.includes(name)) throw new Error('SERVFAIL');
       return zone['MX ' + name] || [];
+    },
+    async ns(name) {
+      if (failNames.includes(name)) throw new Error('SERVFAIL');
+      return zone['NS ' + name] || [];
     }
   };
 }
@@ -203,4 +207,37 @@ test('DoH adapter falls back to second endpoint and maps NXDOMAIN to []', async 
   assert.ok(calls.some(u => u.startsWith('https://dns.google/resolve')));
   const dead = MailSeal.dohAdapter(async () => { throw new Error('offline'); });
   await assert.rejects(dead.txt('x.com'), /dns_unavailable/);
+});
+
+test('lookalike candidates: convincing variants first, no original, no stripped names', () => {
+  const c = MailSeal.lookalikeCandidates('https://www.cohen-law.co.il/');
+  const names = c.map(x => x.domain);
+  assert.ok(names.includes('cohen-iaw.co.il'), 'l->i homoglyph');
+  assert.ok(names.includes('cohen-law.com'), 'TLD swap');
+  assert.ok(names.includes('cohenlaw.co.il'), 'hyphen removed');
+  assert.ok(!names.includes('cohen-law.co.il'), 'original excluded');
+  assert.ok(!names.includes('cohen.co.il'), 'stripping the legal word would flag unrelated owners');
+  assert.equal(c[0].technique, 'homoglyph');
+  assert.equal(new Set(names).size, names.length, 'no duplicates');
+  assert.ok(names.every(n => /^[a-z0-9-]+\.[a-z.]+$/.test(n)));
+  const bare = MailSeal.lookalikeCandidates('levi.co.il').map(x => x.domain);
+  assert.ok(bare.includes('levi-law.co.il') && bare.includes('leviadv.com'), 'legal words appended to bare names');
+});
+
+test('findLookalikes reports registered variants, mail-capable first, tolerates lookup errors', async () => {
+  const dns = mockDns({
+    'NS cohen-iaw.co.il': ['ns1.parking.example'],
+    'MX cohen-iaw.co.il': [{ priority: 10, host: 'mx.evil.example' }],
+    'NS cohen-law.com': ['ns1.registrar.example'],
+    'NS cohenlaw.co.il': ['ns1.registrar.example'],
+    'MX cohenlaw.co.il': [{ priority: 0, host: '.' }]
+  }, ['c0hen-law.co.il']);
+  let progressCalls = 0;
+  const r = await MailSeal.findLookalikes('cohen-law.co.il', dns, { onProgress: () => progressCalls++ });
+  assert.equal(r.checked, MailSeal.lookalikeCandidates('cohen-law.co.il').length);
+  assert.deepEqual(r.found.map(f => f.domain), ['cohen-iaw.co.il', 'cohen-law.com', 'cohenlaw.co.il']);
+  assert.equal(r.found[0].mail, true);
+  assert.equal(r.found[2].mail, false, 'null MX is not mail-capable');
+  assert.equal(r.errors, 1);
+  assert.equal(progressCalls, r.checked);
 });
